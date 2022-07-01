@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Cinemato.iml" filepath="$PROJECT_DIR$/.idea/modules/Cinemato.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Cinemato.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Cinemato.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/Cinemato.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/Cinemato.core.iml" />
     </modules>
   </component>
 </project>
