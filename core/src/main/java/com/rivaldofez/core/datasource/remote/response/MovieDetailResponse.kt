@@ -65,7 +65,7 @@ data class MovieDetailResponse(
 	val voteAverage: Double,
 
 	@field:SerializedName("belongs_to_collection")
-	val belongsToCollection: Any,
+	val belongsToCollection: String,
 
 	@field:SerializedName("tagline")
 	val tagline: String,
@@ -83,7 +83,7 @@ data class MovieDetailResponse(
 data class ProductionCompaniesItem(
 
 	@field:SerializedName("logo_path")
-	val logoPath: Any,
+	val logoPath: String,
 
 	@field:SerializedName("name")
 	val name: String,
