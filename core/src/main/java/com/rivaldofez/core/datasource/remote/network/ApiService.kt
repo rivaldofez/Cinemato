@@ -1,4 +1,3 @@
 package com.rivaldofez.core.datasource.remote.network
 
-class ApiService {
-}
+import retrofit2.http.GET
