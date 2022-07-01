@@ -17,15 +17,17 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
 
     //koin
-    implementation "org.koin:koin-core:$koin_version"
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-android-viewmodel:$koin_version"
+    implementation "io.insert-koin:koin-core:$koin_version"
+
+//    implementation "org.koin:koin-core:$koin_version"
+//    implementation "org.koin:koin-android:$koin_version"
+//    implementation "org.koin:koin-android-viewmodel:$koin_version"
 
     //test
-    testImplementation "junit:junit:$junit_version"
+    testImplementation "junit:junit:4.13.2"
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_version"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$androidx_espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.4.0"
 
-    implementation "com.airbnb.android:lottie:$lottie_version"
+    implementation "com.airbnb.android:lottie:5.2.0"
 }
