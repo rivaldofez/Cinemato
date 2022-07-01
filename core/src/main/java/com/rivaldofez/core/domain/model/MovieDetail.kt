@@ -1,8 +1,4 @@
-package com.rivaldofez.core.datasource.domain.model
-
-import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
+package com.rivaldofez.core.domain.model
 
 class MovieDetail {
     val id: Int,
