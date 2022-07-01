@@ -1,6 +1,6 @@
 package com.rivaldofez.core.domain.model
 
-class MovieDetail {
+data class MovieDetail (
     val id: Int,
     val originalLanguage: String,
     val imdbId: String,
@@ -22,4 +22,4 @@ class MovieDetail {
     val adult: Boolean,
     val homepage: String,
 //    val status: String
-}
+)
