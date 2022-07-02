@@ -9,8 +9,10 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24909420289855072" />
         <entry key="app/src/main/res/layout/activity_movie.xml" value="0.10207700101317123" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.24909420289855072" />
+        <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.1724137931034483" />
+        <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.1724137931034483" />
         <entry key="app/src/main/res/layout/fragment_movie.xml" value="0.26856884057971014" />
-        <entry key="app/src/main/res/layout/fragment_tvseries.xml" value="0.26856884057971014" />
+        <entry key="app/src/main/res/layout/fragment_tvseries.xml" value="0.1724137931034483" />
         <entry key="app/src/main/res/layout/item_movie.xml" value="0.20989583333333334" />
       </map>
     </option>
