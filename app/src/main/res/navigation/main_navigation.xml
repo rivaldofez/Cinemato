@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/movieFragment">
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.rivaldofez.cinemato.movie.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie" >
+        <action
+            android:id="@+id/action_movieFragment_to_TVSeriesFragment"
+            app:destination="@id/TVSeriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/TVSeriesFragment"
+        android:name="com.rivaldofez.cinemato.tvseries.TVSeriesFragment"
+        android:label="fragment_tvseries"
+        tools:layout="@layout/fragment_tvseries" >
+        <action
+            android:id="@+id/action_TVSeriesFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
+</navigation>
