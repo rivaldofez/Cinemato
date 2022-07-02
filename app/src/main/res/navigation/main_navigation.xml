@@ -12,15 +12,60 @@
         tools:layout="@layout/fragment_movie" >
         <action
             android:id="@+id/action_movieFragment_to_TVSeriesFragment"
-            app:destination="@id/TVSeriesFragment" />
+            app:destination="@id/tvShowFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
-        android:id="@+id/TVSeriesFragment"
+        android:id="@+id/tvShowFragment"
         android:name="com.rivaldofez.cinemato.tvseries.TVSeriesFragment"
         android:label="fragment_tvseries"
-        tools:layout="@layout/fragment_tvseries" >
+        tools:layout="@layout/fragment_tvshow" >
         <action
             android:id="@+id/action_TVSeriesFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+        <action
+            android:id="@+id/action_tvShowFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_tvShowFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+        <action
+            android:id="@+id/action_tvShowFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.rivaldofez.cinemato.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_tvShowFragment"
+            app:destination="@id/tvShowFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="com.rivaldofez.cinemato.feed.FeedFragment"
+        android:label="fragment_feed"
+        tools:layout="@layout/fragment_feed" >
+        <action
+            android:id="@+id/action_feedFragment_to_tvShowFragment"
+            app:destination="@id/tvShowFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_movieFragment"
             app:destination="@id/movieFragment" />
     </fragment>
 </navigation>
