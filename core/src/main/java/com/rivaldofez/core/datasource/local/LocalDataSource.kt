@@ -10,4 +10,5 @@ class LocalDataSource(private val movieDao: MovieDao) {
 
     fun getDetailMovie(id: String): Flow<MovieDetailLocalEntity?> = movieDao.getDetailMovie(id.toInt())
 
+    suspend fun insertPopularMovies(popularMovies: List<MovieItemLocalEntity>) = movieDao.insertPopularMovies(popularMovies)
 }

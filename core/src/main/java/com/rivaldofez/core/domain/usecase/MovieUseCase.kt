@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MovieUseCase {
 
-    fun getPopularMovies(): Flow<Resource<List<Movie>>>
+    fun getPopularMovies(page: String): Flow<Resource<List<Movie>>>
     fun getDetailMovie(id: String): Flow<Resource<MovieDetail?>>
 
 }

@@ -17,14 +17,15 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
 
     //koin
-    implementation "io.insert-koin:koin-core:$koin_version"
+//    implementation "io.insert-koin:koin-core:$koin_version"
+
 
     //
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_layout"
 
-//    implementation "org.koin:koin-core:$koin_version"
-//    implementation "org.koin:koin-android:$koin_version"
-//    implementation "org.koin:koin-android-viewmodel:$koin_version"
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
 
     //test
     testImplementation "junit:junit:4.13.2"
@@ -33,4 +34,5 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-contrib:3.4.0"
 
     implementation "com.airbnb.android:lottie:5.2.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }

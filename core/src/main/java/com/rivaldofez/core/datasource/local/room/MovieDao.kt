@@ -1,6 +1,8 @@
 package com.rivaldofez.core.datasource.local.room
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.rivaldofez.core.datasource.local.entity.MovieDetailLocalEntity
 import com.rivaldofez.core.datasource.local.entity.MovieItemLocalEntity
@@ -13,4 +15,7 @@ interface MovieDao {
 
     @Query("Select * FROM moviedetail where id= :id")
     fun getDetailMovie(id: Int): Flow<MovieDetailLocalEntity?>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPopularMovies(popularMovies: List<MovieItemLocalEntity>)
 }

@@ -1,6 +1,6 @@
 package com.rivaldofez.core.datasource.remote
 
-import android.graphics.Movie
+import android.util.Log
 import com.rivaldofez.core.datasource.remote.network.ApiResponse
 import com.rivaldofez.core.datasource.remote.network.ApiService
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
@@ -13,11 +13,13 @@ import java.lang.Exception
 
 class RemoteDataSource(private val apiService: ApiService) {
 
-    suspend fun getPopularMovies(): Flow<ApiResponse<List<MovieListItem>>> =
+    suspend fun getPopularMovies(page: String): Flow<ApiResponse<List<MovieListItem>>> =
         flow {
             try {
-                val response = apiService.getPopularMovies("d63d4fcb8d25c828fe89669f635ff545",page = "0")
+                val response = apiService.getPopularMovies("d63d4fcb8d25c828fe89669f635ff545",page = page)
+                Log.d("Teston", response.toString())
                 val dataArray = response.results
+                Log.d("Teston", dataArray.toString())
                 if(dataArray.isNotEmpty()){
                     emit(ApiResponse.Success(response.results))
                 } else {
@@ -25,6 +27,7 @@ class RemoteDataSource(private val apiService: ApiService) {
                 }
             }catch (e: Exception){
                 emit(ApiResponse.Error(e.toString()))
+                Log.d("Teston", e.toString())
             }
         }.flowOn(Dispatchers.IO)
 
