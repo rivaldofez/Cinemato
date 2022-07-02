@@ -14,5 +14,27 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        binding.bnavMain.setNavigationChangeListener{_, position ->
+            when(position) {
+                0 -> {
+                    navController.popBackStack()
+                    navController.navigate(R.id.movieFragment)
+                }
+                1 -> {
+                    navController.popBackStack()
+                    navController.navigate(R.id.tvShowFragment)
+                }
+                2 -> {
+                    navController.popBackStack()
+                    navController.navigate(R.id.feedFragment)
+                }
+                3 -> {
+                    navController.popBackStack()
+                    navController.navigate(R.id.favoriteFragment)
+                }
+            }
+        }
     }
 }
