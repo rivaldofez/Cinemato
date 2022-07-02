@@ -2,6 +2,7 @@ package com.rivaldofez.core.datasource.remote.network
 
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MoviesResponse
+import com.rivaldofez.core.datasource.remote.response.TvShowResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -19,4 +20,40 @@ interface  ApiService {
         @Path("id") id: String,
         @Query("key") key : String
     ): MovieDetailResponse?
+
+
+
+
+
+    @GET("3/tv/popular")
+    suspend fun getPopularTvShow(
+        @Query("api_key") key: String,
+        @Query("page") page: String
+    ): TvShowResponse
+
+    @GET("3/tv/top_rated")
+    suspend fun getTopRatedTvShow(
+        @Query("api_key") key: String,
+        @Query("page") page: String
+    ): TvShowResponse
+
+    @GET("3/tv/on_the_air")
+    suspend fun getOnAirTvShow(
+        @Query("api_key") key: String,
+        @Query("page") page: String
+    ): TvShowResponse
+
+    @GET("3/tv/airing_today")
+    suspend fun getAiringTodayTvShow(
+        @Query("api_key") key: String,
+        @Query("page") page: String
+    ): TvShowResponse
+
+    @GET("3/tv/{id}")
+    suspend fun getDetailTvShow(
+        @Path("id") id: String,
+        @Query("key") key : String
+    ): MovieDetailResponse?
+
+
 }
