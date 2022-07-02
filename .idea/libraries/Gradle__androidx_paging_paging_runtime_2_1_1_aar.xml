@@ -3,8 +3,9 @@
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/45ec2c408e735b3c01a01e27c272daee/transformed/paging-runtime-2.1.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ad60675cf36e153b748a30257c5c6a1e/transformed/paging-runtime-2.1.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ad60675cf36e153b748a30257c5c6a1e/transformed/paging-runtime-2.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ad60675cf36e153b748a30257c5c6a1e/transformed/paging-runtime-2.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c88d305611691c0d020554a4a1a4dc04/transformed/paging-runtime-2.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c88d305611691c0d020554a4a1a4dc04/transformed/paging-runtime-2.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c88d305611691c0d020554a4a1a4dc04/transformed/paging-runtime-2.1.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
