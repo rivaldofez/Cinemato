@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.FragmentTvshowBinding
+import com.rivaldofez.cinemato.full_list.FullListFragment
+import com.rivaldofez.cinemato.movie.MovieFragmentDirections
 import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.domain.model.TvShow
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -36,6 +38,7 @@ class TVShowFragment : Fragment(), TvShowCallback {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null){
+            setClickViewAll()
             callObserveAiringTodayTvShow()
             callObserveOnTheAirTvShow()
             callObservePopularTvShow()
@@ -124,19 +127,27 @@ class TVShowFragment : Fragment(), TvShowCallback {
 
     private fun setClickViewAll(){
         binding.btnViewallPopular.setOnClickListener {
-
+            actionToFullList(FullListFragment.ACTION_TV_POPULAR)
         }
 
         binding.btnViewallToprated.setOnClickListener {
-
+            actionToFullList(FullListFragment.ACTION_TV_TOPRATED)
         }
 
         binding.btnViewallOntheair.setOnClickListener {
-
+            actionToFullList(FullListFragment.ACTION_TV_ONAIR)
         }
 
         binding.btnViewallAiringtoday.setOnClickListener {
-
+            actionToFullList(FullListFragment.ACTION_TV_AIRING)
         }
+    }
+
+    private fun actionToFullList(action: String){
+        val gotoFullListFragment = TVShowFragmentDirections.actionTvShowFragmentToFullListFragment(
+            action
+        )
+
+        findNavController().navigate(gotoFullListFragment)
     }
 }

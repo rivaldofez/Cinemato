@@ -140,7 +140,7 @@
             android:textColor="@color/white"
             android:text="View All"
             android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/rv_airing_today_tvshow"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_airing_today_tvshow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_airing_today_tvshow" />
 

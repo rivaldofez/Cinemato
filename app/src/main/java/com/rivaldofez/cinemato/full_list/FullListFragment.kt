@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.rivaldofez.cinemato.databinding.FragmentFullListBinding
 import com.rivaldofez.cinemato.movie.MovieCallback
 import com.rivaldofez.cinemato.movie.MovieViewModel
+import com.rivaldofez.cinemato.tvshow.TvShowCallback
+import com.rivaldofez.cinemato.tvshow.TvShowViewModel
 import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.domain.model.Movie
+import com.rivaldofez.core.domain.model.TvShow
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class FullListFragment : Fragment(), MovieCallback {
+class FullListFragment : Fragment(), MovieCallback, TvShowCallback {
     private var _binding: FragmentFullListBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
@@ -92,6 +95,66 @@ class FullListFragment : Fragment(), MovieCallback {
                         is Resource.Error -> Log.d("Teston", "error")
                     }
                 })
+            }else if(action == ACTION_TV_POPULAR){
+                val tvShowViewModel: TvShowViewModel by viewModel()
+                val tvShowFullListAdapter = TvShowFullListAdapter(this)
+                with(binding.rvFullList){
+                    layoutManager = GridLayoutManager(context, 2)
+                    adapter = tvShowFullListAdapter
+                }
+
+                tvShowViewModel.getPopularTvShow(page = "1").observe(viewLifecycleOwner, {tvshows ->
+                    when(tvshows) {
+                        is Resource.Success -> tvshows.data?.let { tvShowFullListAdapter.setTvShow(tvshows = it) }
+                        is Resource.Loading -> Log.d("Teston", "loading")
+                        is Resource.Error -> Log.d("Teston", "error")
+                    }
+                })
+            }else if(action == ACTION_TV_TOPRATED){
+                val tvShowViewModel: TvShowViewModel by viewModel()
+                val tvShowFullListAdapter = TvShowFullListAdapter(this)
+                with(binding.rvFullList){
+                    layoutManager = GridLayoutManager(context, 2)
+                    adapter = tvShowFullListAdapter
+                }
+
+                tvShowViewModel.getTopRatedTvShow(page = "1").observe(viewLifecycleOwner, {tvshows ->
+                    when(tvshows) {
+                        is Resource.Success -> tvshows.data?.let { tvShowFullListAdapter.setTvShow(tvshows = it) }
+                        is Resource.Loading -> Log.d("Teston", "loading")
+                        is Resource.Error -> Log.d("Teston", "error")
+                    }
+                })
+            }else if(action == ACTION_TV_ONAIR){
+                val tvShowViewModel: TvShowViewModel by viewModel()
+                val tvShowFullListAdapter = TvShowFullListAdapter(this)
+                with(binding.rvFullList){
+                    layoutManager = GridLayoutManager(context, 2)
+                    adapter = tvShowFullListAdapter
+                }
+
+                tvShowViewModel.getOnTheAirTvShow(page = "1").observe(viewLifecycleOwner, {tvshows ->
+                    when(tvshows) {
+                        is Resource.Success -> tvshows.data?.let { tvShowFullListAdapter.setTvShow(tvshows = it) }
+                        is Resource.Loading -> Log.d("Teston", "loading")
+                        is Resource.Error -> Log.d("Teston", "error")
+                    }
+                })
+            }else if(action == ACTION_TV_AIRING){
+                val tvShowViewModel: TvShowViewModel by viewModel()
+                val tvShowFullListAdapter = TvShowFullListAdapter(this)
+                with(binding.rvFullList){
+                    layoutManager = GridLayoutManager(context, 2)
+                    adapter = tvShowFullListAdapter
+                }
+
+                tvShowViewModel.getAiringTodayTvShow(page = "1").observe(viewLifecycleOwner, {tvshows ->
+                    when(tvshows) {
+                        is Resource.Success -> tvshows.data?.let { tvShowFullListAdapter.setTvShow(tvshows = it) }
+                        is Resource.Loading -> Log.d("Teston", "loading")
+                        is Resource.Error -> Log.d("Teston", "error")
+                    }
+                })
             }
         }
     }
@@ -112,5 +175,12 @@ class FullListFragment : Fragment(), MovieCallback {
             movie.id.toString()
         )
         findNavController().navigate(gotoDetailMovieFragment)
+    }
+
+    override fun ontvShowItemClick(tvShow: TvShow) {
+        val gotoDetailTvShowFragment = FullListFragmentDirections.actionFullListFragmentToDetailTvShowFragment(
+            tvShow.id.toString()
+        )
+        findNavController().navigate(gotoDetailTvShowFragment)
     }
 }
