@@ -51,9 +51,6 @@ data class TvShowDetailLocalEntity (
     @ColumnInfo(name = "overview")
     val overview: String,
 
-    @ColumnInfo(name = "languages")
-    val languages: List<String>,
-
     @ColumnInfo(name = "poster_path")
     val posterPath: String,
 

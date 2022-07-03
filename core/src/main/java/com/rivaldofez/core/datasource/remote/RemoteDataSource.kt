@@ -5,6 +5,7 @@ import com.rivaldofez.core.datasource.remote.network.ApiResponse
 import com.rivaldofez.core.datasource.remote.network.ApiService
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
+import com.rivaldofez.core.datasource.remote.response.TvShowListItem
 import com.rivaldofez.core.datasource.remote.response.TvShowResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -75,10 +76,6 @@ class RemoteDataSource(private val apiService: ApiService) {
         }.flowOn(Dispatchers.IO)
 
 
-
-
-
-
     suspend fun getDetailMovie(id: String): Flow<ApiResponse<MovieDetailResponse>> =
         flow {
             try {
@@ -93,16 +90,64 @@ class RemoteDataSource(private val apiService: ApiService) {
             }
         }.flowOn(Dispatchers.IO)
 
-    suspend fun getPopularTvShow(page: String): Flow<ApiResponse<TvShowResponse>> =
+
+
+    suspend fun getPopularTvShow(page: String): Flow<ApiResponse<List<TvShowListItem>>> =
         flow {
             try {
                 val response = apiService.getPopularTvShow("d63d4fcb8d25c828fe89669f635ff545",page = page)
-                if(response.results.isNotEmpty()){
-                    emit(ApiResponse.Success(response))
-                }else{
+                val dataArray = response.results
+                if(dataArray.isNotEmpty()){
+                    emit(ApiResponse.Success(response.results))
+                } else {
                     emit(ApiResponse.Empty)
                 }
-            }catch (e : Exception) {
+            }catch (e: Exception){
+                emit(ApiResponse.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+
+    suspend fun getTopRatedTvShow(page: String): Flow<ApiResponse<List<TvShowListItem>>> =
+        flow {
+            try {
+                val response = apiService.getTopRatedTvShow("d63d4fcb8d25c828fe89669f635ff545",page = page)
+                val dataArray = response.results
+                if(dataArray.isNotEmpty()){
+                    emit(ApiResponse.Success(response.results))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
+            }catch (e: Exception){
+                emit(ApiResponse.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+
+    suspend fun getOnTheAirTvShow(page: String): Flow<ApiResponse<List<TvShowListItem>>> =
+        flow {
+            try {
+                val response = apiService.getOnAirTvShow("d63d4fcb8d25c828fe89669f635ff545",page = page)
+                val dataArray = response.results
+                if(dataArray.isNotEmpty()){
+                    emit(ApiResponse.Success(response.results))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
+            }catch (e: Exception){
+                emit(ApiResponse.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+
+    suspend fun getAiringTodayTvShow(page: String): Flow<ApiResponse<List<TvShowListItem>>> =
+        flow {
+            try {
+                val response = apiService.getAiringTodayTvShow("d63d4fcb8d25c828fe89669f635ff545",page = page)
+                val dataArray = response.results
+                if(dataArray.isNotEmpty()){
+                    emit(ApiResponse.Success(response.results))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
+            }catch (e: Exception){
                 emit(ApiResponse.Error(e.toString()))
             }
         }.flowOn(Dispatchers.IO)

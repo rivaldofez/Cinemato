@@ -35,7 +35,7 @@ class LocalDataSource(private val cinemaDao: CinemaDao) {
 
     suspend fun insertIdOnTheAIrTvShow(idOnTheAirTvShow: List<OnTheAirTvShowLocalEntity>) = cinemaDao.insertIdOnTheAirTvShow(idOnTheAirTvShow)
 
-    suspend fun insertIdAiringTodayTvShow(idAiringTodayTvShow: List<AiringTodayTvShowEntity>) = cinemaDao.insertIdOnTheAirTvShow(AiringTodayTvShowEntity)
+    suspend fun insertIdAiringTodayTvShow(idAiringTodayTvShow: List<AiringTodayTvShowEntity>) = cinemaDao.insertIdAiringTodayTvShow(idAiringTodayTvShow)
 
     fun getPopularTvShow() : Flow<List<TvShowItemLocalEntity>> = cinemaDao.getPopularTvShow()
 
