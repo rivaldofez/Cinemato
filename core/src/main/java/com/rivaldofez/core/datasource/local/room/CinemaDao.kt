@@ -38,7 +38,6 @@ interface CinemaDao {
     fun getNowPlayingMovies(): Flow<List<MovieItemLocalEntity>>
 
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTvShowList(tvShowItemList: List<TvShowItemLocalEntity>)
 
@@ -49,7 +48,7 @@ interface CinemaDao {
     suspend fun insertIdTopRatedTvShow(idTopRatedTvShow: List<TopRatedTvShowLocalEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertIdOnTheAirTvShow(idOnAirTvShow: List<OnTheAirLocalEntity>)
+    suspend fun insertIdOnTheAirTvShow(idOnAirTvShow: List<OnTheAirTvShowLocalEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdAiringTodayTvShow(idAiringTvShow: List<AiringTodayTvShowEntity>)
@@ -65,7 +64,6 @@ interface CinemaDao {
 
     @Query("Select * FROM tvshowlist natural join airingtodaytvshow")
     fun getAiringTodayTvShow(): Flow<List<TvShowItemLocalEntity>>
-
 
 
     @Query("Select * FROM moviedetail where id= :id")

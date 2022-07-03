@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "ontheairtvshow")
-data class OnTheAirLocalEntity (
+data class OnTheAirTvShowLocalEntity (
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
