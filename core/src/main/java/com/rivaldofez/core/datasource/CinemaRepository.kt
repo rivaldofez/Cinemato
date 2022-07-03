@@ -163,7 +163,7 @@ class CinemaRepository(
         override fun shouldFetch(data: List<TvShow>?): Boolean = true
 
         override suspend fun createCall(): Flow<ApiResponse<List<TvShowListItem>>> {
-            return remoteDataSource.getPopularTvShow(page)
+            return remoteDataSource.getTopRatedTvShow(page)
         }
 
         override suspend fun saveCallResult(data: List<TvShowListItem>) {
