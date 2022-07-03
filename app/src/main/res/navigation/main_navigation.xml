@@ -118,5 +118,11 @@
             android:name="typeAction"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_fullListFragment_to_detailTvShowFragment"
+            app:destination="@id/detailTvShowFragment" />
+        <action
+            android:id="@+id/action_fullListFragment_to_detailMovie"
+            app:destination="@id/detailMovie" />
     </fragment>
 </navigation>

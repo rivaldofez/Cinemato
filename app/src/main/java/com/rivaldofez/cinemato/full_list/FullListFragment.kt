@@ -8,11 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.FragmentFullListBinding
-import com.rivaldofez.cinemato.movie.MovieAdapter
 import com.rivaldofez.cinemato.movie.MovieCallback
-import com.rivaldofez.cinemato.movie.MovieFragmentDirections
 import com.rivaldofez.cinemato.movie.MovieViewModel
 import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.domain.model.Movie
@@ -21,9 +18,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class FullListFragment : Fragment(), MovieCallback {
     private var _binding: FragmentFullListBinding? = null
     private val binding get() = _binding!!
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -100,7 +94,6 @@ class FullListFragment : Fragment(), MovieCallback {
                 })
             }
         }
-
     }
 
     companion object {
@@ -115,7 +108,7 @@ class FullListFragment : Fragment(), MovieCallback {
     }
 
     override fun onMovieItemClick(movie: Movie) {
-        val gotoDetailMovieFragment = MovieFragmentDirections.actionMovieFragmentToDetailMovie(
+        val gotoDetailMovieFragment = FullListFragmentDirections.actionFullListFragmentToDetailMovie(
             movie.id.toString()
         )
         findNavController().navigate(gotoDetailMovieFragment)
