@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_movieFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_detailMovie"
+            app:destination="@id/detailMovie" />
     </fragment>
     <fragment
         android:id="@+id/tvShowFragment"
@@ -52,6 +55,9 @@
         <action
             android:id="@+id/action_favoriteFragment_to_feedFragment"
             app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailMovie"
+            app:destination="@id/detailMovie" />
     </fragment>
     <fragment
         android:id="@+id/feedFragment"
@@ -67,5 +73,15 @@
         <action
             android:id="@+id/action_feedFragment_to_movieFragment"
             app:destination="@id/movieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailMovie"
+        android:name="com.rivaldofez.cinemato.detail_movie.DetailMovie"
+        android:label="fragment_detail_movie"
+        tools:layout="@layout/fragment_detail_movie" >
+        <argument
+            android:name="movieId"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>
