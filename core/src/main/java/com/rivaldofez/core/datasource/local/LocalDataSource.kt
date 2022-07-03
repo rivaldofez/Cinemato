@@ -18,5 +18,5 @@ class LocalDataSource(private val cinemaDao: CinemaDao) {
 
     suspend fun insertPopularTvShow(popularTvShows: List<TvShowItemLocalEntity>) = cinemaDao.insertPopularTvShow(popularTvShows)
 
-    suspend fun insertPopularMovies(popularMovies: List<MovieItemLocalEntity>) = cinemaDao.insertPopularMovies(popularMovies)
+    suspend fun insertPopularMovies(popularMovies: List<MovieItemLocalEntity>) = cinemaDao.insertMovieList(popularMovies)
 }
