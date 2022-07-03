@@ -4,15 +4,10 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.rivaldofez.core.datasource.remote.response.*
-import com.rivaldofez.core.datasource.remote.response.subresponse.GenresItem
-import com.rivaldofez.core.datasource.remote.response.subresponse.ProductionCompaniesItem
-import com.rivaldofez.core.datasource.remote.response.subresponse.ProductionCountriesItem
-import com.rivaldofez.core.datasource.remote.response.subresponse.SpokenLanguagesItem
 
 
 @Entity(tableName = "tvshowdetail")
-data class TvShowDetailLocalEntity (
+data class TvShowDetailLocalEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
@@ -34,7 +29,7 @@ data class TvShowDetailLocalEntity (
     val type: String,
 
     @ColumnInfo(name = "backdrop_path")
-    val backdropPath: String,
+    var backdropPath: String? = "",
 
     @ColumnInfo(name = "popularity")
     val popularity: Double,
@@ -81,4 +76,4 @@ data class TvShowDetailLocalEntity (
     @ColumnInfo(name = "spoken_languages")
     val spokenLanguages: String,
 
-)
+    )

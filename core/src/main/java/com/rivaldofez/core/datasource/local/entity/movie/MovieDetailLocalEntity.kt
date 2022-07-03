@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "moviedetail")
-data class MovieDetailLocalEntity (
+data class MovieDetailLocalEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
@@ -22,7 +22,7 @@ data class MovieDetailLocalEntity (
     val imdbId: String,
 
     @ColumnInfo(name = "backdrop_path")
-    val backdropPath: String,
+    var backdropPath: String? = "",
 
     @ColumnInfo(name = "revenue")
     val revenue: Int,

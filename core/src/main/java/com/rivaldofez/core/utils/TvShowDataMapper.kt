@@ -1,8 +1,6 @@
 package com.rivaldofez.core.utils
 
-import com.rivaldofez.core.datasource.local.entity.movie.PopularMovieLocalEntity
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
-import com.rivaldofez.core.datasource.remote.response.MovieListItem
 import com.rivaldofez.core.datasource.remote.response.TvShowDetailResponse
 import com.rivaldofez.core.datasource.remote.response.TvShowListItem
 import com.rivaldofez.core.domain.model.TvShow
@@ -52,8 +50,8 @@ object TvShowDataMapper {
                 id = it.id,
                 name = it.name,
                 posterPath = it.posterPath,
-                backdropPath = it.backdropPath,
-                firstAirDate = it.backdropPath,
+                backdropPath = it.backdropPath ?: "",
+                firstAirDate = it.firstAirDate,
                 overview = it.overview,
                 popularity = it.popularity,
                 voteAverage = it.voteAverage
@@ -71,7 +69,7 @@ object TvShowDataMapper {
             originalLanguage = input.originalLanguage,
             numberOfEpisodes = input.numberOfEpisodes,
             type = input.type,
-            backdropPath = input.backdropPath,
+            backdropPath = input.backdropPath ?: "",
             popularity = input.popularity,
             numberOfSeasons = input.numberOfSeasons,
             voteCount = input.voteCount,
@@ -97,7 +95,7 @@ object TvShowDataMapper {
             originalLanguage = input.originalLanguage,
             numberOfEpisodes = input.numberOfEpisodes,
             type = input.type,
-            backdropPath = input.backdropPath,
+            backdropPath = input.backdropPath ?: "",
             popularity = input.popularity,
             numberOfSeasons = input.numberOfSeasons,
             voteCount = input.voteCount,
@@ -124,7 +122,7 @@ object TvShowDataMapper {
                 id = it.id,
                 name = it.name,
                 posterPath = it.posterPath,
-                backdropPath = it.backdropPath,
+                backdropPath = it.backdropPath ?: "",
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
                 firstAirDate = it.firstAirDate

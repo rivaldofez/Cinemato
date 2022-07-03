@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "movielist")
-data class MovieItemLocalEntity (
+data class MovieItemLocalEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
@@ -19,7 +19,7 @@ data class MovieItemLocalEntity (
     val posterPath: String,
 
     @ColumnInfo(name = "backdrop_path")
-    val backdropPath: String,
+    var backdropPath: String? = "",
 
     @ColumnInfo(name = "releaseDate")
     val releaseDate: String,

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "tvshowlist")
-data class TvShowItemLocalEntity (
+data class TvShowItemLocalEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
@@ -20,7 +20,7 @@ data class TvShowItemLocalEntity (
     val posterPath: String,
 
     @ColumnInfo(name = "backdrop_path")
-    val backdropPath: String,
+    var backdropPath: String? = "",
 
     @ColumnInfo(name = "first_air_date")
     val firstAirDate: String,
@@ -35,7 +35,7 @@ data class TvShowItemLocalEntity (
     val voteAverage: Double,
 
 
-)
+    )
 
 
 

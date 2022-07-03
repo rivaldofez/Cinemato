@@ -4,7 +4,7 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 
-data class TvShowDetail (
+data class TvShowDetail(
 
     val id: Int,
     val name: String,
@@ -12,7 +12,7 @@ data class TvShowDetail (
     val originalLanguage: String,
     val numberOfEpisodes: Int,
     val type: String,
-    val backdropPath: String,
+    var backdropPath: String? = "",
     val popularity: Double,
     val numberOfSeasons: Int,
     val voteCount: Int,

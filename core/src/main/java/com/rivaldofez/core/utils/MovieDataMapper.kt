@@ -3,8 +3,6 @@ package com.rivaldofez.core.utils
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
-import com.rivaldofez.core.datasource.remote.response.subresponse.GenresItem
-import com.rivaldofez.core.datasource.remote.response.subresponse.SpokenLanguagesItem
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 
@@ -52,7 +50,7 @@ object MovieDataMapper {
                 id = it.id,
                 title = it.title,
                 posterPath = it.posterPath,
-                backdropPath = it.backdropPath,
+                backdropPath = it.backdropPath ?: "",
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
                 releaseDate = it.releaseDate
@@ -69,7 +67,7 @@ object MovieDataMapper {
             originalLanguage = input.originalLanguage,
             imdbId = input.imdbId,
             title = input.title,
-            backdropPath = input.backdropPath,
+            backdropPath = input.backdropPath ?: "",
             revenue = input.revenue,
             genres = MapperAtribute.mapListGenreToString(input.genres),
             popularity = input.popularity,
@@ -94,7 +92,7 @@ object MovieDataMapper {
             title = input.title,
             originalLanguage = input.originalLanguage,
             imdbId = input.imdbId,
-            backdropPath = input.backdropPath,
+            backdropPath = input.backdropPath ?: "",
             revenue = input.revenue,
             popularity = input.popularity,
             voteCount = input.voteCount,
@@ -124,7 +122,7 @@ object MovieDataMapper {
                 id = it.id,
                 title = it.title,
                 posterPath = it.posterPath,
-                backdropPath = it.backdropPath,
+                backdropPath = it.backdropPath ?: "",
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
                 releaseDate = it.releaseDate
