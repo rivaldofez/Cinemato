@@ -7,7 +7,7 @@ import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.domain.model.TvShow
 import com.rivaldofez.core.domain.usecase.CinemaUseCase
 
-class TvShowVIewModel(private val cinemaUseCase: CinemaUseCase): ViewModel() {
+class TvShowViewModel(private val cinemaUseCase: CinemaUseCase): ViewModel() {
     fun getPopularTvShow(page: String): LiveData<Resource<List<TvShow>>> {
         return cinemaUseCase.getPopularTvShow(page).asLiveData()
     }
@@ -23,7 +23,4 @@ class TvShowVIewModel(private val cinemaUseCase: CinemaUseCase): ViewModel() {
     fun getAiringTodayTvShow(page: String): LiveData<Resource<List<TvShow>>> {
         return cinemaUseCase.getPopularTvShow(page).asLiveData()
     }
-
-
-
 }
