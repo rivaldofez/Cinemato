@@ -5,6 +5,7 @@ import com.rivaldofez.core.datasource.remote.network.ApiResponse
 import com.rivaldofez.core.datasource.remote.network.ApiService
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
+import com.rivaldofez.core.datasource.remote.response.TvShowResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -12,6 +13,21 @@ import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 
 class RemoteDataSource(private val apiService: ApiService) {
+
+
+    suspend fun getPopularTvShow(page: String): Flow<ApiResponse<TvShowResponse>> =
+        flow {
+            try {
+                val response = apiService.getPopularTvShow("d63d4fcb8d25c828fe89669f635ff545",page = page)
+                if(response.results.isNotEmpty()){
+                    emit(ApiResponse.Success(response))
+                }else{
+                    emit(ApiResponse.Empty)
+                }
+            }catch (e : Exception) {
+                emit(ApiResponse.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
 
     suspend fun getPopularMovies(page: String): Flow<ApiResponse<List<MovieListItem>>> =
         flow {

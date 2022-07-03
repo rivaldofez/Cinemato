@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
         binding.loadingSplash.setIndeterminateDrawable(DoubleBounce())
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, MovieActivity::class.java))
+            startActivity(Intent(this, HomeActivity::class.java))
             finish()
             binding.loadingSplash.visibility = View.INVISIBLE
         }, SPLASH_TIME)
