@@ -121,4 +121,22 @@ class TVShowFragment : Fragment(), TvShowCallback {
         )
         findNavController().navigate(gotoDetailTvShowFragment)
     }
+
+    private fun setClickViewAll(){
+        binding.btnViewallPopular.setOnClickListener {
+
+        }
+
+        binding.btnViewallToprated.setOnClickListener {
+
+        }
+
+        binding.btnViewallOntheair.setOnClickListener {
+
+        }
+
+        binding.btnViewallAiringtoday.setOnClickListener {
+
+        }
+    }
 }
