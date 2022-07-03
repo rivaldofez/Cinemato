@@ -12,9 +12,9 @@ import com.rivaldofez.core.datasource.local.entity.movie.*
     TvShowItemLocalEntity::class,
     TvShowDetailLocalEntity::class,
     PopularMovieLocalEntity::class,
-TopRatedMovieLocalEntity::class,
-UpcomingMovieLocalEntity::class,
-NowPlayingMovieLocalEntity::class
+    TopRatedMovieLocalEntity::class,
+    UpcomingMovieLocalEntity::class,
+    NowPlayingMovieLocalEntity::class
                      ], version= 1, exportSchema = false)
 abstract class CinemaDatabase: RoomDatabase() {
     abstract fun cinemaDao(): CinemaDao
