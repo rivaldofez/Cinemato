@@ -29,5 +29,4 @@ class CinemaInteractor(private val cinemaRepository: ICinemaRepository): CinemaU
 
     override fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail?>> = cinemaRepository.getDetailTvShow(id)
 
-
 }
