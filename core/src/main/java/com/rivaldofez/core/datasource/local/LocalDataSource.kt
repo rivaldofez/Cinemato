@@ -1,7 +1,7 @@
 package com.rivaldofez.core.datasource.local
 
-import com.rivaldofez.core.datasource.local.entity.TvShowItemLocalEntity
 import com.rivaldofez.core.datasource.local.entity.movie.*
+import com.rivaldofez.core.datasource.local.entity.tvshow.*
 import com.rivaldofez.core.datasource.local.room.CinemaDao
 import kotlinx.coroutines.flow.Flow
 
@@ -24,15 +24,28 @@ class LocalDataSource(private val cinemaDao: CinemaDao) {
 
     fun getNowPlayingMovies() : Flow<List<MovieItemLocalEntity>> = cinemaDao.getNowPlayingMovies()
 
-
-
-
-
     fun getDetailMovie(id: String): Flow<MovieDetailLocalEntity?> = cinemaDao.getDetailMovie(id.toInt())
 
-    fun getPopularTvShow(): Flow<List<TvShowItemLocalEntity>> = cinemaDao.getPopularTvShow()
 
-    suspend fun insertPopularTvShow(popularTvShows: List<TvShowItemLocalEntity>) = cinemaDao.insertPopularTvShow(popularTvShows)
+    suspend fun insertTvShowList(tvShowItemList: List<TvShowItemLocalEntity>) = cinemaDao.insertTvShowList(tvShowItemList)
+
+    suspend fun insertIdPopularTvShow(idPopularTvShow: List<PopularTvShowLocalEntity>) = cinemaDao.insertIdPopularTvShow(idPopularTvShow)
+
+    suspend fun insertIdTopRatedTvShow(idTopRatedTvShow: List<TopRatedTvShowLocalEntity>) = cinemaDao.insertIdTopRatedTvShow(idTopRatedTvShow)
+
+    suspend fun insertIdOnTheAIrTvShow(idOnTheAirTvShow: List<OnTheAirTvShowLocalEntity>) = cinemaDao.insertIdOnTheAirTvShow(idOnTheAirTvShow)
+
+    suspend fun insertIdAiringTodayTvShow(idAiringTodayTvShow: List<AiringTodayTvShowEntity>) = cinemaDao.insertIdAiringTodayTvShow(idAiringTodayTvShow)
+
+    fun getPopularTvShow() : Flow<List<TvShowItemLocalEntity>> = cinemaDao.getPopularTvShow()
+
+    fun getTopRatedTvShow() : Flow<List<TvShowItemLocalEntity>> = cinemaDao.getTopRatedTvShow()
+
+    fun getOnTheAirTvShow() : Flow<List<TvShowItemLocalEntity>> = cinemaDao.getOnTheAirShow()
+
+    fun getAiringTodayTvShow() : Flow<List<TvShowItemLocalEntity>> = cinemaDao.getAiringTodayTvShow()
+
+    fun getDetailTvShow(id: String): Flow<TvShowDetailLocalEntity?> = cinemaDao.getDetailTvShow(id.toInt())
 
 
 }

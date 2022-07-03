@@ -12,7 +12,6 @@ import kotlinx.coroutines.FlowPreview
 @FlowPreview
 @ExperimentalCoroutinesApi
 class MovieViewModel(private val cinemaUseCase: CinemaUseCase): ViewModel() {
-//    val popularMovies = movieUseCase.getPopularMovies().asLiveData()
 
     fun getPopularMovies(page: String): LiveData<Resource<List<Movie>>>{
         return cinemaUseCase.getPopularMovies(page).asLiveData()
@@ -30,7 +29,4 @@ class MovieViewModel(private val cinemaUseCase: CinemaUseCase): ViewModel() {
         return cinemaUseCase.getNowPlayingMovies(page).asLiveData()
     }
 
-    fun hello(){
-        print("Hello")
-    }
 }

@@ -21,7 +21,7 @@ data class MovieDetailResponse(
 	val title: String,
 
 	@field:SerializedName("backdrop_path")
-	val backdropPath: String,
+	var backdropPath: String? ="",
 
 	@field:SerializedName("revenue")
 	val revenue: Int,

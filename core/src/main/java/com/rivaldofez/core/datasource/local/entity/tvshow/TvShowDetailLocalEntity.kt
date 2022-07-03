@@ -1,67 +1,68 @@
-package com.rivaldofez.core.datasource.local.entity.movie
+package com.rivaldofez.core.datasource.local.entity.tvshow
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "moviedetail")
-data class MovieDetailLocalEntity(
+
+@Entity(tableName = "tvshowdetail")
+data class TvShowDetailLocalEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
     val id: Int,
 
-    @ColumnInfo(name = "title")
-    val title: String,
+    @ColumnInfo(name = "name")
+    val name: String,
+
+    @ColumnInfo(name = "original_name")
+    val originalName: String,
 
     @ColumnInfo(name = "original_language")
     val originalLanguage: String,
 
-    @ColumnInfo(name = "imdb_id")
-    val imdbId: String,
+    @ColumnInfo(name = "number_of_episodes")
+    val numberOfEpisodes: Int,
+
+    @ColumnInfo(name = "type")
+    val type: String,
 
     @ColumnInfo(name = "backdrop_path")
     var backdropPath: String? = "",
 
-    @ColumnInfo(name = "revenue")
-    val revenue: Int,
-
     @ColumnInfo(name = "popularity")
     val popularity: Double,
+
+    @ColumnInfo(name = "number_of_seasons")
+    val numberOfSeasons: Int,
 
     @ColumnInfo(name = "vote_count")
     val voteCount: Int,
 
-    @ColumnInfo(name = "budget")
-    val budget: Int,
+    @ColumnInfo(name = "first_air_date")
+    val firstAirDate: String,
 
     @ColumnInfo(name = "overview")
     val overview: String,
 
-    @ColumnInfo(name = "original_title")
-    val originalTitle: String,
-
-    @ColumnInfo(name = "runtime")
-    val runtime: Int,
-
     @ColumnInfo(name = "poster_path")
     val posterPath: String,
 
-    @ColumnInfo(name = "release_date")
-    val releaseDate: String,
-
     @ColumnInfo(name = "vote_average")
     val voteAverage: Double,
-
-    @ColumnInfo(name = "belongs_to_collection")
-    val belongsToCollection: String,
 
     @ColumnInfo(name = "tagline")
     val tagline: String,
 
     @ColumnInfo(name = "adult")
     val adult: Boolean,
+
+    @ColumnInfo(name = "in_production")
+    val inProduction: Boolean,
+
+    @ColumnInfo(name = "last_air_date")
+    val lastAirDate: String,
 
     @ColumnInfo(name = "homepage")
     val homepage: String,
@@ -74,4 +75,5 @@ data class MovieDetailLocalEntity(
 
     @ColumnInfo(name = "spoken_languages")
     val spokenLanguages: String,
-)
+
+    )

@@ -38,7 +38,7 @@ data class TvShowListItem(
 	val originCountry: List<String>,
 
 	@field:SerializedName("backdrop_path")
-	val backdropPath: String,
+	var backdropPath: String? = "",
 
 	@field:SerializedName("original_name")
 	val originalName: String,

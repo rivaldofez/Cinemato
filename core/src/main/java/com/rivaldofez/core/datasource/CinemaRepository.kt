@@ -5,11 +5,15 @@ import com.rivaldofez.core.datasource.remote.RemoteDataSource
 import com.rivaldofez.core.datasource.remote.network.ApiResponse
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
+import com.rivaldofez.core.datasource.remote.response.TvShowListItem
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
+import com.rivaldofez.core.domain.model.TvShow
+import com.rivaldofez.core.domain.model.TvShowDetail
 import com.rivaldofez.core.domain.repository.ICinemaRepository
 import com.rivaldofez.core.utils.AppExecutors
-import com.rivaldofez.core.utils.DataMapper
+import com.rivaldofez.core.utils.MovieDataMapper
+import com.rivaldofez.core.utils.TvShowDataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -21,7 +25,7 @@ class CinemaRepository(
     override fun getPopularMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
             return localDataSource.getPopularMovies().map { movies ->
-                DataMapper.mapMovieListLocalToDomain(movies)
+                MovieDataMapper.mapMovieListLocalToDomain(movies)
             }
         }
 
@@ -32,8 +36,8 @@ class CinemaRepository(
         }
 
         override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = DataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = DataMapper.mapMovieListResponseToPopularId(data)
+            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
+            val idMovieList = MovieDataMapper.mapMovieListResponseToPopularId(data)
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdPopularMovies(idMovieList)
         }
@@ -42,7 +46,7 @@ class CinemaRepository(
     override fun getTopRatedMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
             return localDataSource.getTopRatedMovies().map { movies ->
-                DataMapper.mapMovieListLocalToDomain(movies)
+                MovieDataMapper.mapMovieListLocalToDomain(movies)
             }
         }
 
@@ -53,8 +57,8 @@ class CinemaRepository(
         }
 
         override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = DataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = DataMapper.mapMovieListResponseToTopRatedId(data)
+            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
+            val idMovieList = MovieDataMapper.mapMovieListResponseToTopRatedId(data)
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdTopRatedMovies(idMovieList)
         }
@@ -63,7 +67,7 @@ class CinemaRepository(
     override fun getUpComingMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
             return localDataSource.getUpComingMovies().map { movies ->
-                DataMapper.mapMovieListLocalToDomain(movies)
+                MovieDataMapper.mapMovieListLocalToDomain(movies)
             }
         }
 
@@ -74,8 +78,8 @@ class CinemaRepository(
         }
 
         override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = DataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = DataMapper.mapMovieListResponseToUpComingId(data)
+            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
+            val idMovieList = MovieDataMapper.mapMovieListResponseToUpComingId(data)
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdUpComingMovies(idMovieList)
         }
@@ -84,7 +88,7 @@ class CinemaRepository(
     override fun getNowPlayingMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
             return localDataSource.getNowPlayingMovies().map { movies ->
-                DataMapper.mapMovieListLocalToDomain(movies)
+                MovieDataMapper.mapMovieListLocalToDomain(movies)
             }
         }
 
@@ -95,8 +99,8 @@ class CinemaRepository(
         }
 
         override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = DataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = DataMapper.mapMovieListResponseToNowPlayingId(data)
+            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
+            val idMovieList = MovieDataMapper.mapMovieListResponseToNowPlayingId(data)
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdNowPlayingMovies(idMovieList)
         }
@@ -107,7 +111,7 @@ class CinemaRepository(
             val loaded = localDataSource.getDetailMovie(id)
             return loaded.map {
                 if(it != null){
-                    DataMapper.mapDetailMovieLocalToDomain(it)
+                    MovieDataMapper.mapDetailMovieLocalToDomain(it)
                 }else{
                     null
                 }
@@ -123,7 +127,96 @@ class CinemaRepository(
 
 
         override suspend fun saveCallResult(data: MovieDetailResponse) {
-            val detailMovie = DataMapper.mapDetailMovieResponseToLocal(data)
+            val detailMovie = MovieDataMapper.mapDetailMovieResponseToLocal(data)
         }
     }.asFlow()
+
+
+    override fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
+        override fun loadFromDB(): Flow<List<TvShow>> {
+            return localDataSource.getPopularTvShow().map {
+                TvShowDataMapper.mapTvShowListLocalToDomain(it)
+            }
+        }
+
+        override fun shouldFetch(data: List<TvShow>?): Boolean = true
+
+        override suspend fun createCall(): Flow<ApiResponse<List<TvShowListItem>>> {
+            return remoteDataSource.getPopularTvShow(page)
+        }
+
+        override suspend fun saveCallResult(data: List<TvShowListItem>) {
+            val tvShowList = TvShowDataMapper.mapTvShowListResponseToLocal(data)
+            val idTvShowList = TvShowDataMapper.mapTvShowListResponseToPopularId(data)
+            localDataSource.insertTvShowList(tvShowList)
+            localDataSource.insertIdPopularTvShow(idTvShowList)
+        }
+    }.asFlow()
+
+    override fun getTopRatedTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
+        override fun loadFromDB(): Flow<List<TvShow>> {
+            return localDataSource.getTopRatedTvShow().map {
+                TvShowDataMapper.mapTvShowListLocalToDomain(it)
+            }
+        }
+
+        override fun shouldFetch(data: List<TvShow>?): Boolean = true
+
+        override suspend fun createCall(): Flow<ApiResponse<List<TvShowListItem>>> {
+            return remoteDataSource.getTopRatedTvShow(page)
+        }
+
+        override suspend fun saveCallResult(data: List<TvShowListItem>) {
+            val tvShowList = TvShowDataMapper.mapTvShowListResponseToLocal(data)
+            val idTvShowList = TvShowDataMapper.mapTvShowListResponseToTopRatedId(data)
+            localDataSource.insertTvShowList(tvShowList)
+            localDataSource.insertIdTopRatedTvShow(idTvShowList)
+        }
+    }.asFlow()
+
+    override fun getOnTheAirTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
+        override fun loadFromDB(): Flow<List<TvShow>> {
+            return localDataSource.getOnTheAirTvShow().map {
+                TvShowDataMapper.mapTvShowListLocalToDomain(it)
+            }
+        }
+
+        override fun shouldFetch(data: List<TvShow>?): Boolean = true
+
+        override suspend fun createCall(): Flow<ApiResponse<List<TvShowListItem>>> {
+            return remoteDataSource.getOnTheAirTvShow(page)
+        }
+
+        override suspend fun saveCallResult(data: List<TvShowListItem>) {
+            val tvShowList = TvShowDataMapper.mapTvShowListResponseToLocal(data)
+            val idTvShowList = TvShowDataMapper.mapTvShowListResponseToOnTheAirId(data)
+            localDataSource.insertTvShowList(tvShowList)
+            localDataSource.insertIdOnTheAIrTvShow(idTvShowList)
+        }
+    }.asFlow()
+
+    override fun getAiringTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
+        override fun loadFromDB(): Flow<List<TvShow>> {
+            return localDataSource.getAiringTodayTvShow().map {
+                TvShowDataMapper.mapTvShowListLocalToDomain(it)
+            }
+        }
+
+        override fun shouldFetch(data: List<TvShow>?): Boolean = true
+
+        override suspend fun createCall(): Flow<ApiResponse<List<TvShowListItem>>> {
+            return remoteDataSource.getAiringTodayTvShow(page)
+        }
+
+        override suspend fun saveCallResult(data: List<TvShowListItem>) {
+            val tvShowList = TvShowDataMapper.mapTvShowListResponseToLocal(data)
+            val idTvShowList = TvShowDataMapper.mapTvShowListResponseToAiringTodayId(data)
+            localDataSource.insertTvShowList(tvShowList)
+            localDataSource.insertIdAiringTodayTvShow(idTvShowList)
+        }
+    }.asFlow()
+
+    override fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail>> {
+        TODO("Not yet implemented")
+    }
 }

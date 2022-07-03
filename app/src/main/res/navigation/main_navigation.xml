@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/tvShowFragment"
-        android:name="com.rivaldofez.cinemato.tvseries.TVSeriesFragment"
+        android:name="com.rivaldofez.cinemato.tvshow.TVSeriesFragment"
         android:label="fragment_tvseries"
         tools:layout="@layout/fragment_tvshow" >
         <action

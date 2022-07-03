@@ -4,41 +4,28 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 
-data class TvShowDetail (
+data class TvShowDetail(
 
     val id: Int,
+    val name: String,
+    val originalName: String,
     val originalLanguage: String,
     val numberOfEpisodes: Int,
-//    val networks: List<NetworksItem>,
     val type: String,
-    val backdropPath: String,
-//    val genres: List<GenresItem>,
+    var backdropPath: String? = "",
     val popularity: Double,
-//    val productionCountries: List<ProductionCountriesItem>,
     val numberOfSeasons: Int,
     val voteCount: Int,
     val firstAirDate: String,
     val overview: String,
-//    val seasons: List<SeasonsItem>,
-    val languages: List<String>,
-//    val createdBy: List<CreatedByItem>,
-//    val lastEpisodeToAir: LastEpisodeToAir,
     val posterPath: String,
-//    val originCountry: List<String>,
-//    val spokenLanguages: List<SpokenLanguagesItem>,
-//    val productionCompanies: List<ProductionCompaniesItem>,
-    val originalName: String,
     val voteAverage: Double,
-    val name: String,
     val tagline: String,
-//    val episodeRunTime: List<Int>,
     val adult: Boolean,
-//    val nextEpisodeToAir: NextEpisodeToAir,
     val inProduction: Boolean,
     val lastAirDate: String,
     val homepage: String,
-    val status: String
-
-
-
+    val status: String,
+    val genres: String,
+    val spokenLanguages: String
 )

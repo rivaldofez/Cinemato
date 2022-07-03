@@ -3,18 +3,10 @@ package com.rivaldofez.core.utils
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
-import com.rivaldofez.core.datasource.remote.response.subresponse.GenresItem
-import com.rivaldofez.core.datasource.remote.response.subresponse.SpokenLanguagesItem
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 
-object DataMapper {
-    private fun mapListGenreToString(input: List<GenresItem>) : String =
-        input.joinToString { it.name }
-
-    private fun mapListSpokenLanguageToString(input: List<SpokenLanguagesItem>) : String =
-        input.joinToString { it.englishName }
-
+object MovieDataMapper {
     fun mapMovieListResponseToPopularId(input: List<MovieListItem>): List<PopularMovieLocalEntity> {
         val idList = ArrayList<PopularMovieLocalEntity>()
         input.map {
@@ -58,7 +50,7 @@ object DataMapper {
                 id = it.id,
                 title = it.title,
                 posterPath = it.posterPath,
-                backdropPath = it.backdropPath,
+                backdropPath = it.backdropPath ?: "",
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
                 releaseDate = it.releaseDate
@@ -75,16 +67,16 @@ object DataMapper {
             originalLanguage = input.originalLanguage,
             imdbId = input.imdbId,
             title = input.title,
-            backdropPath = input.backdropPath,
+            backdropPath = input.backdropPath ?: "",
             revenue = input.revenue,
-            genres = mapListGenreToString(input.genres),
+            genres = MapperAtribute.mapListGenreToString(input.genres),
             popularity = input.popularity,
             voteCount = input.voteCount,
             budget = input.budget,
             overview = input.overview,
             runtime = input.runtime,
             posterPath = input.posterPath,
-            spokenLanguages = mapListSpokenLanguageToString(input.spokenLanguages),
+            spokenLanguages = MapperAtribute.mapListSpokenLanguageToString(input.spokenLanguages),
             releaseDate = input.releaseDate,
             voteAverage = input.voteAverage,
             belongsToCollection = input.belongsToCollection,
@@ -100,7 +92,7 @@ object DataMapper {
             title = input.title,
             originalLanguage = input.originalLanguage,
             imdbId = input.imdbId,
-            backdropPath = input.backdropPath,
+            backdropPath = input.backdropPath ?: "",
             revenue = input.revenue,
             popularity = input.popularity,
             voteCount = input.voteCount,
@@ -130,7 +122,7 @@ object DataMapper {
                 id = it.id,
                 title = it.title,
                 posterPath = it.posterPath,
-                backdropPath = it.backdropPath,
+                backdropPath = it.backdropPath ?: "",
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
                 releaseDate = it.releaseDate
@@ -139,7 +131,6 @@ object DataMapper {
         }
         return movieList
     }
-
 
     fun mapDetailMovieListLocalToDomain(input: List<MovieDetailLocalEntity>) : List<MovieDetail> =
         input.map { mapDetailMovieLocalToDomain(it) }

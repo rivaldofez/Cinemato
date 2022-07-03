@@ -22,7 +22,6 @@ class MovieFragment : Fragment() {
     private val upcomingAdapter = MovieAdapter()
     private val nowPlayingAdapter = MovieAdapter()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
