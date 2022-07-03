@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cinemato">
         <activity
-            android:name=".movie.MovieActivity"
-            android:exported="false" />
-        <activity
             android:name=".home.HomeActivity"
             android:exported="false"
             android:theme="@style/Theme.Cinemato.NoToolbar"/>

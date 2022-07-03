@@ -18,6 +18,10 @@ class MovieFragment : Fragment() {
     private val binding get() = _binding!!
     private val movieViewModel: MovieViewModel by viewModel()
     private val popularAdapter = MovieAdapter()
+    private val topRatedAdapter = MovieAdapter()
+    private val upcomingAdapter = MovieAdapter()
+    private val nowPlayingAdapter = MovieAdapter()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,20 +37,77 @@ class MovieFragment : Fragment() {
 
         if(activity != null){
             callObservePopularMovies()
+            callObserveTopRatedMovies()
+            callObserveUpcomingMovies()
+            callObserveNowPlayingMovies()
 
             with(binding.rvPopularMovie){
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
+                val layoutManagerPopular = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                layoutManager = layoutManagerPopular
                 adapter = popularAdapter
+            }
+
+            with(binding.rvTopratedMovie){
+                val layoutManagerTopRated = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                layoutManager = layoutManagerTopRated
+                adapter = topRatedAdapter
+            }
+
+            with(binding.rvUpcomingMovie){
+                val layoutManagerUpComing = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                layoutManager = layoutManagerUpComing
+                adapter = upcomingAdapter
+            }
+
+            with(binding.rvNowPlayingMovie){
+                val layoutManagerNowPlaying = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                layoutManager = layoutManagerNowPlaying
+                adapter = nowPlayingAdapter
             }
         }
     }
 
     private fun callObservePopularMovies(){
-        movieViewModel.getTopRatedMovies("1").observe(viewLifecycleOwner, { movies ->
+        movieViewModel.getPopularMovies("1").observe(viewLifecycleOwner, { movies ->
             if(movies != null){
                 when(movies){
                     is Resource.Success -> movies.data?.let { popularAdapter.setMovie(movies = it) }
+                    is Resource.Loading -> Log.d("Teston", "loading")
+                    is Resource.Error -> Log.d("Teston", "error")
+                }
+            }
+        })
+    }
+
+    private fun callObserveTopRatedMovies(){
+        movieViewModel.getTopRatedMovies("1").observe(viewLifecycleOwner, { movies ->
+            if(movies != null){
+                when(movies){
+                    is Resource.Success -> movies.data?.let { topRatedAdapter.setMovie(movies = it) }
+                    is Resource.Loading -> Log.d("Teston", "loading")
+                    is Resource.Error -> Log.d("Teston", "error")
+                }
+            }
+        })
+    }
+
+    private fun callObserveUpcomingMovies(){
+        movieViewModel.getUpComingMovies("1").observe(viewLifecycleOwner, { movies ->
+            if(movies != null){
+                when(movies){
+                    is Resource.Success -> movies.data?.let { upcomingAdapter.setMovie(movies = it) }
+                    is Resource.Loading -> Log.d("Teston", "loading")
+                    is Resource.Error -> Log.d("Teston", "error")
+                }
+            }
+        })
+    }
+
+    private fun callObserveNowPlayingMovies(){
+        movieViewModel.getNowPlayingMovies("1").observe(viewLifecycleOwner, { movies ->
+            if(movies != null){
+                when(movies){
+                    is Resource.Success -> movies.data?.let { nowPlayingAdapter.setMovie(movies = it) }
                     is Resource.Loading -> Log.d("Teston", "loading")
                     is Resource.Error -> Log.d("Teston", "error")
                 }
