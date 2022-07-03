@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.40260416666666665" />
         <entry key="app/src/main/res/drawable-v24/bg_chip_navbar.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/bg_btn_viewall.xml" value="0.232" />
         <entry key="app/src/main/res/drawable/bg_popularity_round.xml" value="0.3415" />
         <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.44091672935273407" />
@@ -15,7 +16,7 @@
         <entry key="app/src/main/res/layout/fragment_detail_tvshow.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.1724137931034483" />
         <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.1724137931034483" />
-        <entry key="app/src/main/res/layout/fragment_movie.xml" value="0.24364360864611634" />
+        <entry key="app/src/main/res/layout/fragment_movie.xml" value="0.39579524680073125" />
         <entry key="app/src/main/res/layout/fragment_tvseries.xml" value="0.1724137931034483" />
         <entry key="app/src/main/res/layout/fragment_tvshow.xml" value="0.19972826086956522" />
         <entry key="app/src/main/res/layout/item_cinema.xml" value="0.5470494417862839" />
