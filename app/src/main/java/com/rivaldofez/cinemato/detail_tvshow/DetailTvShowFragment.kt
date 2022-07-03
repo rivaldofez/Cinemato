@@ -87,7 +87,6 @@ class DetailTvShowFragment : Fragment() {
             tvEpisode.text = detailTvShow.numberOfEpisodes.toString()
             tvSeason.text = detailTvShow.numberOfSeasons.toString()
             tvTagline.text = if (detailTvShow.tagline == "") "No tagline Defined" else detailTvShow.tagline
-
         }
     }
 }
