@@ -3,7 +3,7 @@ package com.rivaldofez.core.di
 import androidx.room.Room
 import com.rivaldofez.core.datasource.CinemaRepository
 import com.rivaldofez.core.datasource.local.LocalDataSource
-import com.rivaldofez.core.datasource.local.room.MovieDatabase
+import com.rivaldofez.core.datasource.local.room.CinemaDatabase
 import com.rivaldofez.core.datasource.remote.RemoteDataSource
 import com.rivaldofez.core.datasource.remote.network.ApiService
 import com.rivaldofez.core.domain.repository.ICinemaRepository
@@ -44,13 +44,13 @@ val networkModule = module {
 }
 
 val databaseModule = module {
-    factory { get<MovieDatabase>().movieDao()}
+    factory { get<CinemaDatabase>().cinemaDao()}
     single {
         val passphrase: ByteArray = SQLiteDatabase.getBytes("rivaldofez".toCharArray())
         val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
-            MovieDatabase::class.java, "Movie.db"
+            CinemaDatabase::class.java, "Movie.db"
         ).fallbackToDestructiveMigration()
             .openHelperFactory(factory)
             .build()

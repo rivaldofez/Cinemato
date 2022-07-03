@@ -10,7 +10,7 @@ import com.rivaldofez.core.datasource.local.entity.TvShowItemLocalEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface MovieDao {
+interface CinemaDao {
     @Query("Select * FROM movielist")
     fun getPopularMovies(): Flow<List<MovieItemLocalEntity>>
 
