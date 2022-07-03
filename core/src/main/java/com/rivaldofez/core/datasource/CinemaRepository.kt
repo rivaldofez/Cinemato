@@ -39,7 +39,7 @@ class CinemaRepository(
             Log.d("Teston", "save call")
             val movieList = DataMapper.mapMovieListResponseToLocal(data)
             val idmMovieList = DataMapper.mapMovieListResponseToLocalId(data)
-            localDataSource.insertPopularMovies(movieList)
+            localDataSource.insertMovieList(movieList)
             localDataSource.insertIdPopularMovies(idmMovieList)
         }
     }.asFlow()

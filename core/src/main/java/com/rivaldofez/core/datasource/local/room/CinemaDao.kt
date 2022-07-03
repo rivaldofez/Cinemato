@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CinemaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovieList(popularMovies: List<MovieItemLocalEntity>)
+    suspend fun insertMovieList(movieItemList: List<MovieItemLocalEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdPopularMovies(idPopularMovies: List<PopularMovieLocalEntity>)
