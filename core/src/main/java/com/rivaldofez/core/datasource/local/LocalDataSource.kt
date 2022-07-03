@@ -1,6 +1,6 @@
 package com.rivaldofez.core.datasource.local
 
-import com.rivaldofez.core.datasource.local.entity.TvShowItemLocalEntity
+import com.rivaldofez.core.datasource.local.entity.tvshow.TvShowItemLocalEntity
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.local.room.CinemaDao
 import kotlinx.coroutines.flow.Flow

@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.rivaldofez.core.datasource.local.entity.TvShowItemLocalEntity
+import com.rivaldofez.core.datasource.local.entity.tvshow.TvShowItemLocalEntity
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import kotlinx.coroutines.flow.Flow
 

@@ -2,8 +2,9 @@ package com.rivaldofez.core.datasource.local.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.rivaldofez.core.datasource.local.entity.*
 import com.rivaldofez.core.datasource.local.entity.movie.*
+import com.rivaldofez.core.datasource.local.entity.tvshow.TvShowDetailLocalEntity
+import com.rivaldofez.core.datasource.local.entity.tvshow.TvShowItemLocalEntity
 
 
 @Database(entities = [

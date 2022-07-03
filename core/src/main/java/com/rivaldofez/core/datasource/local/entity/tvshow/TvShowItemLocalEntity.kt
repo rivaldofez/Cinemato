@@ -1,4 +1,4 @@
-package com.rivaldofez.core.datasource.local.entity
+package com.rivaldofez.core.datasource.local.entity.tvshow
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
