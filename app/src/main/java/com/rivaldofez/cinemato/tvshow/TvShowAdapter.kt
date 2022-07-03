@@ -21,7 +21,6 @@ class TvShowAdapter: RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
         val itemTvShowBinding = ItemCinemaHorizontalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TvShowViewHolder(itemTvShowBinding)

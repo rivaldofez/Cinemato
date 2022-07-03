@@ -1,14 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_700"
     tools:context=".tvshow.TVSeriesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Fragment TV Show" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tv_popular_tvshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Popular Tv Show"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_popular_tvshow"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_popular_tvshow" />
+
+        <TextView
+            android:id="@+id/tv_toprated_tvshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Top Rated Tv Show"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_popular_tvshow"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_toprated_tvshow"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_toprated_tvshow" />
+
+        <TextView
+            android:id="@+id/tv_on_the_air_tvshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="On The Air TV Show"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_toprated_tvshow" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_on_the_air_tvshow"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_on_the_air_tvshow" />
+
+        <TextView
+            android:id="@+id/tv_airing_today_tvshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Airing Today TV Show"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_on_the_air_tvshow" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_airing_today_tvshow"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_airing_today_tvshow" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -4,6 +4,7 @@ import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 import com.rivaldofez.core.domain.model.TvShow
+import com.rivaldofez.core.domain.model.TvShowDetail
 import kotlinx.coroutines.flow.Flow
 
 interface CinemaUseCase {
@@ -26,6 +27,6 @@ interface CinemaUseCase {
 
     fun getAiringTodayTvShow(page: String): Flow<Resource<List<TvShow>>>
 
-    fun getDetailTvShow(id:String): Flow<Resource<List<TvShow>>>
+    fun getDetailTvShow(id:String): Flow<Resource<List<TvShowDetail>>>
 
 }
