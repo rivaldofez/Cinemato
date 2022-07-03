@@ -2,6 +2,7 @@ package com.rivaldofez.core.utils
 
 import com.rivaldofez.core.datasource.local.entity.MovieDetailLocalEntity
 import com.rivaldofez.core.datasource.local.entity.MovieItemLocalEntity
+import com.rivaldofez.core.datasource.local.entity.PopularMovieLocalEntity
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
 import com.rivaldofez.core.datasource.remote.response.subresponse.GenresItem
@@ -16,6 +17,15 @@ object DataMapper {
 
     private fun mapListSpokenLanguageToString(input: List<SpokenLanguagesItem>) : String =
         input.joinToString { it.englishName }
+
+    fun mapMovieListResponseToLocalId(input: List<MovieListItem>): List<PopularMovieLocalEntity> {
+        val idList = ArrayList<PopularMovieLocalEntity>()
+        input.map {
+            val popularMovieId = PopularMovieLocalEntity(id = it.id)
+            idList.add(popularMovieId)
+        }
+        return idList
+    }
 
     fun mapMovieListResponseToLocal(input: List<MovieListItem>): List<MovieItemLocalEntity> {
         val movieList = ArrayList<MovieItemLocalEntity>()

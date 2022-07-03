@@ -43,8 +43,8 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                     .apply(
                         RequestOptions.placeholderOf(R.drawable.ic_favorite)
                         .error(R.drawable.ic_favorite)).into(imgPoster)
+                ratingCinema.rating = (0.5F * movie.voteAverage).toFloat()
             }
-
         }
     }
 }
