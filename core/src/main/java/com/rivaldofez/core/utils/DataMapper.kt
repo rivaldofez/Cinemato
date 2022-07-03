@@ -1,15 +1,14 @@
 package com.rivaldofez.core.utils
 
-import com.rivaldofez.core.datasource.local.entity.MovieDetailLocalEntity
-import com.rivaldofez.core.datasource.local.entity.MovieItemLocalEntity
-import com.rivaldofez.core.datasource.local.entity.PopularMovieLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.MovieDetailLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.MovieItemLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.PopularMovieLocalEntity
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
 import com.rivaldofez.core.datasource.remote.response.subresponse.GenresItem
 import com.rivaldofez.core.datasource.remote.response.subresponse.SpokenLanguagesItem
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
-import org.koin.ext.getOrCreateScope
 
 object DataMapper {
     private fun mapListGenreToString(input: List<GenresItem>) : String =

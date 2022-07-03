@@ -1,8 +1,8 @@
 package com.rivaldofez.core.datasource.local
 
-import com.rivaldofez.core.datasource.local.entity.MovieDetailLocalEntity
-import com.rivaldofez.core.datasource.local.entity.MovieItemLocalEntity
-import com.rivaldofez.core.datasource.local.entity.PopularMovieLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.MovieDetailLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.MovieItemLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.PopularMovieLocalEntity
 import com.rivaldofez.core.datasource.local.entity.TvShowItemLocalEntity
 import com.rivaldofez.core.datasource.local.room.CinemaDao
 import kotlinx.coroutines.flow.Flow

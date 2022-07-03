@@ -2,7 +2,6 @@ package com.rivaldofez.core.datasource
 
 import android.util.Log
 import com.rivaldofez.core.datasource.local.LocalDataSource
-import com.rivaldofez.core.datasource.local.entity.MovieItemLocalEntity
 import com.rivaldofez.core.datasource.remote.RemoteDataSource
 import com.rivaldofez.core.datasource.remote.network.ApiResponse
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse

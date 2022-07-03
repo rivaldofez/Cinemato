@@ -4,9 +4,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.rivaldofez.core.datasource.local.entity.MovieDetailLocalEntity
-import com.rivaldofez.core.datasource.local.entity.MovieItemLocalEntity
-import com.rivaldofez.core.datasource.local.entity.PopularMovieLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.MovieDetailLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.MovieItemLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.PopularMovieLocalEntity
 import com.rivaldofez.core.datasource.local.entity.TvShowItemLocalEntity
 import kotlinx.coroutines.flow.Flow
 
