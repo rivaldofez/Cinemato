@@ -1,8 +1,6 @@
 package com.rivaldofez.core.utils
 
-import com.rivaldofez.core.datasource.local.entity.movie.MovieDetailLocalEntity
-import com.rivaldofez.core.datasource.local.entity.movie.MovieItemLocalEntity
-import com.rivaldofez.core.datasource.local.entity.movie.PopularMovieLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
 import com.rivaldofez.core.datasource.remote.response.subresponse.GenresItem
@@ -17,11 +15,38 @@ object DataMapper {
     private fun mapListSpokenLanguageToString(input: List<SpokenLanguagesItem>) : String =
         input.joinToString { it.englishName }
 
-    fun mapMovieListResponseToLocalId(input: List<MovieListItem>): List<PopularMovieLocalEntity> {
+    fun mapMovieListResponseToPopularId(input: List<MovieListItem>): List<PopularMovieLocalEntity> {
         val idList = ArrayList<PopularMovieLocalEntity>()
         input.map {
-            val popularMovieId = PopularMovieLocalEntity(id = it.id)
-            idList.add(popularMovieId)
+            val movieId = PopularMovieLocalEntity(id = it.id)
+            idList.add(movieId)
+        }
+        return idList
+    }
+
+    fun mapMovieListResponseToTopRatedId(input: List<MovieListItem>): List<TopRatedMovieLocalEntity> {
+        val idList = ArrayList<TopRatedMovieLocalEntity>()
+        input.map {
+            val movieId = TopRatedMovieLocalEntity(id = it.id)
+            idList.add(movieId)
+        }
+        return idList
+    }
+
+    fun mapMovieListResponseToUpComingId(input: List<MovieListItem>): List<UpcomingMovieLocalEntity> {
+        val idList = ArrayList<UpcomingMovieLocalEntity>()
+        input.map {
+            val movieId = UpcomingMovieLocalEntity(id = it.id)
+            idList.add(movieId)
+        }
+        return idList
+    }
+
+    fun mapMovieListResponseToNowPlayingId(input: List<MovieListItem>): List<NowPlayingMovieLocalEntity> {
+        val idList = ArrayList<NowPlayingMovieLocalEntity>()
+        input.map {
+            val movieId = NowPlayingMovieLocalEntity(id = it.id)
+            idList.add(movieId)
         }
         return idList
     }

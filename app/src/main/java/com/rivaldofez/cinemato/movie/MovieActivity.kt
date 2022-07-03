@@ -37,7 +37,7 @@ class MovieActivity : AppCompatActivity() {
                 if(page < totalPage){
                     if(visibleItemCount + pastVisibleItem >= total){
                         page++
-                        movieViewModel.getPopularMovies(page.toString()).observe(this@MovieActivity, {movies ->
+                        movieViewModel.getNowPlayingMovies(page.toString()).observe(this@MovieActivity, {movies ->
                             Log.d("Teston", "hellooo"+movies.data.toString())
                             if(movies != null){
                                 when(movies){

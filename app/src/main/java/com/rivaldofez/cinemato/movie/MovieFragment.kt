@@ -43,7 +43,7 @@ class MovieFragment : Fragment() {
     }
 
     private fun callObservePopularMovies(){
-        movieViewModel.getPopularMovies("1").observe(viewLifecycleOwner, { movies ->
+        movieViewModel.getTopRatedMovies("1").observe(viewLifecycleOwner, { movies ->
             if(movies != null){
                 when(movies){
                     is Resource.Success -> movies.data?.let { popularAdapter.setMovie(movies = it) }

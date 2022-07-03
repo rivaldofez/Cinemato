@@ -39,7 +39,6 @@ interface ApiService {
         @Query("key") key : String
     ): MovieDetailResponse?
 
-
     @GET("3/tv/popular")
     suspend fun getPopularTvShow(
         @Query("api_key") key: String,
