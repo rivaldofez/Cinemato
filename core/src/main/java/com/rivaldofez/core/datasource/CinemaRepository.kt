@@ -7,6 +7,8 @@ import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
+import com.rivaldofez.core.domain.model.TvShow
+import com.rivaldofez.core.domain.model.TvShowDetail
 import com.rivaldofez.core.domain.repository.ICinemaRepository
 import com.rivaldofez.core.utils.AppExecutors
 import com.rivaldofez.core.utils.DataMapper
@@ -126,4 +128,39 @@ class CinemaRepository(
             val detailMovie = DataMapper.mapDetailMovieResponseToLocal(data)
         }
     }.asFlow()
+
+
+    override fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
+        override fun loadFromDB(): Flow<List<Movie>> {
+            TODO("Not yet implemented")
+        }
+
+        override fun shouldFetch(data: List<Movie>?): Boolean {
+            TODO("Not yet implemented")
+        }
+
+        override suspend fun createCall(): Flow<ApiResponse<List<MovieListItem>>> {
+            TODO("Not yet implemented")
+        }
+
+        override suspend fun saveCallResult(data: List<MovieListItem>) {
+            TODO("Not yet implemented")
+        }
+    }
+
+    override fun getTopRatedTvShow(page: String): Flow<Resource<List<TvShow>>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getOnTheAirTvShow(page: String): Flow<Resource<List<TvShow>>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAiringTvShow(page: String): Flow<Resource<List<TvShow>>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail>> {
+        TODO("Not yet implemented")
+    }
 }

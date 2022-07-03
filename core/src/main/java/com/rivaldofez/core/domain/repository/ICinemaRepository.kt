@@ -3,6 +3,8 @@ package com.rivaldofez.core.domain.repository
 import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
+import com.rivaldofez.core.domain.model.TvShow
+import com.rivaldofez.core.domain.model.TvShowDetail
 import kotlinx.coroutines.flow.Flow
 
 interface ICinemaRepository {
@@ -16,4 +18,14 @@ interface ICinemaRepository {
     fun getNowPlayingMovies(page: String): Flow<Resource<List<Movie>>>
 
     fun getDetailMovie(id: String): Flow<Resource<MovieDetail?>>
+
+    fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>>
+
+    fun getTopRatedTvShow(page: String): Flow<Resource<List<TvShow>>>
+
+    fun getOnTheAirTvShow(page: String): Flow<Resource<List<TvShow>>>
+
+    fun getAiringTvShow(page: String): Flow<Resource<List<TvShow>>>
+
+    fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail>>
 }
