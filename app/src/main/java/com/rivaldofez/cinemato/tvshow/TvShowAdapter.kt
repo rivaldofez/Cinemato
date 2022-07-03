@@ -36,7 +36,7 @@ class TvShowAdapter: RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     inner class TvShowViewHolder(private val binding: ItemCinemaHorizontalBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShow: TvShow){
             with(binding){
-                tvTitle.text = tvShow.name,
+                tvTitle.text = tvShow.name
                 tvPopularity.text = String.format("%.0f",((tvShow.voteAverage/10.0)*100))
                 Glide.with(itemView.context).load(BuildConfig.API_PATH_IMAGE + tvShow.posterPath)
                     .apply(

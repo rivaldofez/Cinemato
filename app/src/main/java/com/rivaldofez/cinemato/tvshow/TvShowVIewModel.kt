@@ -13,14 +13,14 @@ class TvShowViewModel(private val cinemaUseCase: CinemaUseCase): ViewModel() {
     }
 
     fun getTopRatedTvShow(page: String): LiveData<Resource<List<TvShow>>> {
-        return cinemaUseCase.getPopularTvShow(page).asLiveData()
+        return cinemaUseCase.getTopRatedTvShow(page).asLiveData()
     }
 
     fun getOnTheAirTvShow(page: String): LiveData<Resource<List<TvShow>>> {
-        return cinemaUseCase.getPopularTvShow(page).asLiveData()
+        return cinemaUseCase.getOnTheAirTvShow(page).asLiveData()
     }
 
     fun getAiringTodayTvShow(page: String): LiveData<Resource<List<TvShow>>> {
-        return cinemaUseCase.getPopularTvShow(page).asLiveData()
+        return cinemaUseCase.getAiringTodayTvShow(page).asLiveData()
     }
 }

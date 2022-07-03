@@ -27,6 +27,6 @@ interface CinemaUseCase {
 
     fun getAiringTodayTvShow(page: String): Flow<Resource<List<TvShow>>>
 
-    fun getDetailTvShow(id:String): Flow<Resource<List<TvShowDetail>>>
+    fun getDetailTvShow(id:String): Flow<Resource<TvShowDetail>>
 
 }

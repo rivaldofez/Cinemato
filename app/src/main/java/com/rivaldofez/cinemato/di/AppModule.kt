@@ -1,6 +1,7 @@
 package com.rivaldofez.cinemato.di
 
 import com.rivaldofez.cinemato.movie.MovieViewModel
+import com.rivaldofez.cinemato.tvshow.TvShowViewModel
 import com.rivaldofez.core.domain.usecase.CinemaInteractor
 import com.rivaldofez.core.domain.usecase.CinemaUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,5 +16,6 @@ val useCaseModule = module {
 @ExperimentalCoroutinesApi
 @FlowPreview
 val viewModelModule = module {
-    viewModel{ MovieViewModel(get()) }
+    viewModel { MovieViewModel(get()) }
+    viewModel { TvShowViewModel(get()) }
 }

@@ -27,7 +27,7 @@ class CinemaInteractor(private val cinemaRepository: ICinemaRepository): CinemaU
 
     override fun getAiringTodayTvShow(page: String): Flow<Resource<List<TvShow>>> = cinemaRepository.getAiringTvShow(page)
 
-    override fun getDetailTvShow(id: String): Flow<Resource<List<TvShowDetail>>> = cinemaRepository.getDetailTvShow(id)
+    override fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail>> = cinemaRepository.getDetailTvShow(id)
 
 
 }
