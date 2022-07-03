@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.rivaldofez.core.datasource.local.entity.MovieDetailLocalEntity
 import com.rivaldofez.core.datasource.local.entity.MovieItemLocalEntity
+import com.rivaldofez.core.datasource.local.entity.TvShowItemLocalEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -18,4 +19,10 @@ interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPopularMovies(popularMovies: List<MovieItemLocalEntity>)
+
+    @Query("Select * FROM tvshowlist")
+    fun getPopularTvShow(): Flow<List<TvShowItemLocalEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPopularTvShow(tvShows: List<TvShowItemLocalEntity>)
 }
