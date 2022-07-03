@@ -1,4 +1,4 @@
-package com.rivaldofez.cinemato.tvseries
+package com.rivaldofez.cinemato.tvshow
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
