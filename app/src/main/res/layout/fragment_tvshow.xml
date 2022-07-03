@@ -16,11 +16,28 @@
             android:id="@+id/tv_popular_tvshow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="Popular Tv Show"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/btn_viewall_popular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_btn_viewall"
+            android:padding="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="View All"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_popular_tvshow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_popular_tvshow" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_popular_tvshow"
@@ -34,11 +51,28 @@
             android:id="@+id/tv_toprated_tvshow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="Top Rated Tv Show"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_popular_tvshow"/>
+            app:layout_constraintTop_toBottomOf="@+id/rv_popular_tvshow" />
+
+        <TextView
+            android:id="@+id/btn_viewall_toprated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_btn_viewall"
+            android:padding="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="View All"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_toprated_tvshow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_toprated_tvshow" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_toprated_tvshow"
@@ -52,11 +86,28 @@
             android:id="@+id/tv_on_the_air_tvshow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="On The Air TV Show"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_toprated_tvshow" />
+
+        <TextView
+            android:id="@+id/btn_viewall_ontheair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_btn_viewall"
+            android:padding="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="View All"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_on_the_air_tvshow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_on_the_air_tvshow" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_on_the_air_tvshow"
@@ -70,11 +121,28 @@
             android:id="@+id/tv_airing_today_tvshow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="Airing Today TV Show"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_on_the_air_tvshow" />
+
+        <TextView
+            android:id="@+id/btn_viewall_airingtoday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_btn_viewall"
+            android:padding="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="View All"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_airing_today_tvshow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_airing_today_tvshow" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_airing_today_tvshow"

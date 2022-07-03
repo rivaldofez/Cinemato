@@ -122,4 +122,23 @@ class MovieFragment : Fragment(), MovieCallback {
         )
         findNavController().navigate(gotoDetailMovieFragment)
     }
+
+    private fun setClickViewAll(){
+        binding.btnViewallPopular.setOnClickListener {
+
+        }
+
+        binding.btnViewallToprated.setOnClickListener {
+
+        }
+
+        binding.btnViewallNowplaying.setOnClickListener {
+
+        }
+
+        binding.btnViewallUpcoming.setOnClickListener {
+
+        }
+    }
+
 }

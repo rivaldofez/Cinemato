@@ -37,7 +37,8 @@
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_popular_movie"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_popular_movie" />
+            app:layout_constraintTop_toTopOf="@+id/tv_popular_movie"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_popular_movie"
