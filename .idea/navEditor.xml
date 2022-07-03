@@ -14,7 +14,19 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="-281" />
-                            <option name="y" value="144" />
+                            <option name="y" value="216" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="detailTvShowFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="217" />
+                            <option name="y" value="152" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -128,13 +140,23 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="164" />
-                            <option name="y" value="-253" />
+                            <option name="x" value="102" />
+                            <option name="y" value="-238" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_TVSeriesFragment_to_movieFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_tvShowFragment_to_detailTvShowFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_tvShowFragment_to_detailTvShowFragment2">
                               <value>
                                 <LayoutPositions />
                               </value>

@@ -11,7 +11,7 @@ import com.rivaldofez.cinemato.databinding.ItemCinemaBinding
 import com.rivaldofez.cinemato.databinding.ItemCinemaHorizontalBinding
 import com.rivaldofez.core.domain.model.TvShow
 
-class TvShowAdapter: RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
+class TvShowAdapter(private val callback: TvShowCallback): RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     private val listTvShow = ArrayList<TvShow>()
 
     fun setTvShow(tvshows: List<TvShow>){
@@ -36,6 +36,8 @@ class TvShowAdapter: RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     inner class TvShowViewHolder(private val binding: ItemCinemaHorizontalBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShow: TvShow){
             with(binding){
+                cvItemCinema.setOnClickListener { callback.ontvShowItemClick(tvShow) }
+
                 tvTitle.text = tvShow.name
                 tvPopularity.text = String.format("%.0f",((tvShow.voteAverage/10.0)*100))
                 Glide.with(itemView.context).load(BuildConfig.API_PATH_IMAGE + tvShow.posterPath)

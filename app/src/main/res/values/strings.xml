@@ -3,4 +3,5 @@
     <string name="cd_logo_cinemato">Logo Cinemato</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="episode_run">Latest Run %1$s</string>
 </resources>
