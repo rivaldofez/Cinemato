@@ -1,23 +1,21 @@
 package com.rivaldofez.core.di
 
 import androidx.room.Room
-import com.rivaldofez.core.datasource.MovieRepository
+import com.rivaldofez.core.datasource.CinemaRepository
 import com.rivaldofez.core.datasource.local.LocalDataSource
 import com.rivaldofez.core.datasource.local.room.MovieDatabase
 import com.rivaldofez.core.datasource.remote.RemoteDataSource
 import com.rivaldofez.core.datasource.remote.network.ApiService
-import com.rivaldofez.core.domain.repository.IMovieRepository
+import com.rivaldofez.core.domain.repository.ICinemaRepository
 import com.rivaldofez.core.utils.AppExecutors
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
-import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 val networkModule = module {
     single {
@@ -63,8 +61,8 @@ val repositoryModule = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
     factory { AppExecutors() }
-    single<IMovieRepository> {
-        MovieRepository(
+    single<ICinemaRepository> {
+        CinemaRepository(
             get(),
             get(),
             get()

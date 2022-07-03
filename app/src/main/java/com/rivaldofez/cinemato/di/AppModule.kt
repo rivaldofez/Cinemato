@@ -1,15 +1,15 @@
 package com.rivaldofez.cinemato.di
 
 import com.rivaldofez.cinemato.movie.MovieViewModel
-import com.rivaldofez.core.domain.usecase.MovieInteractor
-import com.rivaldofez.core.domain.usecase.MovieUseCase
+import com.rivaldofez.core.domain.usecase.CinemaInteractor
+import com.rivaldofez.core.domain.usecase.CinemaUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    factory<MovieUseCase> { MovieInteractor(get()) }
+    factory<CinemaUseCase> { CinemaInteractor(get()) }
 }
 
 @ExperimentalCoroutinesApi
