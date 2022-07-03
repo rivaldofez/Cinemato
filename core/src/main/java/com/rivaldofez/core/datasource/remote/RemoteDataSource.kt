@@ -144,6 +144,7 @@ class RemoteDataSource(private val apiService: ApiService) {
                 }
             }catch (e: Exception){
                 emit(ApiResponse.Error(e.toString()))
+                Log.d("Teston", e.toString())
             }
         }.flowOn(Dispatchers.IO)
 

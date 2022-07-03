@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.rivaldofez.cinemato.BuildConfig
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.FragmentDetailMovieBinding
 import com.rivaldofez.core.datasource.Resource
@@ -68,6 +71,12 @@ class DetailMovieFragment : Fragment() {
                     cgLanguage.addView(itemSpokenLanguage)
                 }
             }
+
+            Glide.with(requireContext()).load(BuildConfig.API_PATH_IMAGE + detailMovie.posterPath).apply(
+                RequestOptions.placeholderOf(R.drawable.ic_favorite).error(R.drawable.ic_feed)).into(imgPoster)
+            Glide.with(requireContext()).load(BuildConfig.API_PATH_IMAGE + detailMovie.posterPath).apply(
+                RequestOptions.placeholderOf(R.drawable.ic_favorite).error(R.drawable.ic_feed)).into(imgBackdrop)
+
             tvDate.text = ViewHelper.formatDate(detailMovie.releaseDate)
             tvBudget.text = ViewHelper.formatCurrency(detailMovie.budget)
             tvDuration.text = ViewHelper.formatRuntime(detailMovie.runtime)
@@ -77,8 +86,7 @@ class DetailMovieFragment : Fragment() {
             tvTitle.text = detailMovie.title
             tvSynopsis.text = detailMovie.overview
             tvStatus.text = detailMovie.status
-            chartPopularity.setProgress((detailMovie.voteAverage.toFloat() * 10F) * 100, true)
-
+            chartPopularity.setProgress((detailMovie.voteAverage.toFloat() * 10F), true)
         }
     }
 }

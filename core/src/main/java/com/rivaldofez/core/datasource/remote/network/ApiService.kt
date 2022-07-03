@@ -37,7 +37,7 @@ interface ApiService {
     @GET("3/movie/{id}")
     suspend fun getDetailMovie(
         @Path("id") id: String,
-        @Query("key") key : String
+        @Query("api_key") key : String
     ): MovieDetailResponse?
 
 
@@ -69,7 +69,7 @@ interface ApiService {
     @GET("3/tv/{id}")
     suspend fun getDetailTvShow(
         @Path("id") id: String,
-        @Query("key") key : String
+        @Query("api_key") key : String
     ): TvShowDetailResponse?
 
 

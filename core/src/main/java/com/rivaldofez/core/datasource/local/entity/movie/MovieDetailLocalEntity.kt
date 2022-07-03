@@ -54,9 +54,6 @@ data class MovieDetailLocalEntity(
     @ColumnInfo(name = "vote_average")
     val voteAverage: Double,
 
-    @ColumnInfo(name = "belongs_to_collection")
-    val belongsToCollection: String,
-
     @ColumnInfo(name = "tagline")
     val tagline: String,
 

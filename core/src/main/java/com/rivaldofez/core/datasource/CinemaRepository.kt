@@ -1,5 +1,6 @@
 package com.rivaldofez.core.datasource
 
+import android.util.Log
 import com.rivaldofez.core.datasource.local.LocalDataSource
 import com.rivaldofez.core.datasource.remote.RemoteDataSource
 import com.rivaldofez.core.datasource.remote.network.ApiResponse
@@ -231,6 +232,7 @@ class CinemaRepository(
 
         override suspend fun saveCallResult(data: MovieDetailResponse) {
             val dataMapped = MovieDataMapper.mapDetailMovieResponseToLocal(data)
+            Log.d("Teston", "save call " + dataMapped.toString())
             localDataSource.insertDetailMovie(dataMapped)
         }
     }.asFlow()
