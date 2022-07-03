@@ -18,7 +18,6 @@ data class TvShowDetail (
     val voteCount: Int,
     val firstAirDate: String,
     val overview: String,
-    val languages: List<String>,
     val posterPath: String,
     val voteAverage: Double,
     val tagline: String,

@@ -11,7 +11,7 @@ import com.rivaldofez.core.domain.model.TvShow
 import com.rivaldofez.core.domain.model.TvShowDetail
 import com.rivaldofez.core.domain.repository.ICinemaRepository
 import com.rivaldofez.core.utils.AppExecutors
-import com.rivaldofez.core.utils.DataMapper
+import com.rivaldofez.core.utils.MovieDataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -23,7 +23,7 @@ class CinemaRepository(
     override fun getPopularMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
             return localDataSource.getPopularMovies().map { movies ->
-                DataMapper.mapMovieListLocalToDomain(movies)
+                MovieDataMapper.mapMovieListLocalToDomain(movies)
             }
         }
 
@@ -34,8 +34,8 @@ class CinemaRepository(
         }
 
         override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = DataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = DataMapper.mapMovieListResponseToPopularId(data)
+            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
+            val idMovieList = MovieDataMapper.mapMovieListResponseToPopularId(data)
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdPopularMovies(idMovieList)
         }
@@ -44,7 +44,7 @@ class CinemaRepository(
     override fun getTopRatedMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
             return localDataSource.getTopRatedMovies().map { movies ->
-                DataMapper.mapMovieListLocalToDomain(movies)
+                MovieDataMapper.mapMovieListLocalToDomain(movies)
             }
         }
 
@@ -55,8 +55,8 @@ class CinemaRepository(
         }
 
         override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = DataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = DataMapper.mapMovieListResponseToTopRatedId(data)
+            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
+            val idMovieList = MovieDataMapper.mapMovieListResponseToTopRatedId(data)
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdTopRatedMovies(idMovieList)
         }
@@ -65,7 +65,7 @@ class CinemaRepository(
     override fun getUpComingMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
             return localDataSource.getUpComingMovies().map { movies ->
-                DataMapper.mapMovieListLocalToDomain(movies)
+                MovieDataMapper.mapMovieListLocalToDomain(movies)
             }
         }
 
@@ -76,8 +76,8 @@ class CinemaRepository(
         }
 
         override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = DataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = DataMapper.mapMovieListResponseToUpComingId(data)
+            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
+            val idMovieList = MovieDataMapper.mapMovieListResponseToUpComingId(data)
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdUpComingMovies(idMovieList)
         }
@@ -86,7 +86,7 @@ class CinemaRepository(
     override fun getNowPlayingMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
             return localDataSource.getNowPlayingMovies().map { movies ->
-                DataMapper.mapMovieListLocalToDomain(movies)
+                MovieDataMapper.mapMovieListLocalToDomain(movies)
             }
         }
 
@@ -97,8 +97,8 @@ class CinemaRepository(
         }
 
         override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = DataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = DataMapper.mapMovieListResponseToNowPlayingId(data)
+            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
+            val idMovieList = MovieDataMapper.mapMovieListResponseToNowPlayingId(data)
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdNowPlayingMovies(idMovieList)
         }
@@ -109,7 +109,7 @@ class CinemaRepository(
             val loaded = localDataSource.getDetailMovie(id)
             return loaded.map {
                 if(it != null){
-                    DataMapper.mapDetailMovieLocalToDomain(it)
+                    MovieDataMapper.mapDetailMovieLocalToDomain(it)
                 }else{
                     null
                 }
@@ -125,14 +125,16 @@ class CinemaRepository(
 
 
         override suspend fun saveCallResult(data: MovieDetailResponse) {
-            val detailMovie = DataMapper.mapDetailMovieResponseToLocal(data)
+            val detailMovie = MovieDataMapper.mapDetailMovieResponseToLocal(data)
         }
     }.asFlow()
 
 
     override fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
-            TODO("Not yet implemented")
+            return localDataSource.getPopularTvShow().map {
+
+            }
         }
 
         override fun shouldFetch(data: List<Movie>?): Boolean {

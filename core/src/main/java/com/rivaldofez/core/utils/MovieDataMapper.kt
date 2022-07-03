@@ -8,13 +8,7 @@ import com.rivaldofez.core.datasource.remote.response.subresponse.SpokenLanguage
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 
-object DataMapper {
-    private fun mapListGenreToString(input: List<GenresItem>) : String =
-        input.joinToString { it.name }
-
-    private fun mapListSpokenLanguageToString(input: List<SpokenLanguagesItem>) : String =
-        input.joinToString { it.englishName }
-
+object MovieDataMapper {
     fun mapMovieListResponseToPopularId(input: List<MovieListItem>): List<PopularMovieLocalEntity> {
         val idList = ArrayList<PopularMovieLocalEntity>()
         input.map {
@@ -77,14 +71,14 @@ object DataMapper {
             title = input.title,
             backdropPath = input.backdropPath,
             revenue = input.revenue,
-            genres = mapListGenreToString(input.genres),
+            genres = MapperAtribute.mapListGenreToString(input.genres),
             popularity = input.popularity,
             voteCount = input.voteCount,
             budget = input.budget,
             overview = input.overview,
             runtime = input.runtime,
             posterPath = input.posterPath,
-            spokenLanguages = mapListSpokenLanguageToString(input.spokenLanguages),
+            spokenLanguages = MapperAtribute.mapListSpokenLanguageToString(input.spokenLanguages),
             releaseDate = input.releaseDate,
             voteAverage = input.voteAverage,
             belongsToCollection = input.belongsToCollection,
