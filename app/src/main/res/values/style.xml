@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <style name="RatingBar" parent="Widget.AppCompat.RatingBar.Small">
-            <item name="colorControlNormal">@color/gold</item>
-            <item name="colorControlActivated">@color/duskgray</item>
-        </style>
+    <style name="RatingBar" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="colorControlNormal">@color/gold</item>
+        <item name="colorControlActivated">@color/duskgray</item>
+    </style>
 
-        <style name="RoundImageView">
-            <item name="cornerFamily">rounded</item>
-            <item name="cornerSize">12dp</item>
-            <item name="color">@color/white</item>
-        </style>
+    <style name="RoundImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+        <item name="color">@color/white</item>
+    </style>
+
+    <style name="Searchview">
+        <item name="android:textColorHint">@color/duskgray</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:queryBackground">@android:color/transparent</item>
+        <item name="iconTint">@color/white</item>
+    </style>
 </resources>
