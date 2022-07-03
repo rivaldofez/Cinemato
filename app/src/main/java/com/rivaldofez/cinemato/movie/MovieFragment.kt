@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.FragmentMovieBinding
+import com.rivaldofez.cinemato.full_list.FullListFragment
 import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.domain.model.Movie
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -125,20 +126,28 @@ class MovieFragment : Fragment(), MovieCallback {
 
     private fun setClickViewAll(){
         binding.btnViewallPopular.setOnClickListener {
-
+            actionToFullList(FullListFragment.ACTION_MOVIE_POPULAR)
         }
 
         binding.btnViewallToprated.setOnClickListener {
-
+            actionToFullList(FullListFragment.ACTION_MOVIE_TOPRATED)
         }
 
         binding.btnViewallNowplaying.setOnClickListener {
-
+            actionToFullList(FullListFragment.ACTION_MOVIE_NOWPLAYING)
         }
 
         binding.btnViewallUpcoming.setOnClickListener {
-
+            actionToFullList(FullListFragment.ACTION_MOVIE_UPCOMING)
         }
+    }
+
+    private fun actionToFullList(action: String){
+        val gotoFullListFragment = MovieFragmentDirections.actionMovieFragmentToFullListFragment(
+            action
+        )
+
+        findNavController().navigate(gotoFullListFragment)
     }
 
 }
