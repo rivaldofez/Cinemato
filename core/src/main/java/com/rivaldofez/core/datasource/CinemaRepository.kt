@@ -1,10 +1,12 @@
 package com.rivaldofez.core.datasource
 
+import android.util.Log
 import com.rivaldofez.core.datasource.local.LocalDataSource
 import com.rivaldofez.core.datasource.remote.RemoteDataSource
 import com.rivaldofez.core.datasource.remote.network.ApiResponse
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
+import com.rivaldofez.core.datasource.remote.response.TvShowDetailResponse
 import com.rivaldofez.core.datasource.remote.response.TvShowListItem
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
@@ -106,32 +108,6 @@ class CinemaRepository(
         }
     }.asFlow()
 
-    override fun getDetailMovie(id: String): Flow<Resource<MovieDetail?>> = object: NetworkBoundResource<MovieDetail?, MovieDetailResponse>(){
-        override fun loadFromDB(): Flow<MovieDetail?> {
-            val loaded = localDataSource.getDetailMovie(id)
-            return loaded.map {
-                if(it != null){
-                    MovieDataMapper.mapDetailMovieLocalToDomain(it)
-                }else{
-                    null
-                }
-            }
-        }
-
-        override fun shouldFetch(data: MovieDetail?): Boolean =
-            data == null
-
-
-        override suspend fun createCall(): Flow<ApiResponse<MovieDetailResponse>> =
-            remoteDataSource.getDetailMovie(id)
-
-
-        override suspend fun saveCallResult(data: MovieDetailResponse) {
-            val detailMovie = MovieDataMapper.mapDetailMovieResponseToLocal(data)
-        }
-    }.asFlow()
-
-
     override fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
         override fun loadFromDB(): Flow<List<TvShow>> {
             return localDataSource.getPopularTvShow().map {
@@ -216,7 +192,48 @@ class CinemaRepository(
         }
     }.asFlow()
 
-    override fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail>> {
-        TODO("Not yet implemented")
-    }
+    override fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail?>> = object: NetworkBoundResource<TvShowDetail?, TvShowDetailResponse>(){
+        override fun loadFromDB(): Flow<TvShowDetail?> {
+            val loaded = localDataSource.getDetailTvShow(id)
+            return loaded.map {
+                if(it != null){
+                    TvShowDataMapper.mapDetailTvShowLocalToDomain(it)
+                }else{
+                    null
+                }
+            }
+        }
+
+        override fun shouldFetch(data: TvShowDetail?): Boolean = true
+
+        override suspend fun createCall(): Flow<ApiResponse<TvShowDetailResponse>> = remoteDataSource.getDetailTvShow(id)
+
+        override suspend fun saveCallResult(data: TvShowDetailResponse) {
+            val dataMapped = TvShowDataMapper.mapDetailTvShowResponseToLocal(data)
+            localDataSource.insertDetailTvShow(dataMapped)
+        }
+    }.asFlow()
+
+    override fun getDetailMovie(id: String): Flow<Resource<MovieDetail?>> = object: NetworkBoundResource<MovieDetail?, MovieDetailResponse>(){
+        override fun loadFromDB(): Flow<MovieDetail?> {
+            val loaded = localDataSource.getDetailMovie(id)
+            return loaded.map {
+                if(it != null){
+                    MovieDataMapper.mapDetailMovieLocalToDomain(it)
+                }else{
+                    null
+                }
+            }
+        }
+
+        override fun shouldFetch(data: MovieDetail?): Boolean = true
+
+        override suspend fun createCall(): Flow<ApiResponse<MovieDetailResponse>> = remoteDataSource.getDetailMovie(id)
+
+        override suspend fun saveCallResult(data: MovieDetailResponse) {
+            val dataMapped = MovieDataMapper.mapDetailMovieResponseToLocal(data)
+            Log.d("Teston", "save call " + dataMapped.toString())
+            localDataSource.insertDetailMovie(dataMapped)
+        }
+    }.asFlow()
 }

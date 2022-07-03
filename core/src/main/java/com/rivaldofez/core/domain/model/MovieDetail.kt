@@ -18,7 +18,6 @@ data class MovieDetail(
     val posterPath: String,
     val releaseDate: String,
     val voteAverage: Double,
-    val belongsToCollection: String,
     val tagline: String,
     val adult: Boolean,
     val homepage: String,
