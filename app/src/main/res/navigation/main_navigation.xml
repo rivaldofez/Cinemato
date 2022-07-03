@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailMovie"
-        android:name="com.rivaldofez.cinemato.detail_movie.DetailMovie"
+        android:name="com.rivaldofez.cinemato.detail_movie.DetailMovieFragment"
         android:label="fragment_detail_movie"
         tools:layout="@layout/fragment_detail_movie" >
         <argument
