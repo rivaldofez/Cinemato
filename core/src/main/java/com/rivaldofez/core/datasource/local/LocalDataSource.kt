@@ -3,6 +3,7 @@ package com.rivaldofez.core.datasource.local
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
 import com.rivaldofez.core.datasource.local.room.CinemaDao
+import com.rivaldofez.core.domain.model.MovieDetail
 import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource(private val cinemaDao: CinemaDao) {
@@ -46,6 +47,11 @@ class LocalDataSource(private val cinemaDao: CinemaDao) {
     fun getAiringTodayTvShow() : Flow<List<TvShowItemLocalEntity>> = cinemaDao.getAiringTodayTvShow()
 
     fun getDetailTvShow(id: String): Flow<TvShowDetailLocalEntity?> = cinemaDao.getDetailTvShow(id.toInt())
+
+
+    suspend fun insertDetailTvShow(tvShowDetail: TvShowDetailLocalEntity) = cinemaDao.insertTvShowDetail(tvShowDetail)
+
+    suspend fun insertDetailMovie(movieDetail: MovieDetailLocalEntity) = cinemaDao.insertDetailMovie(movieDetail)
 
 
 }

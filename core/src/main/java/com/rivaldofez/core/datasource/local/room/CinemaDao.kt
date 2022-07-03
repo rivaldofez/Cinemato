@@ -72,4 +72,10 @@ interface CinemaDao {
     @Query("Select * FROM tvshowdetail where id= :id")
     fun getDetailTvShow(id: Int): Flow<TvShowDetailLocalEntity?>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertDetailMovie(detailMovie: MovieDetailLocalEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTvShowDetail(detailTvShow: TvShowDetailLocalEntity)
+
 }

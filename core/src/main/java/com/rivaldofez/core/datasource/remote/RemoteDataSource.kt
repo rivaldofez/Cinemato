@@ -3,10 +3,7 @@ package com.rivaldofez.core.datasource.remote
 import android.util.Log
 import com.rivaldofez.core.datasource.remote.network.ApiResponse
 import com.rivaldofez.core.datasource.remote.network.ApiService
-import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
-import com.rivaldofez.core.datasource.remote.response.MovieListItem
-import com.rivaldofez.core.datasource.remote.response.TvShowListItem
-import com.rivaldofez.core.datasource.remote.response.TvShowResponse
+import com.rivaldofez.core.datasource.remote.response.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -75,23 +72,6 @@ class RemoteDataSource(private val apiService: ApiService) {
             }
         }.flowOn(Dispatchers.IO)
 
-
-    suspend fun getDetailMovie(id: String): Flow<ApiResponse<MovieDetailResponse>> =
-        flow {
-            try {
-                val response: MovieDetailResponse? = apiService.getDetailMovie(id = id, key = "d63d4fcb8d25c828fe89669f635ff545")
-                if(response != null){
-                    emit(ApiResponse.Success(response))
-                }else{
-                    emit(ApiResponse.Empty)
-                }
-            }catch (e: Exception){
-                emit(ApiResponse.Error(e.toString()))
-            }
-        }.flowOn(Dispatchers.IO)
-
-
-
     suspend fun getPopularTvShow(page: String): Flow<ApiResponse<List<TvShowListItem>>> =
         flow {
             try {
@@ -145,6 +125,35 @@ class RemoteDataSource(private val apiService: ApiService) {
                 if(dataArray.isNotEmpty()){
                     emit(ApiResponse.Success(response.results))
                 } else {
+                    emit(ApiResponse.Empty)
+                }
+            }catch (e: Exception){
+                emit(ApiResponse.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+
+
+    suspend fun getDetailMovie(id: String): Flow<ApiResponse<MovieDetailResponse>> =
+        flow {
+            try {
+                val response: MovieDetailResponse? = apiService.getDetailMovie(id = id, key = "d63d4fcb8d25c828fe89669f635ff545")
+                if(response != null){
+                    emit(ApiResponse.Success(response))
+                }else{
+                    emit(ApiResponse.Empty)
+                }
+            }catch (e: Exception){
+                emit(ApiResponse.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+
+    suspend fun getDetailTvShow(id: String): Flow<ApiResponse<TvShowDetailResponse>> =
+        flow {
+            try {
+                val response: TvShowDetailResponse? = apiService.getDetailTvShow(id = id, key = "d63d4fcb8d25c828fe89669f635ff545")
+                if(response != null){
+                    emit(ApiResponse.Success(response))
+                }else{
                     emit(ApiResponse.Empty)
                 }
             }catch (e: Exception){

@@ -27,5 +27,5 @@ interface ICinemaRepository {
 
     fun getAiringTvShow(page: String): Flow<Resource<List<TvShow>>>
 
-    fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail>>
+    fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail?>>
 }

@@ -2,6 +2,7 @@ package com.rivaldofez.core.datasource.remote.network
 
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MoviesResponse
+import com.rivaldofez.core.datasource.remote.response.TvShowDetailResponse
 import com.rivaldofez.core.datasource.remote.response.TvShowResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -69,7 +70,7 @@ interface ApiService {
     suspend fun getDetailTvShow(
         @Path("id") id: String,
         @Query("key") key : String
-    ): MovieDetailResponse?
+    ): TvShowDetailResponse?
 
 
 }
