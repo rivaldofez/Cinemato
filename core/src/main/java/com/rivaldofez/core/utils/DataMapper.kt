@@ -7,6 +7,8 @@ import com.rivaldofez.core.datasource.remote.response.MovieListItem
 import com.rivaldofez.core.datasource.remote.response.subresponse.GenresItem
 import com.rivaldofez.core.datasource.remote.response.subresponse.SpokenLanguagesItem
 import com.rivaldofez.core.domain.model.Movie
+import com.rivaldofez.core.domain.model.MovieDetail
+import org.koin.ext.getOrCreateScope
 
 object DataMapper {
     private fun mapListGenreToString(input: List<GenresItem>) : String =
@@ -25,6 +27,7 @@ object DataMapper {
                 backdropPath = it.backdropPath,
                 popularity = it.popularity,
                 voteAverage = it.voteAverage,
+                releaseDate = it.releaseDate
             )
             movieList.add(movie)
         }
@@ -57,15 +60,53 @@ object DataMapper {
             status = input.status
         )
 
-    fun mapMovieListLocalToDomain(input: List<MovieItemLocalEntity>): List<Movie> =
+    fun mapDetailMovieLocalToDomain(input: MovieDetailLocalEntity): MovieDetail{
+        val movieDetail = MovieDetail(
+            id = input.id,
+            title = input.title,
+            originalLanguage = input.originalLanguage,
+            imdbId = input.imdbId,
+            backdropPath = input.backdropPath,
+            revenue = input.revenue,
+            popularity = input.popularity,
+            voteCount = input.voteCount,
+            budget = input.budget,
+            overview = input.overview,
+            originalTitle = input.originalTitle,
+            runtime = input.runtime,
+            posterPath = input.posterPath,
+            releaseDate = input.releaseDate,
+            voteAverage = input.voteAverage,
+            belongsToCollection = input.belongsToCollection,
+            tagline = input.tagline,
+            adult = input.adult,
+            homepage = input.homepage,
+            status = input.status,
+            genres = input.genres,
+            spokenLanguages = input.spokenLanguages
+        )
+
+        return movieDetail
+    }
+
+    fun mapMovieListLocalToDomain(input: List<MovieItemLocalEntity>): List<Movie> {
+        val movieList = ArrayList<Movie>()
         input.map {
-            Movie(
+            val movie = Movie(
                 id = it.id,
                 title = it.title,
                 posterPath = it.posterPath,
                 backdropPath = it.backdropPath,
                 popularity = it.popularity,
-                voteAverage = it.voteAverage
+                voteAverage = it.voteAverage,
+                releaseDate = it.releaseDate
             )
+            movieList.add(movie)
         }
+        return movieList
+    }
+
+
+    fun mapDetailMovieListLocalToDomain(input: List<MovieDetailLocalEntity>) : List<MovieDetail> =
+        input.map { mapDetailMovieLocalToDomain(it) }
 }

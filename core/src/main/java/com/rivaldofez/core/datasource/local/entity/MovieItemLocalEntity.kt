@@ -21,6 +21,9 @@ data class MovieItemLocalEntity (
     @ColumnInfo(name = "backdrop_path")
     val backdropPath: String,
 
+    @ColumnInfo(name = "releaseDate")
+    val releaseDate: String,
+
     @ColumnInfo(name = "popularity")
     val popularity: Double,
 

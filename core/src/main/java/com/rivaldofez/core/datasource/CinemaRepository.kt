@@ -11,6 +11,7 @@ import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 import com.rivaldofez.core.domain.repository.ICinemaRepository
 import com.rivaldofez.core.utils.AppExecutors
+import com.rivaldofez.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -23,12 +24,7 @@ class CinemaRepository(
         override fun loadFromDB(): Flow<List<Movie>> {
             Log.d("Teston", "load from db")
             return localDataSource.getPopularMovies().map { movies ->
-                movies.map {
-                    Movie(
-                        id = it.id,
-                        title = it.title
-                    )
-                }
+                DataMapper.mapMovieListLocalToDomain(movies)
             }
         }
 
@@ -42,9 +38,8 @@ class CinemaRepository(
         override suspend fun saveCallResult(data: List<MovieListItem>) {
 
             Log.d("Teston", "save call")
-            val movieList = data.map {
-                MovieItemLocalEntity(id = it.id, title = it.title)
-            }
+            val movieList = DataMapper.mapMovieListResponseToLocal(data)
+
 
             localDataSource.insertPopularMovies(movieList)
         }
@@ -53,9 +48,9 @@ class CinemaRepository(
     override fun getDetailMovie(id: String): Flow<Resource<MovieDetail?>> = object: NetworkBoundResource<MovieDetail?, MovieDetailResponse>(){
         override fun loadFromDB(): Flow<MovieDetail?> {
             val loaded = localDataSource.getDetailMovie(id)
-            return loaded.map {  movie ->
-                if(movie != null){
-                    MovieDetail(id = movie.id, title = movie.title)
+            return loaded.map {
+                if(it != null){
+                    DataMapper.mapDetailMovieLocalToDomain(it)
                 }else{
                     null
                 }
@@ -71,7 +66,7 @@ class CinemaRepository(
 
 
         override suspend fun saveCallResult(data: MovieDetailResponse) {
-            val detailMovie = MovieDetail(id = data.id, title = data.title)
+            val detailMovie = DataMapper.mapDetailMovieResponseToLocal(data)
         }
     }.asFlow()
 }

@@ -1,5 +1,7 @@
 package com.rivaldofez.core.domain.model
 
+import kotlinx.coroutines.flow.Flow
+
 data class MovieDetail (
     val id: Int,
     val title: String,
