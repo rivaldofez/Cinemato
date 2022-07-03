@@ -86,7 +86,7 @@ class DetailTvShowFragment : Fragment() {
             chartPopularity.setProgress((detailTvShow.voteAverage.toFloat() * 10F), true)
             tvEpisode.text = detailTvShow.numberOfEpisodes.toString()
             tvSeason.text = detailTvShow.numberOfSeasons.toString()
-            tvTagline.text = getString(R.string.episode_run, detailTvShow.tagline)
+            tvTagline.text = if (detailTvShow.tagline == "") "No tagline Defined" else detailTvShow.tagline
 
         }
     }

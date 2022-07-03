@@ -11,7 +11,7 @@
         android:label="fragment_movie"
         tools:layout="@layout/fragment_movie" >
         <action
-            android:id="@+id/action_movieFragment_to_TVSeriesFragment"
+            android:id="@+id/action_movieFragment_to_TVShowFragment"
             app:destination="@id/tvShowFragment" />
         <action
             android:id="@+id/action_movieFragment_to_feedFragment"
@@ -25,11 +25,11 @@
     </fragment>
     <fragment
         android:id="@+id/tvShowFragment"
-        android:name="com.rivaldofez.cinemato.tvshow.TVSeriesFragment"
-        android:label="fragment_tvseries"
+        android:name="com.rivaldofez.cinemato.tvshow.TVShowFragment"
+        android:label="fragment_tvshow"
         tools:layout="@layout/fragment_tvshow" >
         <action
-            android:id="@+id/action_TVSeriesFragment_to_movieFragment"
+            android:id="@+id/action_TVShowFragment_to_movieFragment"
             app:destination="@id/movieFragment" />
         <action
             android:id="@+id/action_tvShowFragment_to_feedFragment"

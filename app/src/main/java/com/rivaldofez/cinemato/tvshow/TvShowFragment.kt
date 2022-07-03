@@ -6,20 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.FragmentTvshowBinding
 import com.rivaldofez.core.datasource.Resource
+import com.rivaldofez.core.domain.model.TvShow
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class TVSeriesFragment : Fragment() {
+class TVShowFragment : Fragment(), TvShowCallback {
     private var _binding: FragmentTvshowBinding? = null
     private val binding get() = _binding!!
     private val tvShowViewModel: TvShowViewModel by viewModel()
-    private val popularAdapter = TvShowAdapter()
-    private val topRatedAdapter = TvShowAdapter()
-    private val onTheAirAdapter = TvShowAdapter()
-    private val airingTodayAdapter = TvShowAdapter()
+    private val popularAdapter = TvShowAdapter(this)
+    private val topRatedAdapter = TvShowAdapter(this)
+    private val onTheAirAdapter = TvShowAdapter(this)
+    private val airingTodayAdapter = TvShowAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -113,4 +115,10 @@ class TVSeriesFragment : Fragment() {
         })
     }
 
+    override fun ontvShowItemClick(tvShow: TvShow) {
+        val gotoDetailTvShowFragment = TVShowFragmentDirections.actionTvShowFragmentToDetailTvShowFragment(
+            tvShow.id.toString()
+        )
+        findNavController().navigate(gotoDetailTvShowFragment)
+    }
 }
