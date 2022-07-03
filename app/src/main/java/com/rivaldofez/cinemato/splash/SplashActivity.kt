@@ -11,7 +11,6 @@ import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.ActivitySplashBinding
 import com.rivaldofez.cinemato.home.HomeActivity
-import com.rivaldofez.cinemato.movie.MovieActivity
 
 class SplashActivity : AppCompatActivity() {
 

@@ -15,8 +15,21 @@ class MovieViewModel(private val cinemaUseCase: CinemaUseCase): ViewModel() {
 //    val popularMovies = movieUseCase.getPopularMovies().asLiveData()
 
     fun getPopularMovies(page: String): LiveData<Resource<List<Movie>>>{
-        return  cinemaUseCase.getPopularMovies(page).asLiveData()
+        return cinemaUseCase.getPopularMovies(page).asLiveData()
     }
+
+    fun getTopRatedMovies(page: String): LiveData<Resource<List<Movie>>>{
+        return cinemaUseCase.getTopRatedMovies(page).asLiveData()
+    }
+
+    fun getUpComingMovies(page: String): LiveData<Resource<List<Movie>>>{
+        return cinemaUseCase.getUpComingMovies(page).asLiveData()
+    }
+
+    fun getNowPlayingMovies(page: String): LiveData<Resource<List<Movie>>>{
+        return cinemaUseCase.getNowPlayingMovies(page).asLiveData()
+    }
+
     fun hello(){
         print("Hello")
     }

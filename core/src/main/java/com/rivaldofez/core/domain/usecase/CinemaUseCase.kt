@@ -8,6 +8,13 @@ import kotlinx.coroutines.flow.Flow
 interface CinemaUseCase {
 
     fun getPopularMovies(page: String): Flow<Resource<List<Movie>>>
+
+    fun getUpComingMovies(page: String): Flow<Resource<List<Movie>>>
+
+    fun getTopRatedMovies(page: String): Flow<Resource<List<Movie>>>
+
+    fun getNowPlayingMovies(page: String): Flow<Resource<List<Movie>>>
+
     fun getDetailMovie(id: String): Flow<Resource<MovieDetail?>>
 
 }
