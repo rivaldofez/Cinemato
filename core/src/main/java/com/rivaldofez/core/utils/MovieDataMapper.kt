@@ -134,7 +134,6 @@ object MovieDataMapper {
         return movieList
     }
 
-
     fun mapDetailMovieListLocalToDomain(input: List<MovieDetailLocalEntity>) : List<MovieDetail> =
         input.map { mapDetailMovieLocalToDomain(it) }
 }

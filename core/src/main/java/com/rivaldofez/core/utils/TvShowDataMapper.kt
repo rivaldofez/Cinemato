@@ -1,13 +1,50 @@
 package com.rivaldofez.core.utils
 
-import com.rivaldofez.core.datasource.local.entity.tvshow.TvShowDetailLocalEntity
-import com.rivaldofez.core.datasource.local.entity.tvshow.TvShowItemLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.PopularMovieLocalEntity
+import com.rivaldofez.core.datasource.local.entity.tvshow.*
+import com.rivaldofez.core.datasource.remote.response.MovieListItem
 import com.rivaldofez.core.datasource.remote.response.TvShowDetailResponse
 import com.rivaldofez.core.datasource.remote.response.TvShowListItem
 import com.rivaldofez.core.domain.model.TvShow
 import com.rivaldofez.core.domain.model.TvShowDetail
 
 object TvShowDataMapper {
+    fun mapTvShowListResponseToPopularId(input: List<TvShowListItem>): List<PopularTvShowLocalEntity> {
+        val idList = ArrayList<PopularTvShowLocalEntity>()
+        input.map {
+            val tvShowId = PopularTvShowLocalEntity(id = it.id)
+            idList.add(tvShowId)
+        }
+        return idList
+    }
+
+    fun mapTvShowListResponseToTopRatedId(input: List<TvShowListItem>): List<TopRatedTvShowLocalEntity> {
+        val idList = ArrayList<TopRatedTvShowLocalEntity>()
+        input.map {
+            val tvShowId = TopRatedTvShowLocalEntity(id = it.id)
+            idList.add(tvShowId)
+        }
+        return idList
+    }
+
+    fun mapTvShowListResponseToOnTheAirId(input: List<TvShowListItem>): List<OnTheAirTvShowLocalEntity> {
+        val idList = ArrayList<OnTheAirTvShowLocalEntity>()
+        input.map {
+            val tvShowId = OnTheAirTvShowLocalEntity(id = it.id)
+            idList.add(tvShowId)
+        }
+        return idList
+    }
+
+    fun mapTvShowListResponseToAiringTodayId(input: List<TvShowListItem>): List<AiringTodayTvShowEntity> {
+        val idList = ArrayList<AiringTodayTvShowEntity>()
+        input.map {
+            val tvShowId = AiringTodayTvShowEntity(id = it.id)
+            idList.add(tvShowId)
+        }
+        return idList
+    }
+
     fun mapTvShowListResponseToLocal(input: List<TvShowListItem>): List<TvShowItemLocalEntity> {
         val tvShowList = ArrayList<TvShowItemLocalEntity>()
         input.map {
@@ -97,7 +134,7 @@ object TvShowDataMapper {
         return tvShowList
     }
 
-    fun mapDetailTvShowListLocalToDomain(input: List<TvShowItemLocalEntity>): List<TvShowDetail> =
+    fun mapDetailTvShowListLocalToDomain(input: List<TvShowDetailLocalEntity>): List<TvShowDetail> =
         input.map { mapDetailTvShowLocalToDomain(it) }
 }
 
