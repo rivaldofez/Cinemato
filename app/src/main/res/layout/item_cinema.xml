@@ -7,9 +7,10 @@
     app:cardBackgroundColor="@color/black_500"
     android:layout_margin="8dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cv_itemCinema"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

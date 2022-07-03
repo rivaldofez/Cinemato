@@ -38,6 +38,7 @@ class MovieFragment : Fragment(), MovieCallback {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null){
+            setClickViewAll()
             callObservePopularMovies()
             callObserveTopRatedMovies()
             callObserveUpcomingMovies()
