@@ -8,11 +8,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.rivaldofez.cinemato.BuildConfig
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.ItemCinemaHorizontalBinding
-import com.rivaldofez.cinemato.databinding.ItemMovieBinding
-import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.domain.model.Movie
 
-class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val callback: MovieCallback): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private val listMovie = ArrayList<Movie>()
 
     fun setMovie(movies: List<Movie>){
@@ -37,6 +35,8 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     inner class MovieViewHolder(private val binding: ItemCinemaHorizontalBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie){
             with(binding) {
+                cvItemCinema.setOnClickListener{callback.onMovieItemClick(movie)}
+
                 tvTitle.text = movie.title
                 tvPopularity.text = String.format("%.0f",((movie.voteAverage/10.0)*100))
                 Glide.with(itemView.context).load(BuildConfig.API_PATH_IMAGE + movie.posterPath)

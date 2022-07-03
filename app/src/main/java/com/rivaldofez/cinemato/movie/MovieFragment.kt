@@ -7,20 +7,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.FragmentMovieBinding
 import com.rivaldofez.core.datasource.Resource
+import com.rivaldofez.core.domain.model.Movie
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MovieFragment : Fragment() {
+class MovieFragment : Fragment(), MovieCallback {
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
     private val movieViewModel: MovieViewModel by viewModel()
-    private val popularAdapter = MovieAdapter()
-    private val topRatedAdapter = MovieAdapter()
-    private val upcomingAdapter = MovieAdapter()
-    private val nowPlayingAdapter = MovieAdapter()
+    private val popularAdapter = MovieAdapter(this)
+    private val topRatedAdapter = MovieAdapter(this)
+    private val upcomingAdapter = MovieAdapter(this)
+    private val nowPlayingAdapter = MovieAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -114,4 +116,10 @@ class MovieFragment : Fragment() {
         })
     }
 
+    override fun onMovieItemClick(movie: Movie) {
+        val gotoDetailMovieFragment = MovieFragmentDirections.actionMovieFragmentToDetailMovie(
+            movie.id.toString()
+        )
+        findNavController().navigate(gotoDetailMovieFragment)
+    }
 }
