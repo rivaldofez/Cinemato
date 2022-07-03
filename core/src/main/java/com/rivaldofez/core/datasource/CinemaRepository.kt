@@ -28,7 +28,7 @@ class CinemaRepository(
             }
         }
 
-        override fun shouldFetch(data: List<Movie>?): Boolean = false
+        override fun shouldFetch(data: List<Movie>?): Boolean = true
 
         override suspend fun createCall(): Flow<ApiResponse<List<MovieListItem>>> {
             Log.d("Teston", "create call")
