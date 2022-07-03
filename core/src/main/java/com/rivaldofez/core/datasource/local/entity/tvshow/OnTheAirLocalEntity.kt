@@ -2,9 +2,11 @@ package com.rivaldofez.core.datasource.local.entity.tvshow
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-data class UpComingLocalEntity (
+@Entity(tableName = "ontheairtvshow")
+data class OnTheAirLocalEntity (
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")

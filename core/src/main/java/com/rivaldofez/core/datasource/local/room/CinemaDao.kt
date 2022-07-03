@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.rivaldofez.core.datasource.local.entity.tvshow.TvShowItemLocalEntity
 import com.rivaldofez.core.datasource.local.entity.movie.*
+import com.rivaldofez.core.datasource.local.entity.tvshow.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -39,14 +39,39 @@ interface CinemaDao {
 
 
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTvShowList(tvShowItemList: List<TvShowItemLocalEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertIdPopularTvShow(idPopularTvShow: List<PopularTvShowLocalEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertIdTopRatedTvShow(idTopRatedTvShow: List<TopRatedTvShowLocalEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertIdOnTheAirTvShow(idOnAirTvShow: List<OnTheAirLocalEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertIdAiringTodayTvShow(idAiringTvShow: List<AiringTodayTvShowEntity>)
+
+    @Query("Select * FROM tvshowlist natural join populartvshow")
+    fun getPopularTvShow(): Flow<List<TvShowItemLocalEntity>>
+
+    @Query("Select * FROM tvshowlist natural join topratedtvshow")
+    fun getTopRatedTvShow(): Flow<List<TvShowItemLocalEntity>>
+
+    @Query("Select * FROM tvshowlist natural join ontheairtvshow")
+    fun getOnTheAirShow(): Flow<List<TvShowItemLocalEntity>>
+
+    @Query("Select * FROM tvshowlist natural join airingtodaytvshow")
+    fun getAiringTodayTvShow(): Flow<List<TvShowItemLocalEntity>>
+
 
 
     @Query("Select * FROM moviedetail where id= :id")
     fun getDetailMovie(id: Int): Flow<MovieDetailLocalEntity?>
 
-    @Query("Select * FROM tvshowlist")
-    fun getPopularTvShow(): Flow<List<TvShowItemLocalEntity>>
+    @Query("Select * FROM tvshowdetail where id= :id")
+    fun getDetailTvShow(id: Int): Flow<TvShowDetailLocalEntity?>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPopularTvShow(tvShows: List<TvShowItemLocalEntity>)
 }
