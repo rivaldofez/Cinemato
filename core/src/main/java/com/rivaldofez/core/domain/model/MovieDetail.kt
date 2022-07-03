@@ -20,6 +20,7 @@ data class MovieDetail (
     val tagline: String,
     val adult: Boolean,
     val homepage: String,
-    val status: String
-    val genres: String
+    val status: String,
+    val genres: String,
+    val spokenLanguages: String,
 )

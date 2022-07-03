@@ -12,26 +12,20 @@ data class MovieDetailLocalEntity (
     @ColumnInfo(name = "id")
     val id: Int,
 
+    @ColumnInfo(name = "title")
+    val title: String,
+
     @ColumnInfo(name = "original_language")
     val originalLanguage: String,
 
     @ColumnInfo(name = "imdb_id")
     val imdbId: String,
 
-    @ColumnInfo(name = "video")
-    val video: Boolean,
-
-    @ColumnInfo(name = "title")
-    val title: String,
-
     @ColumnInfo(name = "backdrop_path")
     val backdropPath: String,
 
     @ColumnInfo(name = "revenue")
     val revenue: Int,
-
-    @ColumnInfo(name = "genres")
-    val genres: String,
 
     @ColumnInfo(name = "popularity")
     val popularity: Double,
@@ -54,9 +48,6 @@ data class MovieDetailLocalEntity (
     @ColumnInfo(name = "poster_path")
     val posterPath: String,
 
-    @ColumnInfo(name = "spoken_languages")
-    val spokenLanguages: String,
-
     @ColumnInfo(name = "release_date")
     val releaseDate: String,
 
@@ -76,5 +67,11 @@ data class MovieDetailLocalEntity (
     val homepage: String,
 
     @ColumnInfo(name = "status")
-    val status: String
+    val status: String,
+
+    @ColumnInfo(name = "genres")
+    val genres: String,
+
+    @ColumnInfo(name = "spoken_languages")
+    val spokenLanguages: String,
 )
