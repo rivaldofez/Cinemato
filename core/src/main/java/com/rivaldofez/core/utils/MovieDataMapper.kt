@@ -65,7 +65,7 @@ object MovieDataMapper {
     fun mapDetailMovieResponseToLocal(input: MovieDetailResponse): MovieDetailLocalEntity =
         MovieDetailLocalEntity(
             id = input.id,
-            originalTitle = input.originalLanguage,
+            originalTitle = input.originalTitle,
             originalLanguage = input.originalLanguage,
             imdbId = input.imdbId,
             title = input.title,

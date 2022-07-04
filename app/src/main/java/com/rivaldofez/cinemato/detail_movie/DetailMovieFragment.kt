@@ -83,7 +83,7 @@ class DetailMovieFragment : Fragment() {
             tvBudget.text = ViewHelper.formatCurrency(detailMovie.budget)
             tvDuration.text = ViewHelper.formatRuntime(detailMovie.runtime)
             tvHomepage.text = detailMovie.homepage
-            tvOriginal.text = detailMovie.originalLanguage
+            tvOriginal.text = detailMovie.originalTitle
             tvRevenue.text = ViewHelper.formatCurrency(detailMovie.revenue)
             tvTitle.text = detailMovie.title
             tvSynopsis.text = detailMovie.overview

@@ -81,7 +81,7 @@ class DetailTvShowFragment : Fragment() {
 
             tvDate.text = ViewHelper.formatDate(detailTvShow.firstAirDate)
             tvHomepage.text = detailTvShow.homepage
-            tvOriginal.text = detailTvShow.originalLanguage
+            tvOriginal.text = detailTvShow.originalName
             tvTitle.text = detailTvShow.name
             tvSynopsis.text = detailTvShow.overview
             tvStatus.text = detailTvShow.status
