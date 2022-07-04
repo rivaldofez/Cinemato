@@ -1,5 +1,6 @@
 package com.rivaldofez.core.utils
 
+import com.rivaldofez.core.datasource.local.entity.movie.MovieDetailLocalEntity
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
 import com.rivaldofez.core.datasource.remote.response.TvShowDetailResponse
 import com.rivaldofez.core.datasource.remote.response.TvShowListItem
@@ -112,7 +113,8 @@ object TvShowDataMapper {
             homepage = input.homepage,
             status = input.status,
             genres = input.genres,
-            spokenLanguages = input.spokenLanguages
+            spokenLanguages = input.spokenLanguages,
+            isFavorite = input.isFavorite
         )
         return tvShowDetail
     }
@@ -136,6 +138,35 @@ object TvShowDataMapper {
 
     fun mapDetailTvShowListLocalToDomain(input: List<TvShowDetailLocalEntity>): List<TvShowDetail> =
         input.map { mapDetailTvShowLocalToDomain(it) }
+
+
+    fun mapDomainDetailTvShowToLocal(input: TvShowDetail): TvShowDetailLocalEntity {
+        return TvShowDetailLocalEntity(
+            id = input.id,
+            name = input.name,
+            originalName = input.originalName,
+            originalLanguage = input.originalLanguage,
+            numberOfEpisodes = input.numberOfEpisodes,
+            type = input.type,
+            backdropPath = input.backdropPath,
+            popularity = input.popularity,
+            numberOfSeasons = input.numberOfSeasons,
+            voteCount = input.voteCount,
+            firstAirDate = input.firstAirDate,
+            overview = input.overview,
+            posterPath = input.posterPath,
+            voteAverage = input.voteAverage,
+            tagline = input.tagline,
+            adult = input.adult,
+            inProduction = input.inProduction,
+            lastAirDate = input.lastAirDate,
+            homepage = input.homepage,
+            status = input.status,
+            genres = input.genres,
+            spokenLanguages = input.spokenLanguages,
+            isFavorite = input.isFavorite
+        )
+    }
 
     fun mapTvShowToMediatorItem(input: TvShow): MediatorItem {
         return MediatorItem(

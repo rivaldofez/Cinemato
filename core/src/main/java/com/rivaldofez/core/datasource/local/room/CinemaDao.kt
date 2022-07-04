@@ -1,11 +1,9 @@
 package com.rivaldofez.core.datasource.local.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
+import com.rivaldofez.core.domain.model.MovieDetail
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -77,5 +75,18 @@ interface CinemaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTvShowDetail(detailTvShow: TvShowDetailLocalEntity)
+
+    @Query("Select * From moviedetail where isFavorite = 1")
+    fun getFavoritoMovies(): Flow<List<MovieDetailLocalEntity>>
+
+    @Query("Select * From tvshowdetail where isFavorite = 1")
+    fun getFavoritoTvShows(): Flow<List<TvShowDetailLocalEntity>>
+
+    @Update
+    fun updateDetailMovie(detailMovie: MovieDetailLocalEntity)
+
+    @Update
+    fun updateDetailTvShow(detailTvShow: TvShowDetailLocalEntity)
+
 
 }

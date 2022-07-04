@@ -236,4 +236,26 @@ class CinemaRepository(
             localDataSource.insertDetailMovie(dataMapped)
         }
     }.asFlow()
+
+    override fun getFavoriteMovies(): Flow<List<MovieDetail>> {
+        return localDataSource.getFavoriteMovies().map {
+            MovieDataMapper.mapDetailMovieListLocalToDomain(it)
+        }
+    }
+
+    override fun getFavoriteTvShows(): Flow<List<TvShowDetail>> {
+        return localDataSource.getFavoriteTvShow().map {
+            TvShowDataMapper.mapDetailTvShowListLocalToDomain(it)
+        }
+    }
+
+    override fun setFavoriteMovie(detailMovie: MovieDetail, state: Boolean) {
+        val movieEntity = MovieDataMapper.mapDomainDetailMovieToLocal(detailMovie)
+        appExecutors.diskIO().execute{localDataSource.setFavoriteMovie(movieEntity,state)}
+    }
+
+    override fun setFavoriteTvShow(detailTvShow: TvShowDetail, state: Boolean) {
+        val tvShowEntity = TvShowDataMapper.mapDomainDetailTvShowToLocal(detailTvShow)
+        appExecutors.diskIO().execute{localDataSource.setFavoriteTvShow(tvShowEntity, state)}
+    }
 }

@@ -28,4 +28,12 @@ interface ICinemaRepository {
     fun getAiringTvShow(page: String): Flow<Resource<List<TvShow>>>
 
     fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail?>>
+
+    fun getFavoriteMovies(): Flow<List<MovieDetail>>
+
+    fun getFavoriteTvShows(): Flow<List<TvShowDetail>>
+
+    fun setFavoriteMovie(detailMovie: MovieDetail, state: Boolean)
+
+    fun setFavoriteTvShow(detailTvShow: TvShowDetail, state: Boolean)
 }

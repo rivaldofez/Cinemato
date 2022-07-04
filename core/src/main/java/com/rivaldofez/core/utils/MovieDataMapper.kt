@@ -108,7 +108,9 @@ object MovieDataMapper {
             homepage = input.homepage,
             status = input.status,
             genres = input.genres,
-            spokenLanguages = input.spokenLanguages
+            spokenLanguages = input.spokenLanguages,
+            isFavorite = input.isFavorite
+
         )
 
         return movieDetail
@@ -133,6 +135,33 @@ object MovieDataMapper {
 
     fun mapDetailMovieListLocalToDomain(input: List<MovieDetailLocalEntity>) : List<MovieDetail> =
         input.map { mapDetailMovieLocalToDomain(it) }
+
+    fun mapDomainDetailMovieToLocal(input: MovieDetail): MovieDetailLocalEntity {
+        return MovieDetailLocalEntity(
+            id = input.id,
+            title = input.title,
+            originalLanguage = input.originalLanguage,
+            imdbId = input.imdbId,
+            backdropPath = input.backdropPath,
+            revenue = input.revenue,
+            popularity = input.popularity,
+            voteCount = input.voteCount,
+            budget = input.budget,
+            overview = input.overview,
+            originalTitle = input.originalTitle,
+            runtime = input.runtime,
+            posterPath = input.posterPath,
+            releaseDate = input.releaseDate,
+            voteAverage = input.voteAverage,
+            tagline = input.tagline,
+            adult = input.adult,
+            homepage = input.homepage,
+            status = input.status,
+            genres = input.genres,
+            spokenLanguages = input.spokenLanguages,
+            isFavorite = input.isFavorite
+        )
+    }
 
     fun mapMovieDataToMediator(input: Movie): MediatorItem{
         return MediatorItem(

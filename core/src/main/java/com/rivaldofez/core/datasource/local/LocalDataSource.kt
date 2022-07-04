@@ -53,5 +53,18 @@ class LocalDataSource(private val cinemaDao: CinemaDao) {
 
     suspend fun insertDetailMovie(movieDetail: MovieDetailLocalEntity) = cinemaDao.insertDetailMovie(movieDetail)
 
+    fun getFavoriteMovies() : Flow<List<MovieDetailLocalEntity>> = cinemaDao.getFavoritoMovies()
+
+    fun getFavoriteTvShow(): Flow<List<TvShowDetailLocalEntity>> = cinemaDao.getFavoritoTvShows()
+
+    fun setFavoriteMovie(movieDetail: MovieDetailLocalEntity, newState: Boolean){
+        movieDetail.isFavorite = newState
+        cinemaDao.updateDetailMovie(movieDetail)
+    }
+
+    fun setFavoriteTvShow(tvShowDetail: TvShowDetailLocalEntity, newState: Boolean){
+        tvShowDetail.isFavorite = newState
+        cinemaDao.updateDetailTvShow(tvShowDetail)
+    }
 
 }
