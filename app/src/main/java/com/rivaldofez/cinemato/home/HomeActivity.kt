@@ -3,10 +3,11 @@ package com.rivaldofez.cinemato.home
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.ActivityHomeBinding
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,5 +37,9 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onRefresh() {
+        TODO("Not yet implemented")
     }
 }

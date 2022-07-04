@@ -3,6 +3,8 @@ package com.rivaldofez.core.utils
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
 import com.rivaldofez.core.datasource.remote.response.TvShowDetailResponse
 import com.rivaldofez.core.datasource.remote.response.TvShowListItem
+import com.rivaldofez.core.domain.model.MediatorItem
+import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.TvShow
 import com.rivaldofez.core.domain.model.TvShowDetail
 
@@ -134,5 +136,38 @@ object TvShowDataMapper {
 
     fun mapDetailTvShowListLocalToDomain(input: List<TvShowDetailLocalEntity>): List<TvShowDetail> =
         input.map { mapDetailTvShowLocalToDomain(it) }
+
+    fun mapTvShowToMediatorItem(input: TvShow): MediatorItem {
+        return MediatorItem(
+            id = input.id,
+            title = input.name,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath,
+            releaseDate = input.firstAirDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage,
+            type = "tvshow"
+        )
+    }
+
+    fun mapMediatorItemToTvShow(input: MediatorItem): TvShow{
+        return TvShow(
+            id = input.id,
+            name = input.title,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath,
+            firstAirDate = input.releaseDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage
+        )
+    }
+
+    fun mapListTvShowToMediatorItem(input: List<TvShow>): List<MediatorItem>{
+        val mediatorItemList = ArrayList<MediatorItem>()
+        input.map {
+            mediatorItemList.add(TvShowDataMapper.mapTvShowToMediatorItem(it))
+        }
+        return mediatorItemList
+    }
 }
 

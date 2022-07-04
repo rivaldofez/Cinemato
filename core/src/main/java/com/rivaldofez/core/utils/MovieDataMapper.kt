@@ -3,6 +3,7 @@ package com.rivaldofez.core.utils
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
+import com.rivaldofez.core.domain.model.MediatorItem
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 
@@ -132,4 +133,39 @@ object MovieDataMapper {
 
     fun mapDetailMovieListLocalToDomain(input: List<MovieDetailLocalEntity>) : List<MovieDetail> =
         input.map { mapDetailMovieLocalToDomain(it) }
+
+    fun mapMovieDataToMediator(input: Movie): MediatorItem{
+        return MediatorItem(
+            id = input.id,
+            title = input.title,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath ,
+            releaseDate = input.releaseDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage,
+            type = "movie"
+        )
+    }
+
+    fun mapMediatorItemToMovie(input: MediatorItem): Movie {
+        return Movie(
+            id = input.id,
+            title = input.title,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath,
+            releaseDate = input.releaseDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage,
+        )
+    }
+
+    fun mapListMovieToMediatorItem(input: List<Movie>): List<MediatorItem>{
+        val mediatorItemList = ArrayList<MediatorItem>()
+        input.map {
+            mediatorItemList.add(mapMovieDataToMediator(it))
+        }
+        return mediatorItemList
+    }
+
+
 }
