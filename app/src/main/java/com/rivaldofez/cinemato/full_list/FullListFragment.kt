@@ -20,7 +20,7 @@ import com.rivaldofez.core.utils.MovieDataMapper
 import com.rivaldofez.core.utils.TvShowDataMapper
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class FullListFragment : Fragment(), MovieCallback, TvShowCallback, SwipeRefreshLayout.OnRefreshListener {
+class FullListFragment : Fragment(), MovieCallback, TvShowCallback {
     private var _binding: FragmentFullListBinding? = null
     private val binding get() = _binding!!
     private var totalPage = 1
@@ -230,10 +230,6 @@ class FullListFragment : Fragment(), MovieCallback, TvShowCallback, SwipeRefresh
                 }
             }
         })
-    }
-
-    override fun onRefresh() {
-        TODO("Not yet implemented")
     }
 
     companion object {
