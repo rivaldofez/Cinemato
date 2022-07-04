@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.snackbar.Snackbar
 import com.rivaldofez.cinemato.BuildConfig
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.FragmentDetailMovieBinding
@@ -87,6 +89,36 @@ class DetailMovieFragment : Fragment() {
             tvSynopsis.text = detailMovie.overview
             tvStatus.text = detailMovie.status
             chartPopularity.setProgress((detailMovie.voteAverage.toFloat() * 10F), true)
+
+            btnFavorite.apply {
+                setStateFavoriteIcon(detailMovie.isFavorite)
+                setOnClickListener {
+                    detailMovieViewModel.setFavoriteMovie(detailMovie, !detailMovie.isFavorite)
+                    setStateFavoriteIcon(detailMovie.isFavorite)
+                    showSnackBarFavorite(!detailMovie.isFavorite)
+                }
+            }
+        }
+    }
+
+    private fun setStateFavoriteIcon(isFavorite: Boolean){
+        if(isFavorite)
+            binding.btnFavorite.setImageDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite)
+            )
+        else
+            binding.btnFavorite.setImageDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_unfilled)
+            )
+    }
+
+    private fun showSnackBarFavorite(isFavorite: Boolean){
+        if(isFavorite){
+            val snackbar = Snackbar.make(binding.root, "Added to Favorite List", Snackbar.LENGTH_SHORT)
+            snackbar.show()
+        }else{
+            val snackbar = Snackbar.make(binding.root, "Removed from Favorite List", Snackbar.LENGTH_SHORT)
+            snackbar.show()
         }
     }
 }

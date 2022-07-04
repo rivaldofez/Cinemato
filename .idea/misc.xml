@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable/bg_search.xml" value="0.2445" />
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.2445" />
         <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_favorite_unfilled.xml" value="0.297" />
         <entry key="app/src/main/res/drawable/ic_search_hint.xml" value="0.2445" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.44091672935273407" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24909420289855072" />

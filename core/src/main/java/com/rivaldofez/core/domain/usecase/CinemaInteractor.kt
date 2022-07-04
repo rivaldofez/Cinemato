@@ -29,4 +29,12 @@ class CinemaInteractor(private val cinemaRepository: ICinemaRepository): CinemaU
 
     override fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail?>> = cinemaRepository.getDetailTvShow(id)
 
+    override fun setFavoriteTvShow(detailTvShow: TvShowDetail, state: Boolean) = cinemaRepository.setFavoriteTvShow(detailTvShow, state)
+
+    override fun setFavoriteMovie(detailMovie: MovieDetail, state: Boolean) = cinemaRepository.setFavoriteMovie(detailMovie, state)
+
+    override fun getFavoriteTvShow(): Flow<List<TvShowDetail>> = cinemaRepository.getFavoriteTvShows()
+
+    override fun getFavoriteMovie(): Flow<List<MovieDetail>> = cinemaRepository.getFavoriteMovies()
+
 }
