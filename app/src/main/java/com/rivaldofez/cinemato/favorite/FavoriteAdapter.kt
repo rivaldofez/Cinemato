@@ -9,10 +9,14 @@ import com.bumptech.glide.request.RequestOptions
 import com.rivaldofez.cinemato.BuildConfig
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.ItemFavoriteBinding
+import com.rivaldofez.cinemato.movie.MovieCallback
+import com.rivaldofez.cinemato.tvshow.TvShowCallback
 import com.rivaldofez.core.domain.model.MediatorItem
+import com.rivaldofez.core.utils.MovieDataMapper
+import com.rivaldofez.core.utils.TvShowDataMapper
 import com.rivaldofez.core.utils.ViewHelper
 
-class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavouriteViewHolder>() {
+class FavoriteAdapter(private val mCallback: MovieCallback, private val tCallback: TvShowCallback): RecyclerView.Adapter<FavoriteAdapter.FavouriteViewHolder>() {
 
 
     private val listMediatorItem = ArrayList<MediatorItem>()
@@ -38,9 +42,14 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavouriteViewHolder>
 
     override fun getItemCount(): Int = listMediatorItem.size
 
-    class FavouriteViewHolder(private val binding: ItemFavoriteBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class FavouriteViewHolder(private val binding: ItemFavoriteBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(mediatorItem: MediatorItem){
             with(binding){
+                if(mediatorItem.type == "movie"){
+                    cvItemFavorite.setOnClickListener{mCallback.onMovieItemClick(MovieDataMapper.mapMediatorItemToMovie(mediatorItem))}
+                }else{
+                    cvItemFavorite.setOnClickListener{tCallback.ontvShowItemClick(TvShowDataMapper.mapMediatorItemToTvShow(mediatorItem))}
+                }
                 tvTitle.text = mediatorItem.title
                 tvPopularity.text = String.format("%.0f",((mediatorItem.voteAverage/10.0)*100))
                 tvItemDate.text = ViewHelper.formatDate(mediatorItem.releaseDate)
