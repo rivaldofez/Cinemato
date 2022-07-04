@@ -37,4 +37,12 @@ class CinemaInteractor(private val cinemaRepository: ICinemaRepository): CinemaU
 
     override fun getFavoriteMovie(): Flow<List<MovieDetail>> = cinemaRepository.getFavoriteMovies()
 
+    override suspend fun getSearchMovieResult(query: String): List<Movie> = cinemaRepository.getSearchMovieResult(query)
+
+    override suspend fun getSearchTvShowResult(query: String): List<TvShow> = cinemaRepository.getSearchTvShowResult(query)
+
+    override suspend fun getSearchNameFavoriteTvShowResult(query: String): List<TvShowDetail> = cinemaRepository.getSearchNameFavoriteTvShowResult(query)
+
+    override suspend fun getSearchNameFavoriteMovieResult(query: String): List<MovieDetail> = cinemaRepository.getSearchNameFavoriteMovieResult(query)
+
 }

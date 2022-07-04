@@ -1,5 +1,6 @@
 package com.rivaldofez.core.utils
 
+import android.provider.MediaStore
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
@@ -196,5 +197,24 @@ object MovieDataMapper {
         return mediatorItemList
     }
 
+    fun mapDomainDetailMovieToMediatorItem(input: MovieDetail): MediatorItem {
+        return MediatorItem(
+            id = input.id,
+            title = input.title,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath,
+            releaseDate = input.releaseDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage,
+            type = "movie"
+        )
+    }
 
+    fun mapListDomainDetailMovieToMediatorItem(input: List<MovieDetail>): List<MediatorItem>{
+        val mediatorItemList = ArrayList<MediatorItem>()
+        input.map {
+            mediatorItemList.add(mapDomainDetailMovieToMediatorItem(it))
+        }
+        return mediatorItemList
+    }
 }

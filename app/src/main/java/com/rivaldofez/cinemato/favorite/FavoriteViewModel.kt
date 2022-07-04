@@ -2,6 +2,7 @@ package com.rivaldofez.cinemato.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.rivaldofez.core.domain.model.MovieDetail
 import com.rivaldofez.core.domain.usecase.CinemaUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -37,4 +38,5 @@ class FavoriteViewModel(private val cinemaUseCase: CinemaUseCase): ViewModel() {
             cinemaUseCase.getSearchNameFavoriteTvShowResult(it)
         }.asLiveData()
 
+    fun setFavoriteMovie(movieDetail: MovieDetail, state: Boolean) = cinemaUseCase.setFavoriteMovie(movieDetail, state)
 }

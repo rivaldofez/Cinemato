@@ -200,5 +200,26 @@ object TvShowDataMapper {
         }
         return mediatorItemList
     }
+
+    fun mapDomainDetailTvShowToMediatorItem(input: TvShowDetail): MediatorItem {
+        return MediatorItem(
+            id = input.id,
+            title = input.name,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath,
+            releaseDate = input.firstAirDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage,
+            type = "tvshow"
+        )
+    }
+
+    fun mapListDomainDetailMovieToMediatorItem(input: List<TvShowDetail>): List<MediatorItem>{
+        val mediatorItemList = ArrayList<MediatorItem>()
+        input.map {
+            mediatorItemList.add(TvShowDataMapper.mapDomainDetailTvShowToMediatorItem(it))
+        }
+        return mediatorItemList
+    }
 }
 

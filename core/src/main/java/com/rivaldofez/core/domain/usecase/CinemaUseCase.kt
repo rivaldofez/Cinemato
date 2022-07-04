@@ -42,12 +42,12 @@ interface CinemaUseCase {
 
     fun getFavoriteMovie(): Flow<List<MovieDetail>>
 
-    fun getSearchMovieResult(query: String): List<Movie>
+    suspend fun getSearchMovieResult(query: String): List<Movie>
 
-    fun getSearchTvShowResult(query: String): List<TvShow>
+    suspend fun getSearchTvShowResult(query: String): List<TvShow>
 
-    fun getSearchNameFavoriteTvShowResult(query: String): List<TvShowDetail>
+    suspend fun getSearchNameFavoriteTvShowResult(query: String): List<TvShowDetail>
 
-    fun getSearchNameFavoriteMovieResult(query: String): List<MovieDetail>
+    suspend fun getSearchNameFavoriteMovieResult(query: String): List<MovieDetail>
 
 }
