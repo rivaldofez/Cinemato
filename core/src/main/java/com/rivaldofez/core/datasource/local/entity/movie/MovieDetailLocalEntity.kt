@@ -71,4 +71,7 @@ data class MovieDetailLocalEntity(
 
     @ColumnInfo(name = "spoken_languages")
     val spokenLanguages: String,
+
+    @ColumnInfo(name = "isFavorite")
+    var isFavorite: Boolean = false
 )
