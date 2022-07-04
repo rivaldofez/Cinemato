@@ -29,4 +29,12 @@ interface CinemaUseCase {
 
     fun getDetailTvShow(id:String): Flow<Resource<TvShowDetail?>>
 
+    fun setFavoriteTvShow(detailTvShow: TvShowDetail, state: Boolean)
+
+    fun setFavoriteMovie(detailMovie: MovieDetail, state: Boolean)
+
+    fun getFavoriteTvShow(): Flow<List<TvShowDetail>>
+
+    fun getFavoriteMovie(): Flow<List<MovieDetail>>
+
 }

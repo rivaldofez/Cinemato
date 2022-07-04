@@ -11,4 +11,6 @@ class DetailTvShowViewModel(private val cinemaUseCase: CinemaUseCase): ViewModel
     fun getDetailTvShow(id: String): LiveData<Resource<TvShowDetail?>> {
         return cinemaUseCase.getDetailTvShow(id).asLiveData()
     }
+
+    fun setFavoriteTvShow(tvShowDetail: TvShowDetail, state: Boolean) = cinemaUseCase.sset
 }
