@@ -3,7 +3,10 @@ package com.rivaldofez.core.datasource.local.room
 import androidx.room.*
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
+import com.rivaldofez.core.datasource.remote.response.MovieListItem
+import com.rivaldofez.core.datasource.remote.response.TvShowListItem
 import com.rivaldofez.core.domain.model.MovieDetail
+import com.rivaldofez.core.domain.model.TvShowDetail
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -88,5 +91,17 @@ interface CinemaDao {
     @Update
     fun updateDetailTvShow(detailTvShow: TvShowDetailLocalEntity)
 
+    @Query("SELECT * FROM movielist WHERE title like :query")
+    suspend fun getSearchMovieResult(query: String): List<MovieItemLocalEntity>
+
+    @Query("SELECT * FROM tvshowlist WHERE name like :query")
+    suspend fun getSearchTvShowResult(query: String): List<TvShowItemLocalEntity>
+
+
+    @Query("SELECT * FROM tvshowdetail WHERE isFavorite = 1 and name like :query")
+    suspend fun getSearchNameFavoriteTvShowResult(query: String): List<TvShowDetailLocalEntity>
+
+    @Query("SELECT * FROM moviedetail WHERE isFavorite = 1 and title like :query")
+    suspend fun getSearchNameFavoriteMovieResult(query: String): List<MovieDetailLocalEntity>
 
 }

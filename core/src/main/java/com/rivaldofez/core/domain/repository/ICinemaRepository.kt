@@ -1,6 +1,8 @@
 package com.rivaldofez.core.domain.repository
 
 import com.rivaldofez.core.datasource.Resource
+import com.rivaldofez.core.datasource.remote.response.MovieListItem
+import com.rivaldofez.core.datasource.remote.response.TvShowListItem
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 import com.rivaldofez.core.domain.model.TvShow
@@ -36,4 +38,12 @@ interface ICinemaRepository {
     fun setFavoriteMovie(detailMovie: MovieDetail, state: Boolean)
 
     fun setFavoriteTvShow(detailTvShow: TvShowDetail, state: Boolean)
+
+    suspend fun getSearchMovieResult(query: String) : List<Movie>
+
+    suspend fun getSearchTvShowResult(query: String) : List<TvShow>
+
+    suspend fun getSearchNameFavoriteTvShowResult(query: String) : List<TvShowDetail>
+
+    suspend fun getSearchNameFavoriteMovieResult(query: String) : List<MovieDetail>
 }

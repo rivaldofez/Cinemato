@@ -1,5 +1,6 @@
 package com.rivaldofez.core.datasource.local
 
+import androidx.room.Query
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
 import com.rivaldofez.core.datasource.local.room.CinemaDao
@@ -66,5 +67,13 @@ class LocalDataSource(private val cinemaDao: CinemaDao) {
         tvShowDetail.isFavorite = newState
         cinemaDao.updateDetailTvShow(tvShowDetail)
     }
+
+    suspend fun getSearchMovieResult(query: String) = cinemaDao.getSearchMovieResult("%$query%")
+
+    suspend fun getSearchTvShowResult(query: String) = cinemaDao.getSearchTvShowResult("%$query%")
+
+    suspend fun getSearchNameFavoriteTvShowResult(query: String) = cinemaDao.getSearchNameFavoriteTvShowResult("%$query%")
+
+    suspend fun getSearchNameFavoriteMovieResult(query: String) = cinemaDao.getSearchNameFavoriteMovieResult("%$query%")
 
 }

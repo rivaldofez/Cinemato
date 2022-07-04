@@ -1,6 +1,11 @@
 package com.rivaldofez.core.domain.usecase
 
+import androidx.room.Query
 import com.rivaldofez.core.datasource.Resource
+import com.rivaldofez.core.datasource.local.entity.movie.MovieDetailLocalEntity
+import com.rivaldofez.core.datasource.local.entity.movie.MovieItemLocalEntity
+import com.rivaldofez.core.datasource.local.entity.tvshow.TvShowDetailLocalEntity
+import com.rivaldofez.core.datasource.local.entity.tvshow.TvShowItemLocalEntity
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 import com.rivaldofez.core.domain.model.TvShow
@@ -36,5 +41,13 @@ interface CinemaUseCase {
     fun getFavoriteTvShow(): Flow<List<TvShowDetail>>
 
     fun getFavoriteMovie(): Flow<List<MovieDetail>>
+
+    fun getSearchMovieResult(query: String): List<Movie>
+
+    fun getSearchTvShowResult(query: String): List<TvShow>
+
+    fun getSearchNameFavoriteTvShowResult(query: String): List<TvShowDetail>
+
+    fun getSearchNameFavoriteMovieResult(query: String): List<MovieDetail>
 
 }

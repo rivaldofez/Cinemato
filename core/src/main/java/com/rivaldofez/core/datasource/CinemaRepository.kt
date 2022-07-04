@@ -258,4 +258,20 @@ class CinemaRepository(
         val tvShowEntity = TvShowDataMapper.mapDomainDetailTvShowToLocal(detailTvShow)
         appExecutors.diskIO().execute{localDataSource.setFavoriteTvShow(tvShowEntity, state)}
     }
+
+    override suspend fun getSearchMovieResult(query: String): List<Movie> {
+        return MovieDataMapper.mapMovieListLocalToDomain(localDataSource.getSearchMovieResult(query))
+    }
+
+    override suspend fun getSearchTvShowResult(query: String): List<TvShow> {
+        return TvShowDataMapper.mapTvShowListLocalToDomain(localDataSource.getSearchTvShowResult(query))
+    }
+
+    override suspend fun getSearchNameFavoriteTvShowResult(query: String): List<TvShowDetail> {
+        return TvShowDataMapper.mapDetailTvShowListLocalToDomain(localDataSource.getSearchNameFavoriteTvShowResult(query))
+    }
+
+    override suspend fun getSearchNameFavoriteMovieResult(query: String): List<MovieDetail> {
+        return MovieDataMapper.mapDetailMovieListLocalToDomain(localDataSource.getSearchNameFavoriteMovieResult(query))
+    }
 }
