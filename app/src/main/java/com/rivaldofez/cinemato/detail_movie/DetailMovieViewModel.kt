@@ -11,4 +11,6 @@ class DetailMovieViewModel(private val cinemaUseCase: CinemaUseCase): ViewModel(
     fun getDetailMovie(id: String): LiveData<Resource<MovieDetail?>> {
         return cinemaUseCase.getDetailMovie(id).asLiveData()
     }
+
+    fun setFavoriteMovie(movieDetail: MovieDetail, state: Boolean) = cinemaUseCase.setFavoriteMovie(movieDetail, state)
 }

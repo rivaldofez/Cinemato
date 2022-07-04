@@ -12,5 +12,6 @@ class DetailTvShowViewModel(private val cinemaUseCase: CinemaUseCase): ViewModel
         return cinemaUseCase.getDetailTvShow(id).asLiveData()
     }
 
-    fun setFavoriteTvShow(tvShowDetail: TvShowDetail, state: Boolean) = cinemaUseCase.sset
+    fun setFavoriteTvShow(tvShowDetail: TvShowDetail, state: Boolean) = cinemaUseCase.setFavoriteTvShow(tvShowDetail, state)
+
 }
