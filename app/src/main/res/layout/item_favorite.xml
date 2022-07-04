@@ -41,16 +41,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="96"/>
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/cg_platform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintHeight_min="20dp"
-            app:layout_constraintStart_toEndOf="@+id/img_poster"
-            app:layout_constraintTop_toTopOf="parent"/>
-
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="0dp"
@@ -65,7 +55,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_poster"
-            app:layout_constraintTop_toBottomOf="@+id/cg_platform"
+            app:layout_constraintTop_toTopOf="@+id/img_poster"
             tools:text="Harvest Moon" />
 
         <TextView
