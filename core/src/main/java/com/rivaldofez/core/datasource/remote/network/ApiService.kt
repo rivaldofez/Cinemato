@@ -16,6 +16,12 @@ interface ApiService {
         @Query("page") page: String
     ): MoviesResponse
 
+    @GET("movie/{type}")
+    suspend fun getMovies(
+        @Path("type") type: String,
+        @Query("api_key") key: String,
+        @Query("page") page: String,
+    ): MoviesResponse
 
     @GET("3/movie/top_rated")
     suspend fun getTopRatedMovies(

@@ -1,6 +1,7 @@
 package com.rivaldofez.core.datasource.remote
 
 import android.util.Log
+import com.rivaldofez.core.BuildConfig.API_KEY
 import com.rivaldofez.core.datasource.remote.network.ApiResponse
 import com.rivaldofez.core.datasource.remote.network.ApiService
 import com.rivaldofez.core.datasource.remote.response.*
@@ -11,6 +12,21 @@ import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 
 class RemoteDataSource(private val apiService: ApiService) {
+
+    suspend fun getMovies(type: String, page: String): Flow<ApiResponse<List<MovieListItem>>> =
+        flow {
+            try {
+                val response = apiService.getMovies(key = API_KEY, type = type, page = page )
+                val dataArray = response.results
+                if(dataArray.isNotEmpty()){
+                    emit(ApiResponse.Success(response.results))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
+            }catch (e: Exception){
+                emit(ApiResponse.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
 
     suspend fun getPopularMovies(page: String): Flow<ApiResponse<List<MovieListItem>>> =
         flow {
