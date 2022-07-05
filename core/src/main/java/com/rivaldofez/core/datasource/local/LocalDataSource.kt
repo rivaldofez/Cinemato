@@ -33,16 +33,6 @@ class LocalDataSource(private val cinemaDao: CinemaDao) {
         return cinemaDao.getMovieList(query)
     }
 
-
-
-    fun getPopularMovies() : Flow<List<MovieItemLocalEntity>> = cinemaDao.getPopularMovies()
-
-    fun getTopRatedMovies() : Flow<List<MovieItemLocalEntity>> = cinemaDao.getTopRatedMovies()
-
-    fun getUpComingMovies() : Flow<List<MovieItemLocalEntity>> = cinemaDao.getUpcomingMovies()
-
-    fun getNowPlayingMovies() : Flow<List<MovieItemLocalEntity>> = cinemaDao.getNowPlayingMovies()
-
     fun getDetailMovie(id: String): Flow<MovieDetailLocalEntity?> = cinemaDao.getDetailMovie(id.toInt())
 
 

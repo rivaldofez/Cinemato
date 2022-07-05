@@ -32,18 +32,6 @@ interface CinemaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdUpcomingMovies(idUpcomingMovies: List<UpcomingMovieLocalEntity>)
 
-    @Query("Select * FROM movielist natural join popularMovies")
-    fun getPopularMovies(): Flow<List<MovieItemLocalEntity>>
-
-    @Query("Select * FROM movielist natural join topratedmovies")
-    fun getTopRatedMovies(): Flow<List<MovieItemLocalEntity>>
-
-    @Query("Select * FROM movielist natural join upcomingmovies")
-    fun getUpcomingMovies(): Flow<List<MovieItemLocalEntity>>
-
-    @Query("Select * FROM movielist natural join nowplayingmovies")
-    fun getNowPlayingMovies(): Flow<List<MovieItemLocalEntity>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTvShowList(tvShowItemList: List<TvShowItemLocalEntity>)
 

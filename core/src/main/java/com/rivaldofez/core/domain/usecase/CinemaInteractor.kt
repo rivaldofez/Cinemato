@@ -2,6 +2,7 @@ package com.rivaldofez.core.domain.usecase
 
 import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.datasource.remote.MoviesType
+import com.rivaldofez.core.datasource.remote.TvShowsType
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 import com.rivaldofez.core.domain.model.TvShow
@@ -20,13 +21,13 @@ class CinemaInteractor(private val cinemaRepository: ICinemaRepository): CinemaU
 
     override fun getDetailMovie(id: String): Flow<Resource<MovieDetail?>> = cinemaRepository.getDetailMovie(id)
 
-    override fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>> = cinemaRepository.getPopularTvShow(page)
+    override fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>> = cinemaRepository.getTvShows(TvShowsType.Popular, page)
 
-    override fun getTopRatedTvShow(page: String): Flow<Resource<List<TvShow>>> = cinemaRepository.getTopRatedTvShow(page)
+    override fun getTopRatedTvShow(page: String): Flow<Resource<List<TvShow>>> = cinemaRepository.getTvShows(TvShowsType.TopRated, page)
 
-    override fun getOnTheAirTvShow(page: String): Flow<Resource<List<TvShow>>> = cinemaRepository.getOnTheAirTvShow(page)
+    override fun getOnTheAirTvShow(page: String): Flow<Resource<List<TvShow>>> = cinemaRepository.getTvShows(TvShowsType.OnTheAir, page)
 
-    override fun getAiringTodayTvShow(page: String): Flow<Resource<List<TvShow>>> = cinemaRepository.getAiringTvShow(page)
+    override fun getAiringTodayTvShow(page: String): Flow<Resource<List<TvShow>>> = cinemaRepository.getTvShows(TvShowsType.AiringToday, page)
 
     override fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail?>> = cinemaRepository.getDetailTvShow(id)
 

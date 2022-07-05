@@ -2,6 +2,7 @@ package com.rivaldofez.core.domain.repository
 
 import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.datasource.remote.MoviesType
+import com.rivaldofez.core.datasource.remote.TvShowsType
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
 import com.rivaldofez.core.datasource.remote.response.MoviesResponse
 import com.rivaldofez.core.datasource.remote.response.TvShowListItem
@@ -17,13 +18,7 @@ interface ICinemaRepository {
 
     fun getDetailMovie(id: String): Flow<Resource<MovieDetail?>>
 
-    fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>>
-
-    fun getTopRatedTvShow(page: String): Flow<Resource<List<TvShow>>>
-
-    fun getOnTheAirTvShow(page: String): Flow<Resource<List<TvShow>>>
-
-    fun getAiringTvShow(page: String): Flow<Resource<List<TvShow>>>
+    fun getTvShows(type: TvShowsType, page: String): Flow<Resource<List<TvShow>>>
 
     fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail?>>
 

@@ -2,6 +2,8 @@ package com.rivaldofez.core.utils
 
 import com.rivaldofez.core.datasource.local.entity.movie.MovieDetailLocalEntity
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
+import com.rivaldofez.core.datasource.remote.MoviesType
+import com.rivaldofez.core.datasource.remote.TvShowsType
 import com.rivaldofez.core.datasource.remote.response.TvShowDetailResponse
 import com.rivaldofez.core.datasource.remote.response.TvShowListItem
 import com.rivaldofez.core.domain.model.MediatorItem
@@ -10,6 +12,16 @@ import com.rivaldofez.core.domain.model.TvShow
 import com.rivaldofez.core.domain.model.TvShowDetail
 
 object TvShowDataMapper {
+
+    fun getTvShowsType(type: TvShowsType): String{
+        return when(type){
+            TvShowsType.Popular -> "popular"
+            TvShowsType.TopRated -> "top_rated"
+            TvShowsType.AiringToday -> "airing_today"
+            TvShowsType.OnTheAir -> "on_the_air"
+        }
+    }
+
     fun mapTvShowListResponseToPopularId(input: List<TvShowListItem>): List<PopularTvShowLocalEntity> {
         val idList = ArrayList<PopularTvShowLocalEntity>()
         input.map {

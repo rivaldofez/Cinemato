@@ -8,6 +8,7 @@ import android.util.Log
 import com.rivaldofez.core.datasource.local.LocalDataSource
 import com.rivaldofez.core.datasource.remote.MoviesType
 import com.rivaldofez.core.datasource.remote.RemoteDataSource
+import com.rivaldofez.core.datasource.remote.TvShowsType
 import com.rivaldofez.core.datasource.remote.network.ApiResponse
 import com.rivaldofez.core.datasource.remote.response.*
 import com.rivaldofez.core.domain.model.Movie
@@ -68,96 +69,26 @@ class CinemaRepository(
         }
     }.asFlow()
 
-    override fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
+    override fun getTvShows(type: TvShowsType, page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
         override fun loadFromDB(): Flow<List<TvShow>> {
-            return localDataSource.getPopularTvShow().map {
-                TvShowDataMapper.mapTvShowListLocalToDomain(it)
+            return localDataSource.getPopularTvShow().map { tvShows ->
+                TvShowDataMapper.mapTvShowListLocalToDomain(tvShows)
             }
         }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
 
         override fun shouldFetch(data: List<TvShow>?): Boolean = true
 
         override suspend fun createCall(): Flow<ApiResponse<List<TvShowListItem>>> {
-            return remoteDataSource.getPopularTvShow(page)
+            return remoteDataSource.getTvShows(type = type, page = page)
         }
 
         override suspend fun saveCallResult(data: List<TvShowListItem>) {
             val tvShowList = TvShowDataMapper.mapTvShowListResponseToLocal(data)
-            val idTvShowList = TvShowDataMapper.mapTvShowListResponseToPopularId(data)
             localDataSource.insertTvShowList(tvShowList)
-            localDataSource.insertIdPopularTvShow(idTvShowList)
+            localDataSource.insertIdPopularTvShow(TvShowDataMapper.mapTvShowListResponseToPopularId(data))
         }
-
-        override fun isNetworkActive(): Boolean = checkConnectivity()
-    }.asFlow()
-
-    override fun getTopRatedTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
-        override fun loadFromDB(): Flow<List<TvShow>> {
-            return localDataSource.getTopRatedTvShow().map {
-                TvShowDataMapper.mapTvShowListLocalToDomain(it)
-            }
-        }
-
-        override fun shouldFetch(data: List<TvShow>?): Boolean = true
-
-        override suspend fun createCall(): Flow<ApiResponse<List<TvShowListItem>>> {
-            return remoteDataSource.getTopRatedTvShow(page)
-        }
-
-        override suspend fun saveCallResult(data: List<TvShowListItem>) {
-            val tvShowList = TvShowDataMapper.mapTvShowListResponseToLocal(data)
-            val idTvShowList = TvShowDataMapper.mapTvShowListResponseToTopRatedId(data)
-            localDataSource.insertTvShowList(tvShowList)
-            localDataSource.insertIdTopRatedTvShow(idTvShowList)
-        }
-
-        override fun isNetworkActive(): Boolean = checkConnectivity()
-    }.asFlow()
-
-    override fun getOnTheAirTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
-        override fun loadFromDB(): Flow<List<TvShow>> {
-            return localDataSource.getOnTheAirTvShow().map {
-                TvShowDataMapper.mapTvShowListLocalToDomain(it)
-            }
-        }
-
-        override fun shouldFetch(data: List<TvShow>?): Boolean = true
-
-        override suspend fun createCall(): Flow<ApiResponse<List<TvShowListItem>>> {
-            return remoteDataSource.getOnTheAirTvShow(page)
-        }
-
-        override suspend fun saveCallResult(data: List<TvShowListItem>) {
-            val tvShowList = TvShowDataMapper.mapTvShowListResponseToLocal(data)
-            val idTvShowList = TvShowDataMapper.mapTvShowListResponseToOnTheAirId(data)
-            localDataSource.insertTvShowList(tvShowList)
-            localDataSource.insertIdOnTheAIrTvShow(idTvShowList)
-        }
-
-        override fun isNetworkActive(): Boolean = checkConnectivity()
-    }.asFlow()
-
-    override fun getAiringTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
-        override fun loadFromDB(): Flow<List<TvShow>> {
-            return localDataSource.getAiringTodayTvShow().map {
-                TvShowDataMapper.mapTvShowListLocalToDomain(it)
-            }
-        }
-
-        override fun shouldFetch(data: List<TvShow>?): Boolean = true
-
-        override suspend fun createCall(): Flow<ApiResponse<List<TvShowListItem>>> {
-            return remoteDataSource.getAiringTodayTvShow(page)
-        }
-
-        override suspend fun saveCallResult(data: List<TvShowListItem>) {
-            val tvShowList = TvShowDataMapper.mapTvShowListResponseToLocal(data)
-            val idTvShowList = TvShowDataMapper.mapTvShowListResponseToAiringTodayId(data)
-            localDataSource.insertTvShowList(tvShowList)
-            localDataSource.insertIdAiringTodayTvShow(idTvShowList)
-        }
-
-        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail?>> = object: NetworkBoundResource<TvShowDetail?, TvShowDetailResponse>(){
