@@ -18,8 +18,6 @@ interface CinemaDao {
     @RawQuery(observedEntities = [MovieItemLocalEntity::class])
     fun getMovieList(query: SupportSQLiteQuery): Flow<List<MovieItemLocalEntity>>
 
-
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdPopularMovies(idPopularMovies: List<PopularMovieLocalEntity>)
 
@@ -32,8 +30,14 @@ interface CinemaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdUpcomingMovies(idUpcomingMovies: List<UpcomingMovieLocalEntity>)
 
+
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTvShowList(tvShowItemList: List<TvShowItemLocalEntity>)
+
+    @RawQuery(observedEntities = [TvShowItemLocalEntity::class])
+    fun getTvShowList(query: SupportSQLiteQuery): Flow<List<TvShowItemLocalEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdPopularTvShow(idPopularTvShow: List<PopularTvShowLocalEntity>)
@@ -46,6 +50,8 @@ interface CinemaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdAiringTodayTvShow(idAiringTvShow: List<AiringTodayTvShowEntity>)
+
+
 
     @Query("Select * FROM tvshowlist natural join populartvshow")
     fun getPopularTvShow(): Flow<List<TvShowItemLocalEntity>>

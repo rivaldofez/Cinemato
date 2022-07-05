@@ -65,13 +65,13 @@ class CinemaRepository(
 
         override suspend fun saveCallResult(data: List<MovieListItem>) {
             val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
-            localDataSource.insertMovieList(type = type, movieList)
+            localDataSource.insertMovieList(type = type, movieItemList = movieList)
         }
     }.asFlow()
 
     override fun getTvShows(type: TvShowsType, page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
         override fun loadFromDB(): Flow<List<TvShow>> {
-            return localDataSource.getPopularTvShow().map { tvShows ->
+            return localDataSource.getTvShowList(type).map { tvShows ->
                 TvShowDataMapper.mapTvShowListLocalToDomain(tvShows)
             }
         }
@@ -86,8 +86,7 @@ class CinemaRepository(
 
         override suspend fun saveCallResult(data: List<TvShowListItem>) {
             val tvShowList = TvShowDataMapper.mapTvShowListResponseToLocal(data)
-            localDataSource.insertTvShowList(tvShowList)
-            localDataSource.insertIdPopularTvShow(TvShowDataMapper.mapTvShowListResponseToPopularId(data))
+            localDataSource.insertTvShowList(type = type, tvShowItemList = tvShowList)
         }
     }.asFlow()
 

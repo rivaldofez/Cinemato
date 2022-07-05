@@ -22,7 +22,7 @@ object TvShowDataMapper {
         }
     }
 
-    fun mapTvShowListResponseToPopularId(input: List<TvShowListItem>): List<PopularTvShowLocalEntity> {
+    fun mapTvShowListLocalToPopularId(input: List<TvShowItemLocalEntity>): List<PopularTvShowLocalEntity> {
         val idList = ArrayList<PopularTvShowLocalEntity>()
         input.map {
             val tvShowId = PopularTvShowLocalEntity(id = it.id)
@@ -31,7 +31,7 @@ object TvShowDataMapper {
         return idList
     }
 
-    fun mapTvShowListResponseToTopRatedId(input: List<TvShowListItem>): List<TopRatedTvShowLocalEntity> {
+    fun mapTvShowListLocalToTopRatedId(input: List<TvShowItemLocalEntity>): List<TopRatedTvShowLocalEntity> {
         val idList = ArrayList<TopRatedTvShowLocalEntity>()
         input.map {
             val tvShowId = TopRatedTvShowLocalEntity(id = it.id)
@@ -40,7 +40,7 @@ object TvShowDataMapper {
         return idList
     }
 
-    fun mapTvShowListResponseToOnTheAirId(input: List<TvShowListItem>): List<OnTheAirTvShowLocalEntity> {
+    fun mapTvShowListLocalToOnTheAirId(input: List<TvShowItemLocalEntity>): List<OnTheAirTvShowLocalEntity> {
         val idList = ArrayList<OnTheAirTvShowLocalEntity>()
         input.map {
             val tvShowId = OnTheAirTvShowLocalEntity(id = it.id)
@@ -49,7 +49,7 @@ object TvShowDataMapper {
         return idList
     }
 
-    fun mapTvShowListResponseToAiringTodayId(input: List<TvShowListItem>): List<AiringTodayTvShowEntity> {
+    fun mapTvShowListLocalToAiringTodayId(input: List<TvShowItemLocalEntity>): List<AiringTodayTvShowEntity> {
         val idList = ArrayList<AiringTodayTvShowEntity>()
         input.map {
             val tvShowId = AiringTodayTvShowEntity(id = it.id)

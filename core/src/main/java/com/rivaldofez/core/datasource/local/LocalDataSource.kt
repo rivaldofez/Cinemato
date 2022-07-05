@@ -6,8 +6,10 @@ import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
 import com.rivaldofez.core.datasource.local.room.CinemaDao
 import com.rivaldofez.core.datasource.remote.MoviesType
+import com.rivaldofez.core.datasource.remote.TvShowsType
 import com.rivaldofez.core.domain.model.MovieDetail
 import com.rivaldofez.core.utils.MovieDataMapper
+import com.rivaldofez.core.utils.TvShowDataMapper
 import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource(private val cinemaDao: CinemaDao) {
@@ -35,24 +37,26 @@ class LocalDataSource(private val cinemaDao: CinemaDao) {
 
     fun getDetailMovie(id: String): Flow<MovieDetailLocalEntity?> = cinemaDao.getDetailMovie(id.toInt())
 
+    suspend fun insertTvShowList(type: TvShowsType, tvShowItemList: List<TvShowItemLocalEntity>){
+        cinemaDao.insertTvShowList(tvShowItemList)
+        when(type){
+            TvShowsType.Popular -> cinemaDao.insertIdPopularTvShow(TvShowDataMapper.mapTvShowListLocalToPopularId(tvShowItemList))
+            TvShowsType.TopRated -> cinemaDao.insertIdTopRatedTvShow(TvShowDataMapper.mapTvShowListLocalToTopRatedId(tvShowItemList))
+            TvShowsType.OnTheAir -> cinemaDao.insertIdOnTheAirTvShow(TvShowDataMapper.mapTvShowListLocalToOnTheAirId(tvShowItemList))
+            TvShowsType.AiringToday -> cinemaDao.insertIdAiringTodayTvShow(TvShowDataMapper.mapTvShowListLocalToAiringTodayId(tvShowItemList))
+        }
+    }
 
-    suspend fun insertTvShowList(tvShowItemList: List<TvShowItemLocalEntity>) = cinemaDao.insertTvShowList(tvShowItemList)
-
-    suspend fun insertIdPopularTvShow(idPopularTvShow: List<PopularTvShowLocalEntity>) = cinemaDao.insertIdPopularTvShow(idPopularTvShow)
-
-    suspend fun insertIdTopRatedTvShow(idTopRatedTvShow: List<TopRatedTvShowLocalEntity>) = cinemaDao.insertIdTopRatedTvShow(idTopRatedTvShow)
-
-    suspend fun insertIdOnTheAIrTvShow(idOnTheAirTvShow: List<OnTheAirTvShowLocalEntity>) = cinemaDao.insertIdOnTheAirTvShow(idOnTheAirTvShow)
-
-    suspend fun insertIdAiringTodayTvShow(idAiringTodayTvShow: List<AiringTodayTvShowEntity>) = cinemaDao.insertIdAiringTodayTvShow(idAiringTodayTvShow)
-
-    fun getPopularTvShow() : Flow<List<TvShowItemLocalEntity>> = cinemaDao.getPopularTvShow()
-
-    fun getTopRatedTvShow() : Flow<List<TvShowItemLocalEntity>> = cinemaDao.getTopRatedTvShow()
-
-    fun getOnTheAirTvShow() : Flow<List<TvShowItemLocalEntity>> = cinemaDao.getOnTheAirShow()
-
-    fun getAiringTodayTvShow() : Flow<List<TvShowItemLocalEntity>> = cinemaDao.getAiringTodayTvShow()
+    fun getTvShowList(type: TvShowsType) : Flow<List<TvShowItemLocalEntity>> {
+        val additionQueryString = when(type){
+            TvShowsType.Popular -> "populartvshow"
+            TvShowsType.TopRated -> "topratedtvshow"
+            TvShowsType.AiringToday -> "airingtodaytvshow"
+            TvShowsType.OnTheAir -> "ontheairtvshow"
+        }
+        val query = SimpleSQLiteQuery("Select * FROM tvshowlist natural join " + additionQueryString)
+        return cinemaDao.getTvShowList(query)
+    }
 
     fun getDetailTvShow(id: String): Flow<TvShowDetailLocalEntity?> = cinemaDao.getDetailTvShow(id.toInt())
 
