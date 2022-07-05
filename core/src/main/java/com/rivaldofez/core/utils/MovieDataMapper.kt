@@ -2,6 +2,7 @@ package com.rivaldofez.core.utils
 
 import android.provider.MediaStore
 import com.rivaldofez.core.datasource.local.entity.movie.*
+import com.rivaldofez.core.datasource.remote.MoviesType
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
 import com.rivaldofez.core.domain.model.MediatorItem
@@ -9,6 +10,17 @@ import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 
 object MovieDataMapper {
+
+    fun getMoviesType(type: MoviesType): String{
+        return when(type){
+            MoviesType.Popular -> "popular"
+            MoviesType.TopRated -> "top_rated"
+            MoviesType.UpComing -> "upcoming"
+            MoviesType.NowPlaying -> "now_playing"
+        }
+    }
+
+
     fun mapMovieListResponseToPopularId(input: List<MovieListItem>): List<PopularMovieLocalEntity> {
         val idList = ArrayList<PopularMovieLocalEntity>()
         input.map {
