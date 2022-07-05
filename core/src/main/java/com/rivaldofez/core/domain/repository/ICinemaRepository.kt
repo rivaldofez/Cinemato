@@ -1,7 +1,9 @@
 package com.rivaldofez.core.domain.repository
 
 import com.rivaldofez.core.datasource.Resource
+import com.rivaldofez.core.datasource.remote.MoviesType
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
+import com.rivaldofez.core.datasource.remote.response.MoviesResponse
 import com.rivaldofez.core.datasource.remote.response.TvShowListItem
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
@@ -10,6 +12,8 @@ import com.rivaldofez.core.domain.model.TvShowDetail
 import kotlinx.coroutines.flow.Flow
 
 interface ICinemaRepository {
+
+    fun getMovies(type: MoviesType, page: String): Flow<Resource<List<Movie>>>
 
     fun getPopularMovies(page: String): Flow<Resource<List<Movie>>>
 

@@ -6,12 +6,10 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
 import com.rivaldofez.core.datasource.local.LocalDataSource
+import com.rivaldofez.core.datasource.remote.MoviesType
 import com.rivaldofez.core.datasource.remote.RemoteDataSource
 import com.rivaldofez.core.datasource.remote.network.ApiResponse
-import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
-import com.rivaldofez.core.datasource.remote.response.MovieListItem
-import com.rivaldofez.core.datasource.remote.response.TvShowDetailResponse
-import com.rivaldofez.core.datasource.remote.response.TvShowListItem
+import com.rivaldofez.core.datasource.remote.response.*
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 import com.rivaldofez.core.domain.model.TvShow
@@ -47,6 +45,30 @@ class CinemaRepository(
             return networkInfo.isConnected
         }
     }
+
+
+    override fun getMovies(type: MoviesType, page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
+        override fun loadFromDB(): Flow<List<Movie>> {
+            return localDataSource.getPopularMovies().map { movies ->
+                MovieDataMapper.mapMovieListLocalToDomain(movies)
+            }
+        }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
+
+        override fun shouldFetch(data: List<Movie>?): Boolean = true
+
+        override suspend fun createCall(): Flow<ApiResponse<List<MovieListItem>>> {
+            return remoteDataSource.getMovies(type = type, page = page)
+        }
+
+        override suspend fun saveCallResult(data: List<MovieListItem>) {
+            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
+            val idMovieList = MovieDataMapper.mapMovieListResponseToPopularId(data)
+            localDataSource.insertMovieList(movieList)
+            localDataSource.insertIdPopularMovies(idMovieList)
+        }
+    }.asFlow()
 
     override fun getPopularMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
