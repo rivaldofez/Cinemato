@@ -1,22 +1,39 @@
 package com.rivaldofez.core.datasource.local
 
 import androidx.room.Query
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
 import com.rivaldofez.core.datasource.local.room.CinemaDao
+import com.rivaldofez.core.datasource.remote.MoviesType
 import com.rivaldofez.core.domain.model.MovieDetail
+import com.rivaldofez.core.utils.MovieDataMapper
 import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource(private val cinemaDao: CinemaDao) {
-    suspend fun insertMovieList(movieItemList: List<MovieItemLocalEntity>) = cinemaDao.insertMovieList(movieItemList)
 
-    suspend fun insertIdPopularMovies(idPopularMovies: List<PopularMovieLocalEntity>) = cinemaDao.insertIdPopularMovies(idPopularMovies)
+    suspend fun insertMovieList(type: MoviesType, movieItemList: List<MovieItemLocalEntity>) {
+        cinemaDao.insertMovieList(movieItemList)
+        when(type){
+            MoviesType.Popular -> cinemaDao.insertIdPopularMovies(MovieDataMapper.mapMovieListLocalToPopularId(movieItemList))
+            MoviesType.TopRated -> cinemaDao.insertIdTopRatedMovies(MovieDataMapper.mapMovieListLocalToTopRatedId(movieItemList))
+            MoviesType.NowPlaying -> cinemaDao.insertIdNowPlayingMovies(MovieDataMapper.mapMovieListLocalToNowPlayingId(movieItemList))
+            MoviesType.UpComing -> cinemaDao.insertIdUpcomingMovies(MovieDataMapper.mapMovieListLocalToUpComingId(movieItemList))
+        }
+    }
 
-    suspend fun insertIdTopRatedMovies(idTopRatedMovies: List<TopRatedMovieLocalEntity>) = cinemaDao.insertIdTopRatedMovies(idTopRatedMovies)
+    fun getMovieList(type: MoviesType): Flow<List<MovieItemLocalEntity>> {
+        val additionQueryString = when(type) {
+            MoviesType.Popular -> "popularMovies"
+            MoviesType.TopRated -> "topratedmovies"
+            MoviesType.UpComing -> "upcomingmovies"
+            MoviesType.NowPlaying -> "nowplayingmovies"
+        }
+        val query = SimpleSQLiteQuery("Select * FROM movielist natural join " + additionQueryString)
+        return cinemaDao.getMovieList(query)
+    }
 
-    suspend fun insertIdNowPlayingMovies(idNowPlayingMovies: List<NowPlayingMovieLocalEntity>) = cinemaDao.insertIdNowPlayingMovies(idNowPlayingMovies)
 
-    suspend fun insertIdUpComingMovies(idUpComingMovies: List<UpcomingMovieLocalEntity>) = cinemaDao.insertIdUpcomingMovies(idUpComingMovies)
 
     fun getPopularMovies() : Flow<List<MovieItemLocalEntity>> = cinemaDao.getPopularMovies()
 

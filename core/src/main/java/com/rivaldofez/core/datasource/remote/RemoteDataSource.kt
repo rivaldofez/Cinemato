@@ -29,66 +29,6 @@ class RemoteDataSource(private val apiService: ApiService) {
             }
         }.flowOn(Dispatchers.IO)
 
-    suspend fun getPopularMovies(page: String): Flow<ApiResponse<List<MovieListItem>>> =
-        flow {
-            try {
-                val response = apiService.getPopularMovies("d63d4fcb8d25c828fe89669f635ff545",page = page)
-                val dataArray = response.results
-                if(dataArray.isNotEmpty()){
-                    emit(ApiResponse.Success(response.results))
-                } else {
-                    emit(ApiResponse.Empty)
-                }
-            }catch (e: Exception){
-                emit(ApiResponse.Error(e.toString()))
-            }
-        }.flowOn(Dispatchers.IO)
-
-    suspend fun getTopRatedMovies(page: String): Flow<ApiResponse<List<MovieListItem>>> =
-        flow {
-            try {
-                val response = apiService.getTopRatedMovies("d63d4fcb8d25c828fe89669f635ff545",page = page)
-                val dataArray = response.results
-                if(dataArray.isNotEmpty()){
-                    emit(ApiResponse.Success(response.results))
-                } else {
-                    emit(ApiResponse.Empty)
-                }
-            }catch (e: Exception){
-                emit(ApiResponse.Error(e.toString()))
-            }
-        }.flowOn(Dispatchers.IO)
-
-    suspend fun getUpComingMovies(page: String): Flow<ApiResponse<List<MovieListItem>>> =
-        flow {
-            try {
-                val response = apiService.getUpComingMovies("d63d4fcb8d25c828fe89669f635ff545",page = page)
-                val dataArray = response.results
-                if(dataArray.isNotEmpty()){
-                    emit(ApiResponse.Success(response.results))
-                } else {
-                    emit(ApiResponse.Empty)
-                }
-            }catch (e: Exception){
-                emit(ApiResponse.Error(e.toString()))
-            }
-        }.flowOn(Dispatchers.IO)
-
-    suspend fun getNowPlayingMovies(page: String): Flow<ApiResponse<List<MovieListItem>>> =
-        flow {
-            try {
-                val response = apiService.getNowPlayingMovies("d63d4fcb8d25c828fe89669f635ff545",page = page)
-                val dataArray = response.results
-                if(dataArray.isNotEmpty()){
-                    emit(ApiResponse.Success(response.results))
-                } else {
-                    emit(ApiResponse.Empty)
-                }
-            }catch (e: Exception){
-                emit(ApiResponse.Error(e.toString()))
-            }
-        }.flowOn(Dispatchers.IO)
-
     suspend fun getPopularTvShow(page: String): Flow<ApiResponse<List<TvShowListItem>>> =
         flow {
             try {

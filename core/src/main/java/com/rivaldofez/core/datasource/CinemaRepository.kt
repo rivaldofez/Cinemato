@@ -49,7 +49,7 @@ class CinemaRepository(
 
     override fun getMovies(type: MoviesType, page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
-            return localDataSource.getPopularMovies().map { movies ->
+            return localDataSource.getMovieList(type = type).map { movies ->
                 MovieDataMapper.mapMovieListLocalToDomain(movies)
             }
         }
@@ -64,102 +64,8 @@ class CinemaRepository(
 
         override suspend fun saveCallResult(data: List<MovieListItem>) {
             val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = MovieDataMapper.mapMovieListResponseToPopularId(data)
-            localDataSource.insertMovieList(movieList)
-            localDataSource.insertIdPopularMovies(idMovieList)
+            localDataSource.insertMovieList(type = type, movieList)
         }
-    }.asFlow()
-
-    override fun getPopularMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
-        override fun loadFromDB(): Flow<List<Movie>> {
-            return localDataSource.getPopularMovies().map { movies ->
-                MovieDataMapper.mapMovieListLocalToDomain(movies)
-            }
-        }
-
-        override fun shouldFetch(data: List<Movie>?): Boolean = true
-
-        override suspend fun createCall(): Flow<ApiResponse<List<MovieListItem>>> {
-            return remoteDataSource.getPopularMovies(page)
-        }
-
-        override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = MovieDataMapper.mapMovieListResponseToPopularId(data)
-            localDataSource.insertMovieList(movieList)
-            localDataSource.insertIdPopularMovies(idMovieList)
-        }
-
-        override fun isNetworkActive(): Boolean = checkConnectivity()
-    }.asFlow()
-
-    override fun getTopRatedMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
-        override fun loadFromDB(): Flow<List<Movie>> {
-            return localDataSource.getTopRatedMovies().map { movies ->
-                MovieDataMapper.mapMovieListLocalToDomain(movies)
-            }
-        }
-
-        override fun shouldFetch(data: List<Movie>?): Boolean = true
-
-        override suspend fun createCall(): Flow<ApiResponse<List<MovieListItem>>> {
-            return remoteDataSource.getTopRatedMovies(page)
-        }
-
-        override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = MovieDataMapper.mapMovieListResponseToTopRatedId(data)
-            localDataSource.insertMovieList(movieList)
-            localDataSource.insertIdTopRatedMovies(idMovieList)
-        }
-
-        override fun isNetworkActive(): Boolean = checkConnectivity()
-    }.asFlow()
-
-    override fun getUpComingMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
-        override fun loadFromDB(): Flow<List<Movie>> {
-            return localDataSource.getUpComingMovies().map { movies ->
-                MovieDataMapper.mapMovieListLocalToDomain(movies)
-            }
-        }
-
-        override fun shouldFetch(data: List<Movie>?): Boolean = true
-
-        override suspend fun createCall(): Flow<ApiResponse<List<MovieListItem>>> {
-            return remoteDataSource.getUpComingMovies(page)
-        }
-
-        override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = MovieDataMapper.mapMovieListResponseToUpComingId(data)
-            localDataSource.insertMovieList(movieList)
-            localDataSource.insertIdUpComingMovies(idMovieList)
-        }
-
-        override fun isNetworkActive(): Boolean = checkConnectivity()
-    }.asFlow()
-
-    override fun getNowPlayingMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
-        override fun loadFromDB(): Flow<List<Movie>> {
-            return localDataSource.getNowPlayingMovies().map { movies ->
-                MovieDataMapper.mapMovieListLocalToDomain(movies)
-            }
-        }
-
-        override fun shouldFetch(data: List<Movie>?): Boolean = true
-
-        override suspend fun createCall(): Flow<ApiResponse<List<MovieListItem>>> {
-            return remoteDataSource.getNowPlayingMovies(page)
-        }
-
-        override suspend fun saveCallResult(data: List<MovieListItem>) {
-            val movieList = MovieDataMapper.mapMovieListResponseToLocal(data)
-            val idMovieList = MovieDataMapper.mapMovieListResponseToNowPlayingId(data)
-            localDataSource.insertMovieList(movieList)
-            localDataSource.insertIdNowPlayingMovies(idMovieList)
-        }
-
-        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){

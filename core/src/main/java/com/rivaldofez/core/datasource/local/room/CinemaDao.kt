@@ -1,6 +1,7 @@
 package com.rivaldofez.core.datasource.local.room
 
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
@@ -13,6 +14,11 @@ import kotlinx.coroutines.flow.Flow
 interface CinemaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovieList(movieItemList: List<MovieItemLocalEntity>)
+
+    @RawQuery(observedEntities = [MovieItemLocalEntity::class])
+    fun getMovieList(query: SupportSQLiteQuery): Flow<List<MovieItemLocalEntity>>
+
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdPopularMovies(idPopularMovies: List<PopularMovieLocalEntity>)
@@ -37,7 +43,6 @@ interface CinemaDao {
 
     @Query("Select * FROM movielist natural join nowplayingmovies")
     fun getNowPlayingMovies(): Flow<List<MovieItemLocalEntity>>
-
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTvShowList(tvShowItemList: List<TvShowItemLocalEntity>)

@@ -20,8 +20,7 @@ object MovieDataMapper {
         }
     }
 
-
-    fun mapMovieListResponseToPopularId(input: List<MovieListItem>): List<PopularMovieLocalEntity> {
+    fun mapMovieListLocalToPopularId(input: List<MovieItemLocalEntity>): List<PopularMovieLocalEntity> {
         val idList = ArrayList<PopularMovieLocalEntity>()
         input.map {
             val movieId = PopularMovieLocalEntity(id = it.id)
@@ -30,7 +29,7 @@ object MovieDataMapper {
         return idList
     }
 
-    fun mapMovieListResponseToTopRatedId(input: List<MovieListItem>): List<TopRatedMovieLocalEntity> {
+    fun mapMovieListLocalToTopRatedId(input: List<MovieItemLocalEntity>): List<TopRatedMovieLocalEntity> {
         val idList = ArrayList<TopRatedMovieLocalEntity>()
         input.map {
             val movieId = TopRatedMovieLocalEntity(id = it.id)
@@ -39,7 +38,7 @@ object MovieDataMapper {
         return idList
     }
 
-    fun mapMovieListResponseToUpComingId(input: List<MovieListItem>): List<UpcomingMovieLocalEntity> {
+    fun mapMovieListLocalToUpComingId(input: List<MovieItemLocalEntity>): List<UpcomingMovieLocalEntity> {
         val idList = ArrayList<UpcomingMovieLocalEntity>()
         input.map {
             val movieId = UpcomingMovieLocalEntity(id = it.id)
@@ -48,7 +47,7 @@ object MovieDataMapper {
         return idList
     }
 
-    fun mapMovieListResponseToNowPlayingId(input: List<MovieListItem>): List<NowPlayingMovieLocalEntity> {
+    fun mapMovieListLocalToNowPlayingId(input: List<MovieItemLocalEntity>): List<NowPlayingMovieLocalEntity> {
         val idList = ArrayList<NowPlayingMovieLocalEntity>()
         input.map {
             val movieId = NowPlayingMovieLocalEntity(id = it.id)

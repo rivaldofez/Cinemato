@@ -15,14 +15,6 @@ interface ICinemaRepository {
 
     fun getMovies(type: MoviesType, page: String): Flow<Resource<List<Movie>>>
 
-    fun getPopularMovies(page: String): Flow<Resource<List<Movie>>>
-
-    fun getTopRatedMovies(page: String): Flow<Resource<List<Movie>>>
-
-    fun getUpComingMovies(page: String): Flow<Resource<List<Movie>>>
-
-    fun getNowPlayingMovies(page: String): Flow<Resource<List<Movie>>>
-
     fun getDetailMovie(id: String): Flow<Resource<MovieDetail?>>
 
     fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>>
