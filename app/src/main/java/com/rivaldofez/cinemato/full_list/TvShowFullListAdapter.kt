@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rivaldofez.cinemato.databinding.ItemCinemaBinding
 import com.rivaldofez.cinemato.tvshow.TvShowCallback
+import com.rivaldofez.core.BuildConfig.API_PATH_IMAGE
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.TvShow
 
@@ -36,7 +37,7 @@ class TvShowFullListAdapter(private val callback: TvShowCallback): RecyclerView.
                 cvItemCinema.setOnClickListener{callback.ontvShowItemClick(tvShow)}
                 tvPopularity.text = String.format("%.0f",((tvShow.voteAverage/10.0)*100))
                 tvTitle.text = tvShow.name
-                com.bumptech.glide.Glide.with(itemView.context).load(com.rivaldofez.cinemato.BuildConfig.API_PATH_IMAGE + tvShow.posterPath)
+                com.bumptech.glide.Glide.with(itemView.context).load(API_PATH_IMAGE + tvShow.posterPath)
                     .apply(
                         com.bumptech.glide.request.RequestOptions.placeholderOf(com.rivaldofez.cinemato.R.drawable.ic_favorite)
                             .error(com.rivaldofez.cinemato.R.drawable.ic_favorite)).into(imgPoster)

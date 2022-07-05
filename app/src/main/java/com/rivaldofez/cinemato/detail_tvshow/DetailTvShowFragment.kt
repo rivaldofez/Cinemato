@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.rivaldofez.cinemato.BuildConfig
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.FragmentDetailTvshowBinding
+import com.rivaldofez.core.BuildConfig.API_PATH_IMAGE
 import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.domain.model.TvShowDetail
 import com.rivaldofez.core.utils.ViewHelper
@@ -74,9 +75,9 @@ class DetailTvShowFragment : Fragment() {
                 }
             }
 
-            Glide.with(requireContext()).load(BuildConfig.API_PATH_IMAGE + detailTvShow.posterPath).apply(
+            Glide.with(requireContext()).load(API_PATH_IMAGE + detailTvShow.posterPath).apply(
                 RequestOptions.placeholderOf(R.drawable.ic_favorite).error(R.drawable.ic_feed)).into(imgPoster)
-            Glide.with(requireContext()).load(BuildConfig.API_PATH_IMAGE + detailTvShow.posterPath).apply(
+            Glide.with(requireContext()).load(API_PATH_IMAGE + detailTvShow.posterPath).apply(
                 RequestOptions.placeholderOf(R.drawable.ic_favorite).error(R.drawable.ic_feed)).into(imgBackdrop)
 
             tvDate.text = ViewHelper.formatDate(detailTvShow.firstAirDate)

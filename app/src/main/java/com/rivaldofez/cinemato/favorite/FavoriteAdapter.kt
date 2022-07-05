@@ -11,6 +11,7 @@ import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.ItemFavoriteBinding
 import com.rivaldofez.cinemato.movie.MovieCallback
 import com.rivaldofez.cinemato.tvshow.TvShowCallback
+import com.rivaldofez.core.BuildConfig.API_PATH_IMAGE
 import com.rivaldofez.core.domain.model.MediatorItem
 import com.rivaldofez.core.utils.MovieDataMapper
 import com.rivaldofez.core.utils.TvShowDataMapper
@@ -53,7 +54,7 @@ class FavoriteAdapter(private val mCallback: MovieCallback, private val tCallbac
                 tvTitle.text = mediatorItem.title
                 tvPopularity.text = String.format("%.0f",((mediatorItem.voteAverage/10.0)*100))
                 tvItemDate.text = ViewHelper.formatDate(mediatorItem.releaseDate)
-                Glide.with(imgPoster.context).load(BuildConfig.API_PATH_IMAGE + mediatorItem.posterPath)
+                Glide.with(imgPoster.context).load(API_PATH_IMAGE + mediatorItem.posterPath)
                     .apply(
                         RequestOptions.placeholderOf(R.drawable.ic_favorite)
                             .error(R.drawable.ic_favorite)).into(imgPoster)

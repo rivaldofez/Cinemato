@@ -8,6 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.rivaldofez.cinemato.BuildConfig
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.ItemCinemaHorizontalBinding
+import com.rivaldofez.core.BuildConfig.API_PATH_IMAGE
 import com.rivaldofez.core.domain.model.Movie
 
 class MovieAdapter(private val callback: MovieCallback): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
@@ -39,7 +40,7 @@ class MovieAdapter(private val callback: MovieCallback): RecyclerView.Adapter<Mo
 
                 tvTitle.text = movie.title
                 tvPopularity.text = String.format("%.0f",((movie.voteAverage/10.0)*100))
-                Glide.with(itemView.context).load(BuildConfig.API_PATH_IMAGE + movie.posterPath)
+                Glide.with(itemView.context).load(API_PATH_IMAGE + movie.posterPath)
                     .apply(
                         RequestOptions.placeholderOf(R.drawable.ic_favorite)
                         .error(R.drawable.ic_favorite)).into(imgPoster)

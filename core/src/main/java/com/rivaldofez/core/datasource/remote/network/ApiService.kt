@@ -16,6 +16,7 @@ interface ApiService {
         @Query("page") page: String
     ): MoviesResponse
 
+
     @GET("3/movie/top_rated")
     suspend fun getTopRatedMovies(
         @Query("api_key") key: String,
