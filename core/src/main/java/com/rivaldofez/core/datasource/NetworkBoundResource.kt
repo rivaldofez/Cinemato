@@ -1,5 +1,6 @@
 package com.rivaldofez.core.datasource
 
+import android.content.Context
 import com.rivaldofez.core.datasource.remote.network.ApiResponse
 import kotlinx.coroutines.flow.*
 
@@ -7,7 +8,8 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
     private var result: Flow<Resource<ResultType>> = flow {
         emit(Resource.Loading())
         val dbSource = loadFromDB().first()
-        if(shouldFetch(dbSource)){
+
+        if(shouldFetch(dbSource) && isNetworkActive()){
             emit(Resource.Loading())
             when(val apiResponse = createCall().first()) {
                 is ApiResponse.Success -> {
@@ -38,6 +40,8 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
     protected open fun onFetchFailed() {}
 
     protected abstract fun loadFromDB(): Flow<ResultType>
+
+    protected abstract fun isNetworkActive(): Boolean
 
     protected abstract fun shouldFetch(data: ResultType?): Boolean
 

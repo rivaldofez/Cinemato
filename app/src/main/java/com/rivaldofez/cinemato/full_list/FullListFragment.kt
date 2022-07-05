@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,7 +21,7 @@ import com.rivaldofez.core.utils.MovieDataMapper
 import com.rivaldofez.core.utils.TvShowDataMapper
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class FullListFragment : Fragment(), MovieCallback, TvShowCallback {
+class FullListFragment : Fragment(), MovieCallback, TvShowCallback, SearchView.OnQueryTextListener {
     private var _binding: FragmentFullListBinding? = null
     private val binding get() = _binding!!
     private var totalPage = 1
@@ -93,6 +94,14 @@ class FullListFragment : Fragment(), MovieCallback, TvShowCallback {
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        TODO("Not yet implemented")
     }
 
     private fun selectCallObserver(){

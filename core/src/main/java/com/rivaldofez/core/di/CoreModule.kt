@@ -65,7 +65,8 @@ val repositoryModule = module {
         CinemaRepository(
             get(),
             get(),
-            get()
+            get(),
+            androidContext()
         )
     }
 }

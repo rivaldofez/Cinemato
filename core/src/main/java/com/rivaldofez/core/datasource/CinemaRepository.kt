@@ -1,5 +1,9 @@
 package com.rivaldofez.core.datasource
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.util.Log
 import com.rivaldofez.core.datasource.local.LocalDataSource
 import com.rivaldofez.core.datasource.remote.RemoteDataSource
@@ -22,8 +26,28 @@ import kotlinx.coroutines.flow.map
 class CinemaRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
+    private val appExecutors: AppExecutors,
+    private val appContext: Context
 ): ICinemaRepository {
+    fun checkConnectivity(): Boolean{
+        val connectivityManager = appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+            return when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                else -> false
+            }
+        } else {
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
+    }
+
     override fun getPopularMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
         override fun loadFromDB(): Flow<List<Movie>> {
             return localDataSource.getPopularMovies().map { movies ->
@@ -43,6 +67,8 @@ class CinemaRepository(
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdPopularMovies(idMovieList)
         }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getTopRatedMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
@@ -64,6 +90,8 @@ class CinemaRepository(
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdTopRatedMovies(idMovieList)
         }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getUpComingMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
@@ -85,6 +113,8 @@ class CinemaRepository(
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdUpComingMovies(idMovieList)
         }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getNowPlayingMovies(page: String): Flow<Resource<List<Movie>>> = object : NetworkBoundResource<List<Movie>, List<MovieListItem>>(){
@@ -106,6 +136,8 @@ class CinemaRepository(
             localDataSource.insertMovieList(movieList)
             localDataSource.insertIdNowPlayingMovies(idMovieList)
         }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getPopularTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
@@ -127,6 +159,8 @@ class CinemaRepository(
             localDataSource.insertTvShowList(tvShowList)
             localDataSource.insertIdPopularTvShow(idTvShowList)
         }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getTopRatedTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
@@ -148,6 +182,8 @@ class CinemaRepository(
             localDataSource.insertTvShowList(tvShowList)
             localDataSource.insertIdTopRatedTvShow(idTvShowList)
         }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getOnTheAirTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
@@ -169,6 +205,8 @@ class CinemaRepository(
             localDataSource.insertTvShowList(tvShowList)
             localDataSource.insertIdOnTheAIrTvShow(idTvShowList)
         }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getAiringTvShow(page: String): Flow<Resource<List<TvShow>>> = object : NetworkBoundResource<List<TvShow>, List<TvShowListItem>>(){
@@ -190,6 +228,8 @@ class CinemaRepository(
             localDataSource.insertTvShowList(tvShowList)
             localDataSource.insertIdAiringTodayTvShow(idTvShowList)
         }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getDetailTvShow(id: String): Flow<Resource<TvShowDetail?>> = object: NetworkBoundResource<TvShowDetail?, TvShowDetailResponse>(){
@@ -212,6 +252,8 @@ class CinemaRepository(
             val dataMapped = TvShowDataMapper.mapDetailTvShowResponseToLocal(data)
             localDataSource.insertDetailTvShow(dataMapped)
         }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getDetailMovie(id: String): Flow<Resource<MovieDetail?>> = object: NetworkBoundResource<MovieDetail?, MovieDetailResponse>(){
@@ -235,6 +277,8 @@ class CinemaRepository(
             Log.d("Teston", "save call " + dataMapped.toString())
             localDataSource.insertDetailMovie(dataMapped)
         }
+
+        override fun isNetworkActive(): Boolean = checkConnectivity()
     }.asFlow()
 
     override fun getFavoriteMovies(): Flow<List<MovieDetail>> {
