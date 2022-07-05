@@ -14,47 +14,50 @@ import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource(private val cinemaDao: CinemaDao) {
 
-    suspend fun insertMovieList(type: MoviesType, movieItemList: List<MovieItemLocalEntity>) {
+    suspend fun insertMovieList(type: MoviesType, page: String, movieItemList: List<MovieItemLocalEntity>) {
         cinemaDao.insertMovieList(movieItemList)
         when(type){
-            MoviesType.Popular -> cinemaDao.insertIdPopularMovies(MovieDataMapper.mapMovieListLocalToPopularId(movieItemList))
-            MoviesType.TopRated -> cinemaDao.insertIdTopRatedMovies(MovieDataMapper.mapMovieListLocalToTopRatedId(movieItemList))
-            MoviesType.NowPlaying -> cinemaDao.insertIdNowPlayingMovies(MovieDataMapper.mapMovieListLocalToNowPlayingId(movieItemList))
-            MoviesType.UpComing -> cinemaDao.insertIdUpcomingMovies(MovieDataMapper.mapMovieListLocalToUpComingId(movieItemList))
+            MoviesType.Popular -> cinemaDao.insertIdPopularMovies(MovieDataMapper.mapMovieListLocalToPopularId(movieItemList, page))
+            MoviesType.TopRated -> cinemaDao.insertIdTopRatedMovies(MovieDataMapper.mapMovieListLocalToTopRatedId(movieItemList, page))
+            MoviesType.NowPlaying -> cinemaDao.insertIdNowPlayingMovies(MovieDataMapper.mapMovieListLocalToNowPlayingId(movieItemList, page))
+            MoviesType.UpComing -> cinemaDao.insertIdUpcomingMovies(MovieDataMapper.mapMovieListLocalToUpComingId(movieItemList, page))
         }
     }
 
-    fun getMovieList(type: MoviesType): Flow<List<MovieItemLocalEntity>> {
+    fun getMovieList(type: MoviesType, page: String): Flow<List<MovieItemLocalEntity>> {
         val additionQueryString = when(type) {
             MoviesType.Popular -> "popularMovies"
             MoviesType.TopRated -> "topratedmovies"
             MoviesType.UpComing -> "upcomingmovies"
             MoviesType.NowPlaying -> "nowplayingmovies"
         }
-        val query = SimpleSQLiteQuery("Select * FROM movielist natural join " + additionQueryString)
+        val query = SimpleSQLiteQuery("Select * FROM movielist natural join " + additionQueryString + " WHERE page = " + page)
         return cinemaDao.getMovieList(query)
     }
 
     fun getDetailMovie(id: String): Flow<MovieDetailLocalEntity?> = cinemaDao.getDetailMovie(id.toInt())
 
-    suspend fun insertTvShowList(type: TvShowsType, tvShowItemList: List<TvShowItemLocalEntity>){
+
+
+
+    suspend fun insertTvShowList(type: TvShowsType,page: String, tvShowItemList: List<TvShowItemLocalEntity>){
         cinemaDao.insertTvShowList(tvShowItemList)
         when(type){
-            TvShowsType.Popular -> cinemaDao.insertIdPopularTvShow(TvShowDataMapper.mapTvShowListLocalToPopularId(tvShowItemList))
-            TvShowsType.TopRated -> cinemaDao.insertIdTopRatedTvShow(TvShowDataMapper.mapTvShowListLocalToTopRatedId(tvShowItemList))
-            TvShowsType.OnTheAir -> cinemaDao.insertIdOnTheAirTvShow(TvShowDataMapper.mapTvShowListLocalToOnTheAirId(tvShowItemList))
-            TvShowsType.AiringToday -> cinemaDao.insertIdAiringTodayTvShow(TvShowDataMapper.mapTvShowListLocalToAiringTodayId(tvShowItemList))
+            TvShowsType.Popular -> cinemaDao.insertIdPopularTvShow(TvShowDataMapper.mapTvShowListLocalToPopularId(tvShowItemList, page))
+            TvShowsType.TopRated -> cinemaDao.insertIdTopRatedTvShow(TvShowDataMapper.mapTvShowListLocalToTopRatedId(tvShowItemList, page))
+            TvShowsType.OnTheAir -> cinemaDao.insertIdOnTheAirTvShow(TvShowDataMapper.mapTvShowListLocalToOnTheAirId(tvShowItemList, page))
+            TvShowsType.AiringToday -> cinemaDao.insertIdAiringTodayTvShow(TvShowDataMapper.mapTvShowListLocalToAiringTodayId(tvShowItemList, page))
         }
     }
 
-    fun getTvShowList(type: TvShowsType) : Flow<List<TvShowItemLocalEntity>> {
+    fun getTvShowList(type: TvShowsType, page: String) : Flow<List<TvShowItemLocalEntity>> {
         val additionQueryString = when(type){
             TvShowsType.Popular -> "populartvshow"
             TvShowsType.TopRated -> "topratedtvshow"
             TvShowsType.AiringToday -> "airingtodaytvshow"
             TvShowsType.OnTheAir -> "ontheairtvshow"
         }
-        val query = SimpleSQLiteQuery("Select * FROM tvshowlist natural join " + additionQueryString)
+        val query = SimpleSQLiteQuery("Select * FROM tvshowlist natural join " + additionQueryString + " WHERE page = " + page)
         return cinemaDao.getTvShowList(query)
     }
 

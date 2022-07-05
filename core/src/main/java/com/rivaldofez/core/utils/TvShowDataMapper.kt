@@ -22,37 +22,37 @@ object TvShowDataMapper {
         }
     }
 
-    fun mapTvShowListLocalToPopularId(input: List<TvShowItemLocalEntity>): List<PopularTvShowLocalEntity> {
+    fun mapTvShowListLocalToPopularId(input: List<TvShowItemLocalEntity>, page: String): List<PopularTvShowLocalEntity> {
         val idList = ArrayList<PopularTvShowLocalEntity>()
         input.map {
-            val tvShowId = PopularTvShowLocalEntity(id = it.id)
+            val tvShowId = PopularTvShowLocalEntity(id = it.id, page = page.toInt())
             idList.add(tvShowId)
         }
         return idList
     }
 
-    fun mapTvShowListLocalToTopRatedId(input: List<TvShowItemLocalEntity>): List<TopRatedTvShowLocalEntity> {
+    fun mapTvShowListLocalToTopRatedId(input: List<TvShowItemLocalEntity>, page: String): List<TopRatedTvShowLocalEntity> {
         val idList = ArrayList<TopRatedTvShowLocalEntity>()
         input.map {
-            val tvShowId = TopRatedTvShowLocalEntity(id = it.id)
+            val tvShowId = TopRatedTvShowLocalEntity(id = it.id, page = page.toInt())
             idList.add(tvShowId)
         }
         return idList
     }
 
-    fun mapTvShowListLocalToOnTheAirId(input: List<TvShowItemLocalEntity>): List<OnTheAirTvShowLocalEntity> {
+    fun mapTvShowListLocalToOnTheAirId(input: List<TvShowItemLocalEntity>, page: String): List<OnTheAirTvShowLocalEntity> {
         val idList = ArrayList<OnTheAirTvShowLocalEntity>()
         input.map {
-            val tvShowId = OnTheAirTvShowLocalEntity(id = it.id)
+            val tvShowId = OnTheAirTvShowLocalEntity(id = it.id, page = page.toInt())
             idList.add(tvShowId)
         }
         return idList
     }
 
-    fun mapTvShowListLocalToAiringTodayId(input: List<TvShowItemLocalEntity>): List<AiringTodayTvShowEntity> {
+    fun mapTvShowListLocalToAiringTodayId(input: List<TvShowItemLocalEntity>, page: String): List<AiringTodayTvShowEntity> {
         val idList = ArrayList<AiringTodayTvShowEntity>()
         input.map {
-            val tvShowId = AiringTodayTvShowEntity(id = it.id)
+            val tvShowId = AiringTodayTvShowEntity(id = it.id, page = page.toInt())
             idList.add(tvShowId)
         }
         return idList

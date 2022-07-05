@@ -20,37 +20,37 @@ object MovieDataMapper {
         }
     }
 
-    fun mapMovieListLocalToPopularId(input: List<MovieItemLocalEntity>): List<PopularMovieLocalEntity> {
+    fun mapMovieListLocalToPopularId(input: List<MovieItemLocalEntity>, page: String): List<PopularMovieLocalEntity> {
         val idList = ArrayList<PopularMovieLocalEntity>()
         input.map {
-            val movieId = PopularMovieLocalEntity(id = it.id)
+            val movieId = PopularMovieLocalEntity(id = it.id, page = page.toInt())
             idList.add(movieId)
         }
         return idList
     }
 
-    fun mapMovieListLocalToTopRatedId(input: List<MovieItemLocalEntity>): List<TopRatedMovieLocalEntity> {
+    fun mapMovieListLocalToTopRatedId(input: List<MovieItemLocalEntity>, page: String): List<TopRatedMovieLocalEntity> {
         val idList = ArrayList<TopRatedMovieLocalEntity>()
         input.map {
-            val movieId = TopRatedMovieLocalEntity(id = it.id)
+            val movieId = TopRatedMovieLocalEntity(id = it.id,page = page.toInt())
             idList.add(movieId)
         }
         return idList
     }
 
-    fun mapMovieListLocalToUpComingId(input: List<MovieItemLocalEntity>): List<UpcomingMovieLocalEntity> {
+    fun mapMovieListLocalToUpComingId(input: List<MovieItemLocalEntity>, page: String): List<UpcomingMovieLocalEntity> {
         val idList = ArrayList<UpcomingMovieLocalEntity>()
         input.map {
-            val movieId = UpcomingMovieLocalEntity(id = it.id)
+            val movieId = UpcomingMovieLocalEntity(id = it.id, page = page.toInt())
             idList.add(movieId)
         }
         return idList
     }
 
-    fun mapMovieListLocalToNowPlayingId(input: List<MovieItemLocalEntity>): List<NowPlayingMovieLocalEntity> {
+    fun mapMovieListLocalToNowPlayingId(input: List<MovieItemLocalEntity>, page: String): List<NowPlayingMovieLocalEntity> {
         val idList = ArrayList<NowPlayingMovieLocalEntity>()
         input.map {
-            val movieId = NowPlayingMovieLocalEntity(id = it.id)
+            val movieId = NowPlayingMovieLocalEntity(id = it.id, page = page.toInt())
             idList.add(movieId)
         }
         return idList
