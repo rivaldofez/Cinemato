@@ -1,43 +1,58 @@
 package com.rivaldofez.core.utils
 
+import com.rivaldofez.core.datasource.local.entity.movie.MovieDetailLocalEntity
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
+import com.rivaldofez.core.datasource.remote.MoviesType
+import com.rivaldofez.core.datasource.remote.TvShowsType
 import com.rivaldofez.core.datasource.remote.response.TvShowDetailResponse
 import com.rivaldofez.core.datasource.remote.response.TvShowListItem
+import com.rivaldofez.core.domain.model.MediatorItem
+import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.TvShow
 import com.rivaldofez.core.domain.model.TvShowDetail
 
 object TvShowDataMapper {
-    fun mapTvShowListResponseToPopularId(input: List<TvShowListItem>): List<PopularTvShowLocalEntity> {
+
+    fun getTvShowsType(type: TvShowsType): String{
+        return when(type){
+            TvShowsType.Popular -> "popular"
+            TvShowsType.TopRated -> "top_rated"
+            TvShowsType.AiringToday -> "airing_today"
+            TvShowsType.OnTheAir -> "on_the_air"
+        }
+    }
+
+    fun mapTvShowListLocalToPopularId(input: List<TvShowItemLocalEntity>, page: String): List<PopularTvShowLocalEntity> {
         val idList = ArrayList<PopularTvShowLocalEntity>()
         input.map {
-            val tvShowId = PopularTvShowLocalEntity(id = it.id)
+            val tvShowId = PopularTvShowLocalEntity(id = it.id, page = page.toInt())
             idList.add(tvShowId)
         }
         return idList
     }
 
-    fun mapTvShowListResponseToTopRatedId(input: List<TvShowListItem>): List<TopRatedTvShowLocalEntity> {
+    fun mapTvShowListLocalToTopRatedId(input: List<TvShowItemLocalEntity>, page: String): List<TopRatedTvShowLocalEntity> {
         val idList = ArrayList<TopRatedTvShowLocalEntity>()
         input.map {
-            val tvShowId = TopRatedTvShowLocalEntity(id = it.id)
+            val tvShowId = TopRatedTvShowLocalEntity(id = it.id, page = page.toInt())
             idList.add(tvShowId)
         }
         return idList
     }
 
-    fun mapTvShowListResponseToOnTheAirId(input: List<TvShowListItem>): List<OnTheAirTvShowLocalEntity> {
+    fun mapTvShowListLocalToOnTheAirId(input: List<TvShowItemLocalEntity>, page: String): List<OnTheAirTvShowLocalEntity> {
         val idList = ArrayList<OnTheAirTvShowLocalEntity>()
         input.map {
-            val tvShowId = OnTheAirTvShowLocalEntity(id = it.id)
+            val tvShowId = OnTheAirTvShowLocalEntity(id = it.id, page = page.toInt())
             idList.add(tvShowId)
         }
         return idList
     }
 
-    fun mapTvShowListResponseToAiringTodayId(input: List<TvShowListItem>): List<AiringTodayTvShowEntity> {
+    fun mapTvShowListLocalToAiringTodayId(input: List<TvShowItemLocalEntity>, page: String): List<AiringTodayTvShowEntity> {
         val idList = ArrayList<AiringTodayTvShowEntity>()
         input.map {
-            val tvShowId = AiringTodayTvShowEntity(id = it.id)
+            val tvShowId = AiringTodayTvShowEntity(id = it.id, page = page.toInt())
             idList.add(tvShowId)
         }
         return idList
@@ -110,7 +125,8 @@ object TvShowDataMapper {
             homepage = input.homepage,
             status = input.status,
             genres = input.genres,
-            spokenLanguages = input.spokenLanguages
+            spokenLanguages = input.spokenLanguages,
+            isFavorite = input.isFavorite
         )
         return tvShowDetail
     }
@@ -134,5 +150,88 @@ object TvShowDataMapper {
 
     fun mapDetailTvShowListLocalToDomain(input: List<TvShowDetailLocalEntity>): List<TvShowDetail> =
         input.map { mapDetailTvShowLocalToDomain(it) }
+
+
+    fun mapDomainDetailTvShowToLocal(input: TvShowDetail): TvShowDetailLocalEntity {
+        return TvShowDetailLocalEntity(
+            id = input.id,
+            name = input.name,
+            originalName = input.originalName,
+            originalLanguage = input.originalLanguage,
+            numberOfEpisodes = input.numberOfEpisodes,
+            type = input.type,
+            backdropPath = input.backdropPath,
+            popularity = input.popularity,
+            numberOfSeasons = input.numberOfSeasons,
+            voteCount = input.voteCount,
+            firstAirDate = input.firstAirDate,
+            overview = input.overview,
+            posterPath = input.posterPath,
+            voteAverage = input.voteAverage,
+            tagline = input.tagline,
+            adult = input.adult,
+            inProduction = input.inProduction,
+            lastAirDate = input.lastAirDate,
+            homepage = input.homepage,
+            status = input.status,
+            genres = input.genres,
+            spokenLanguages = input.spokenLanguages,
+            isFavorite = input.isFavorite
+        )
+    }
+
+    fun mapTvShowToMediatorItem(input: TvShow): MediatorItem {
+        return MediatorItem(
+            id = input.id,
+            title = input.name,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath,
+            releaseDate = input.firstAirDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage,
+            type = "tvshow"
+        )
+    }
+
+    fun mapMediatorItemToTvShow(input: MediatorItem): TvShow{
+        return TvShow(
+            id = input.id,
+            name = input.title,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath,
+            firstAirDate = input.releaseDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage
+        )
+    }
+
+    fun mapListTvShowToMediatorItem(input: List<TvShow>): List<MediatorItem>{
+        val mediatorItemList = ArrayList<MediatorItem>()
+        input.map {
+            mediatorItemList.add(TvShowDataMapper.mapTvShowToMediatorItem(it))
+        }
+        return mediatorItemList
+    }
+
+    fun mapDomainDetailTvShowToMediatorItem(input: TvShowDetail): MediatorItem {
+        return MediatorItem(
+            id = input.id,
+            title = input.name,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath,
+            releaseDate = input.firstAirDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage,
+            type = "tvshow"
+        )
+    }
+
+    fun mapListDomainDetailMovieToMediatorItem(input: List<TvShowDetail>): List<MediatorItem>{
+        val mediatorItemList = ArrayList<MediatorItem>()
+        input.map {
+            mediatorItemList.add(TvShowDataMapper.mapDomainDetailTvShowToMediatorItem(it))
+        }
+        return mediatorItemList
+    }
 }
 

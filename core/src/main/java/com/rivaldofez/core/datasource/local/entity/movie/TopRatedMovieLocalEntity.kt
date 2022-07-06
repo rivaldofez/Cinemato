@@ -11,4 +11,7 @@ class TopRatedMovieLocalEntity(
     @NonNull
     @ColumnInfo(name = "id")
     val id: Int,
+
+    @ColumnInfo(name = "page")
+    val page: Int,
 )

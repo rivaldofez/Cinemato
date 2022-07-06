@@ -24,4 +24,5 @@ data class MovieDetail(
     val status: String,
     val genres: String,
     val spokenLanguages: String,
+    val isFavorite: Boolean
 )

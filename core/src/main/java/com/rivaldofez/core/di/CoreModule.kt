@@ -1,6 +1,7 @@
 package com.rivaldofez.core.di
 
 import androidx.room.Room
+import com.rivaldofez.core.BuildConfig.API_BASE_PATH
 import com.rivaldofez.core.datasource.CinemaRepository
 import com.rivaldofez.core.datasource.local.LocalDataSource
 import com.rivaldofez.core.datasource.local.room.CinemaDatabase
@@ -35,7 +36,7 @@ val networkModule = module {
 
     single {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/")
+            .baseUrl(API_BASE_PATH)
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
@@ -65,7 +66,8 @@ val repositoryModule = module {
         CinemaRepository(
             get(),
             get(),
-            get()
+            get(),
+            androidContext()
         )
     }
 }

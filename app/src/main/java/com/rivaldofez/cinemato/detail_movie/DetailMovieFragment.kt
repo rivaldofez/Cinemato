@@ -6,11 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.snackbar.Snackbar
 import com.rivaldofez.cinemato.BuildConfig
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.FragmentDetailMovieBinding
+import com.rivaldofez.core.BuildConfig.API_PATH_IMAGE
 import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.domain.model.MovieDetail
 import com.rivaldofez.core.utils.ViewHelper
@@ -72,21 +75,51 @@ class DetailMovieFragment : Fragment() {
                 }
             }
 
-            Glide.with(requireContext()).load(BuildConfig.API_PATH_IMAGE + detailMovie.posterPath).apply(
+            Glide.with(requireContext()).load(API_PATH_IMAGE + detailMovie.posterPath).apply(
                 RequestOptions.placeholderOf(R.drawable.ic_favorite).error(R.drawable.ic_feed)).into(imgPoster)
-            Glide.with(requireContext()).load(BuildConfig.API_PATH_IMAGE + detailMovie.posterPath).apply(
+            Glide.with(requireContext()).load(API_PATH_IMAGE + detailMovie.posterPath).apply(
                 RequestOptions.placeholderOf(R.drawable.ic_favorite).error(R.drawable.ic_feed)).into(imgBackdrop)
 
             tvDate.text = ViewHelper.formatDate(detailMovie.releaseDate)
             tvBudget.text = ViewHelper.formatCurrency(detailMovie.budget)
             tvDuration.text = ViewHelper.formatRuntime(detailMovie.runtime)
             tvHomepage.text = detailMovie.homepage
-            tvOriginal.text = detailMovie.originalLanguage
+            tvOriginal.text = detailMovie.originalTitle
             tvRevenue.text = ViewHelper.formatCurrency(detailMovie.revenue)
             tvTitle.text = detailMovie.title
             tvSynopsis.text = detailMovie.overview
             tvStatus.text = detailMovie.status
             chartPopularity.setProgress((detailMovie.voteAverage.toFloat() * 10F), true)
+
+            btnFavorite.apply {
+                setStateFavoriteIcon(detailMovie.isFavorite)
+                setOnClickListener {
+                    detailMovieViewModel.setFavoriteMovie(detailMovie, !detailMovie.isFavorite)
+                    setStateFavoriteIcon(detailMovie.isFavorite)
+                    showSnackBarFavorite(!detailMovie.isFavorite)
+                }
+            }
+        }
+    }
+
+    private fun setStateFavoriteIcon(isFavorite: Boolean){
+        if(isFavorite)
+            binding.btnFavorite.setImageDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite)
+            )
+        else
+            binding.btnFavorite.setImageDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_unfilled)
+            )
+    }
+
+    private fun showSnackBarFavorite(isFavorite: Boolean){
+        if(isFavorite){
+            val snackbar = Snackbar.make(binding.root, "Added to Favorite List", Snackbar.LENGTH_SHORT)
+            snackbar.show()
+        }else{
+            val snackbar = Snackbar.make(binding.root, "Removed from Favorite List", Snackbar.LENGTH_SHORT)
+            snackbar.show()
         }
     }
 }

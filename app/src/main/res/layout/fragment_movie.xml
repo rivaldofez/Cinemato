@@ -16,11 +16,29 @@
             android:id="@+id/tv_popular_movie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="Popular Movies"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/btn_viewall_popular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_btn_viewall"
+            android:padding="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="View All"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_popular_movie"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_popular_movie"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_popular_movie"
@@ -34,12 +52,28 @@
             android:id="@+id/tv_toprated_movie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="Top Rated Movies"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_popular_movie" />
 
-            app:layout_constraintTop_toBottomOf="@+id/rv_popular_movie"/>
+        <TextView
+            android:id="@+id/btn_viewall_toprated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_btn_viewall"
+            android:padding="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="View All"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_toprated_movie"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_toprated_movie" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_toprated_movie"
@@ -53,11 +87,28 @@
             android:id="@+id/tv_now_playing_movie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="Now Playing Movies"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_toprated_movie" />
+
+        <TextView
+            android:id="@+id/btn_viewall_nowplaying"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_btn_viewall"
+            android:padding="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="View All"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_now_playing_movie"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_now_playing_movie" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_now_playing_movie"
@@ -71,11 +122,28 @@
             android:id="@+id/tv_upcoming_movie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="Up Coming Movies"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_now_playing_movie" />
+
+        <TextView
+            android:id="@+id/btn_viewall_upcoming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_btn_viewall"
+            android:padding="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="View All"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_upcoming_movie"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_upcoming_movie" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_upcoming_movie"

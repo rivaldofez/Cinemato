@@ -1,43 +1,56 @@
 package com.rivaldofez.core.utils
 
+import android.provider.MediaStore
 import com.rivaldofez.core.datasource.local.entity.movie.*
+import com.rivaldofez.core.datasource.remote.MoviesType
 import com.rivaldofez.core.datasource.remote.response.MovieDetailResponse
 import com.rivaldofez.core.datasource.remote.response.MovieListItem
+import com.rivaldofez.core.domain.model.MediatorItem
 import com.rivaldofez.core.domain.model.Movie
 import com.rivaldofez.core.domain.model.MovieDetail
 
 object MovieDataMapper {
-    fun mapMovieListResponseToPopularId(input: List<MovieListItem>): List<PopularMovieLocalEntity> {
+
+    fun getMoviesType(type: MoviesType): String{
+        return when(type){
+            MoviesType.Popular -> "popular"
+            MoviesType.TopRated -> "top_rated"
+            MoviesType.UpComing -> "upcoming"
+            MoviesType.NowPlaying -> "now_playing"
+        }
+    }
+
+    fun mapMovieListLocalToPopularId(input: List<MovieItemLocalEntity>, page: String): List<PopularMovieLocalEntity> {
         val idList = ArrayList<PopularMovieLocalEntity>()
         input.map {
-            val movieId = PopularMovieLocalEntity(id = it.id)
+            val movieId = PopularMovieLocalEntity(id = it.id, page = page.toInt())
             idList.add(movieId)
         }
         return idList
     }
 
-    fun mapMovieListResponseToTopRatedId(input: List<MovieListItem>): List<TopRatedMovieLocalEntity> {
+    fun mapMovieListLocalToTopRatedId(input: List<MovieItemLocalEntity>, page: String): List<TopRatedMovieLocalEntity> {
         val idList = ArrayList<TopRatedMovieLocalEntity>()
         input.map {
-            val movieId = TopRatedMovieLocalEntity(id = it.id)
+            val movieId = TopRatedMovieLocalEntity(id = it.id,page = page.toInt())
             idList.add(movieId)
         }
         return idList
     }
 
-    fun mapMovieListResponseToUpComingId(input: List<MovieListItem>): List<UpcomingMovieLocalEntity> {
+    fun mapMovieListLocalToUpComingId(input: List<MovieItemLocalEntity>, page: String): List<UpcomingMovieLocalEntity> {
         val idList = ArrayList<UpcomingMovieLocalEntity>()
         input.map {
-            val movieId = UpcomingMovieLocalEntity(id = it.id)
+            val movieId = UpcomingMovieLocalEntity(id = it.id, page = page.toInt())
             idList.add(movieId)
         }
         return idList
     }
 
-    fun mapMovieListResponseToNowPlayingId(input: List<MovieListItem>): List<NowPlayingMovieLocalEntity> {
+    fun mapMovieListLocalToNowPlayingId(input: List<MovieItemLocalEntity>, page: String): List<NowPlayingMovieLocalEntity> {
         val idList = ArrayList<NowPlayingMovieLocalEntity>()
         input.map {
-            val movieId = NowPlayingMovieLocalEntity(id = it.id)
+            val movieId = NowPlayingMovieLocalEntity(id = it.id, page = page.toInt())
             idList.add(movieId)
         }
         return idList
@@ -63,7 +76,7 @@ object MovieDataMapper {
     fun mapDetailMovieResponseToLocal(input: MovieDetailResponse): MovieDetailLocalEntity =
         MovieDetailLocalEntity(
             id = input.id,
-            originalTitle = input.originalLanguage,
+            originalTitle = input.originalTitle,
             originalLanguage = input.originalLanguage,
             imdbId = input.imdbId,
             title = input.title,
@@ -107,7 +120,9 @@ object MovieDataMapper {
             homepage = input.homepage,
             status = input.status,
             genres = input.genres,
-            spokenLanguages = input.spokenLanguages
+            spokenLanguages = input.spokenLanguages,
+            isFavorite = input.isFavorite
+
         )
 
         return movieDetail
@@ -132,4 +147,85 @@ object MovieDataMapper {
 
     fun mapDetailMovieListLocalToDomain(input: List<MovieDetailLocalEntity>) : List<MovieDetail> =
         input.map { mapDetailMovieLocalToDomain(it) }
+
+    fun mapDomainDetailMovieToLocal(input: MovieDetail): MovieDetailLocalEntity {
+        return MovieDetailLocalEntity(
+            id = input.id,
+            title = input.title,
+            originalLanguage = input.originalLanguage,
+            imdbId = input.imdbId,
+            backdropPath = input.backdropPath,
+            revenue = input.revenue,
+            popularity = input.popularity,
+            voteCount = input.voteCount,
+            budget = input.budget,
+            overview = input.overview,
+            originalTitle = input.originalTitle,
+            runtime = input.runtime,
+            posterPath = input.posterPath,
+            releaseDate = input.releaseDate,
+            voteAverage = input.voteAverage,
+            tagline = input.tagline,
+            adult = input.adult,
+            homepage = input.homepage,
+            status = input.status,
+            genres = input.genres,
+            spokenLanguages = input.spokenLanguages,
+            isFavorite = input.isFavorite
+        )
+    }
+
+    fun mapMovieDataToMediator(input: Movie): MediatorItem{
+        return MediatorItem(
+            id = input.id,
+            title = input.title,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath ,
+            releaseDate = input.releaseDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage,
+            type = "movie"
+        )
+    }
+
+    fun mapMediatorItemToMovie(input: MediatorItem): Movie {
+        return Movie(
+            id = input.id,
+            title = input.title,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath,
+            releaseDate = input.releaseDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage,
+        )
+    }
+
+    fun mapListMovieToMediatorItem(input: List<Movie>): List<MediatorItem>{
+        val mediatorItemList = ArrayList<MediatorItem>()
+        input.map {
+            mediatorItemList.add(mapMovieDataToMediator(it))
+        }
+        return mediatorItemList
+    }
+
+    fun mapDomainDetailMovieToMediatorItem(input: MovieDetail): MediatorItem {
+        return MediatorItem(
+            id = input.id,
+            title = input.title,
+            posterPath = input.posterPath,
+            backdropPath = input.backdropPath,
+            releaseDate = input.releaseDate,
+            popularity = input.popularity,
+            voteAverage = input.voteAverage,
+            type = "movie"
+        )
+    }
+
+    fun mapListDomainDetailMovieToMediatorItem(input: List<MovieDetail>): List<MediatorItem>{
+        val mediatorItemList = ArrayList<MediatorItem>()
+        input.map {
+            mediatorItemList.add(mapDomainDetailMovieToMediatorItem(it))
+        }
+        return mediatorItemList
+    }
 }

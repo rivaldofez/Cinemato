@@ -11,4 +11,7 @@ class UpcomingMovieLocalEntity (
     @NonNull
     @ColumnInfo(name = "id")
     val id: Int,
+
+    @ColumnInfo(name = "page")
+    val page: Int,
 )

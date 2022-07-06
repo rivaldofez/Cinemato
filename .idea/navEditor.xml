@@ -48,6 +48,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_favoriteFragment_to_detailTvShowFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_favoriteFragment_to_feedFragment">
                               <value>
                                 <LayoutPositions />
@@ -99,6 +104,32 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="fullListFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-89" />
+                            <option name="y" value="209" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fullListFragment_to_detailMovie">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_fullListFragment_to_detailTvShowFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="movieFragment">
                     <value>
                       <LayoutPositions>
@@ -110,7 +141,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_movieFragment_to_TVSeriesFragment">
+                            <entry key="action_movieFragment_to_TVShowFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -126,6 +157,11 @@
                               </value>
                             </entry>
                             <entry key="action_movieFragment_to_feedFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_movieFragment_to_fullListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -146,7 +182,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_TVSeriesFragment_to_movieFragment">
+                            <entry key="action_TVShowFragment_to_movieFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -167,6 +203,11 @@
                               </value>
                             </entry>
                             <entry key="action_tvShowFragment_to_feedFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_tvShowFragment_to_fullListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

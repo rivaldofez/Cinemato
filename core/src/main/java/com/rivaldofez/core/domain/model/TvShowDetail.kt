@@ -27,5 +27,6 @@ data class TvShowDetail(
     val homepage: String,
     val status: String,
     val genres: String,
-    val spokenLanguages: String
+    val spokenLanguages: String,
+    val isFavorite: Boolean
 )

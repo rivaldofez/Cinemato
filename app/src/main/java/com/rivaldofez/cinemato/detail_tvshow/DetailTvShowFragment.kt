@@ -6,11 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.snackbar.Snackbar
 import com.rivaldofez.cinemato.BuildConfig
 import com.rivaldofez.cinemato.R
 import com.rivaldofez.cinemato.databinding.FragmentDetailTvshowBinding
+import com.rivaldofez.core.BuildConfig.API_PATH_IMAGE
 import com.rivaldofez.core.datasource.Resource
 import com.rivaldofez.core.domain.model.TvShowDetail
 import com.rivaldofez.core.utils.ViewHelper
@@ -72,14 +75,14 @@ class DetailTvShowFragment : Fragment() {
                 }
             }
 
-            Glide.with(requireContext()).load(BuildConfig.API_PATH_IMAGE + detailTvShow.posterPath).apply(
+            Glide.with(requireContext()).load(API_PATH_IMAGE + detailTvShow.posterPath).apply(
                 RequestOptions.placeholderOf(R.drawable.ic_favorite).error(R.drawable.ic_feed)).into(imgPoster)
-            Glide.with(requireContext()).load(BuildConfig.API_PATH_IMAGE + detailTvShow.posterPath).apply(
+            Glide.with(requireContext()).load(API_PATH_IMAGE + detailTvShow.posterPath).apply(
                 RequestOptions.placeholderOf(R.drawable.ic_favorite).error(R.drawable.ic_feed)).into(imgBackdrop)
 
             tvDate.text = ViewHelper.formatDate(detailTvShow.firstAirDate)
             tvHomepage.text = detailTvShow.homepage
-            tvOriginal.text = detailTvShow.originalLanguage
+            tvOriginal.text = detailTvShow.originalName
             tvTitle.text = detailTvShow.name
             tvSynopsis.text = detailTvShow.overview
             tvStatus.text = detailTvShow.status
@@ -87,6 +90,36 @@ class DetailTvShowFragment : Fragment() {
             tvEpisode.text = detailTvShow.numberOfEpisodes.toString()
             tvSeason.text = detailTvShow.numberOfSeasons.toString()
             tvTagline.text = if (detailTvShow.tagline == "") "No tagline Defined" else detailTvShow.tagline
+
+            btnFavorite.apply {
+                setStateFavoriteIcon(detailTvShow.isFavorite)
+                setOnClickListener {
+                    detailTvShowViewModel.setFavoriteTvShow(detailTvShow, !detailTvShow.isFavorite)
+                    setStateFavoriteIcon(detailTvShow.isFavorite)
+                    showSnackBarFavorite(!detailTvShow.isFavorite)
+                }
+            }
+        }
+    }
+
+    private fun setStateFavoriteIcon(isFavorite: Boolean){
+        if(isFavorite)
+            binding.btnFavorite.setImageDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite)
+            )
+        else
+            binding.btnFavorite.setImageDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_unfilled)
+            )
+    }
+
+    private fun showSnackBarFavorite(isFavorite: Boolean){
+        if(isFavorite){
+            val snackbar = Snackbar.make(binding.root, "Added to Favorite List", Snackbar.LENGTH_SHORT)
+            snackbar.show()
+        }else{
+            val snackbar = Snackbar.make(binding.root, "Removed from Favorite List", Snackbar.LENGTH_SHORT)
+            snackbar.show()
         }
     }
 }

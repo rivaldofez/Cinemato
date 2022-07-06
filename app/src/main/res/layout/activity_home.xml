@@ -61,6 +61,16 @@
             app:bt_title="Movie" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/nav_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/white"
+            app:bt_colorInactive="@color/duskgray"
+            app:bt_icon="@drawable/ic_favorite"
+            app:bt_shape="@drawable/bg_chip_navbar"
+            app:bt_title="Favorite" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/nav_tvshow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,25 +80,7 @@
             app:bt_shape="@drawable/bg_chip_navbar"
             app:bt_title="TV Show" />
 
-        <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/nav_feed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:bt_colorActive="@color/white"
-            app:bt_colorInactive="@color/duskgray"
-            app:bt_icon="@drawable/ic_feed"
-            app:bt_shape="@drawable/bg_chip_navbar"
-            app:bt_title="Feed" />
 
-        <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/nav_favorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:bt_colorActive="@color/white"
-            app:bt_colorInactive="@color/duskgray"
-            app:bt_icon="@drawable/ic_favorite"
-            app:bt_shape="@drawable/bg_chip_navbar"
-            app:bt_title="Favorite" />
     </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,4 +11,7 @@ data class AiringTodayTvShowEntity (
     @NonNull
     @ColumnInfo(name = "id")
     val id: Int,
+
+    @ColumnInfo(name = "page")
+    val page: Int,
 )

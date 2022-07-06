@@ -1,17 +1,22 @@
 package com.rivaldofez.core.datasource.local.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.rivaldofez.core.datasource.local.entity.movie.*
 import com.rivaldofez.core.datasource.local.entity.tvshow.*
+import com.rivaldofez.core.datasource.remote.response.MovieListItem
+import com.rivaldofez.core.datasource.remote.response.TvShowListItem
+import com.rivaldofez.core.domain.model.MovieDetail
+import com.rivaldofez.core.domain.model.TvShowDetail
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CinemaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovieList(movieItemList: List<MovieItemLocalEntity>)
+
+    @RawQuery(observedEntities = [MovieItemLocalEntity::class])
+    fun getMovieList(query: SupportSQLiteQuery): Flow<List<MovieItemLocalEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdPopularMovies(idPopularMovies: List<PopularMovieLocalEntity>)
@@ -25,21 +30,14 @@ interface CinemaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdUpcomingMovies(idUpcomingMovies: List<UpcomingMovieLocalEntity>)
 
-    @Query("Select * FROM movielist natural join popularMovies")
-    fun getPopularMovies(): Flow<List<MovieItemLocalEntity>>
 
-    @Query("Select * FROM movielist natural join topratedmovies")
-    fun getTopRatedMovies(): Flow<List<MovieItemLocalEntity>>
-
-    @Query("Select * FROM movielist natural join upcomingmovies")
-    fun getUpcomingMovies(): Flow<List<MovieItemLocalEntity>>
-
-    @Query("Select * FROM movielist natural join nowplayingmovies")
-    fun getNowPlayingMovies(): Flow<List<MovieItemLocalEntity>>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTvShowList(tvShowItemList: List<TvShowItemLocalEntity>)
+
+    @RawQuery(observedEntities = [TvShowItemLocalEntity::class])
+    fun getTvShowList(query: SupportSQLiteQuery): Flow<List<TvShowItemLocalEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdPopularTvShow(idPopularTvShow: List<PopularTvShowLocalEntity>)
@@ -52,6 +50,8 @@ interface CinemaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIdAiringTodayTvShow(idAiringTvShow: List<AiringTodayTvShowEntity>)
+
+
 
     @Query("Select * FROM tvshowlist natural join populartvshow")
     fun getPopularTvShow(): Flow<List<TvShowItemLocalEntity>>
@@ -77,5 +77,30 @@ interface CinemaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTvShowDetail(detailTvShow: TvShowDetailLocalEntity)
+
+    @Query("Select * From moviedetail where isFavorite = 1")
+    fun getFavoritoMovies(): Flow<List<MovieDetailLocalEntity>>
+
+    @Query("Select * From tvshowdetail where isFavorite = 1")
+    fun getFavoritoTvShows(): Flow<List<TvShowDetailLocalEntity>>
+
+    @Update
+    fun updateDetailMovie(detailMovie: MovieDetailLocalEntity)
+
+    @Update
+    fun updateDetailTvShow(detailTvShow: TvShowDetailLocalEntity)
+
+    @Query("SELECT * FROM movielist WHERE title like :query")
+    suspend fun getSearchMovieResult(query: String): List<MovieItemLocalEntity>
+
+    @Query("SELECT * FROM tvshowlist WHERE name like :query")
+    suspend fun getSearchTvShowResult(query: String): List<TvShowItemLocalEntity>
+
+
+    @Query("SELECT * FROM tvshowdetail WHERE isFavorite = 1 and name like :query")
+    suspend fun getSearchNameFavoriteTvShowResult(query: String): List<TvShowDetailLocalEntity>
+
+    @Query("SELECT * FROM moviedetail WHERE isFavorite = 1 and title like :query")
+    suspend fun getSearchNameFavoriteMovieResult(query: String): List<MovieDetailLocalEntity>
 
 }
